@@ -1,0 +1,54 @@
+	
+.headerInitialSpace{
+	background-color: #66A2CA;
+	padding-top: 1%;
+}
+.headerIndex{
+	background-color: #0064A5;
+}
+
+.navbarCustomize {
+	margin-bottom: 0px;
+	border-radius: 0px;
+}
+
+.navbarText {
+	color: #FFFFFF;
+	font-weight: 200;
+}
+
+.footerSeparatorIndex {
+	padding-top: 5px;
+	margin-top: 5px;
+	border-top: #66A2CA medium solid;
+}
+
+.centraltextIndex {
+	padding-left: 7%;
+}
+
+.bodytext {
+	font-size: large;
+	font-weight: 200;
+}
+
+.informationContainerSchool {
+	background-color: #E8E8E8;
+}
+
+.theaderTables {
+	background-color: #0064A5;	
+	font-weight: 200;
+	color: #F5F5F5;
+}
+
+.informationArticleTitle {
+	font-weight: 200;
+	color: #575756;
+}
+
+.tableText {
+font-size: medium;
+font-weight: 200;
+
+}
