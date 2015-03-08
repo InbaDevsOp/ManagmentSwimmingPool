@@ -1,0 +1,72 @@
+<script src="http://code.jquery.com/ui/1.11.3/jquery-ui.js">
+  $(function() {
+    $("#datepicker").datepicker();
+  });
+</script>
+
+<br>
+<div class="row">
+  <div class="col-md-2">
+  </div>
+  
+  <div class="col-md-6">
+    <h3 class="informationArticleTitle">{{tittle}}</h3><br>
+    <form id="addUserform" role="form" class="informationArticleTitle">
+      <div class="form-group">
+        <label>Nombres: </label>
+        <input class="form-control" value="{{user.userNames}}" name="userNames" id="userNames">
+      </div>
+      <div class="form-group">
+        <label>RUT: </label>
+        <input class="form-control" value="{{user.idUser}}" name="idUser" id="idUser">
+      </div>
+      <div class="form-group">
+        <label>Apellido Paterno</label>
+        <input class="form-control" value="{{user.apellidoPaterno}}" name="apellidoPaterno" id="apellidoPaterno">
+      </div>
+      <div class="form-group">
+        <label>Apellido Materno</label>
+        <input class="form-control" value="{{user.apellidoMaterno}}" name="apellidoMaterno" id="apellidoMaterno">
+      </div>
+      <div class="form-group">
+        <label>Fecha Nacimiento</label>
+        <input class="form-control datepicker" value="{{user.fechaNacimiento}}" name="fechaNacimiento" id="datepicker">
+      </div>
+      <div class="form-group">
+        <label>Direcci&oacuten</label>
+        <input class="form-control" value="{{user.direccion}}" name="direccion" id="direccion">
+      </div>
+      <div class="form-group">
+        <label>Comuna</label>
+        <input class="form-control" value="{{user.comuna}}" name="comuna" id="comuna">
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input class="form-control" value="{{user.correo}}" name="correo" id="correo">
+      </div>
+      <div class="form-group">
+        <label>Telefono</label>
+        <input class="form-control" value="{{user.telefono}}" name="telefono" id="telefono">
+      </div>
+      <div class="form-group">
+        <label>Certificado Medico</label>
+        <input class="form-control" value="{{user.certificadoMedico}}" name="certificadoMedico" id="certificadoMedico">
+      </div>
+       <div class="form-group">
+        <label>Enfermedades</label>
+        <input class="form-control" value="{{user.enfermedades}}" name="enfermedades" id="enfermedades">
+      </div>
+      <div class="form-group">
+        <label>Observaciones</label>
+        <input class="form-control" value="{{user.observaciones}}" name="observaciones" id="observaciones">
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input class="form-control" type="password" name="clave" id="clave">
+      </div>
+      <label id="save" class="btn btn-primary">Enviar</label>
+    </form>
+    <br>
+    <br>
+  </div>
+</div>

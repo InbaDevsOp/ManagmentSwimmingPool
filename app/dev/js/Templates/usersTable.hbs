@@ -1,0 +1,20 @@
+<table id="usersInformation"class="table table-striped table-bordered table-hover table-condensed">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Nombres</th>
+      <th>Apellido Paterno</th>
+      <th>Rut</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#users}}
+    <tr>
+      <td>#</td>
+      <td>{{userNames}}</td>
+      <td>{{apellidoPaterno}}</td>
+      <td id="idUser">{{idUser}}</td>
+    </tr>
+    {{/users}}
+  </tbody>
+</table>
