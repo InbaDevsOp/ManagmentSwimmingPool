@@ -1,17 +1,11 @@
-<script src="http://code.jquery.com/ui/1.11.3/jquery-ui.js">
-  $(function() {
-    $("#datepicker").datepicker();
-  });
-</script>
-
 <br>
 <div class="row">
-  <div class="col-md-2">
+  <div class="col-md-1">
   </div>
   
   <div class="col-md-6">
-    <h3 class="informationArticleTitle">{{tittle}}</h3><br>
-    <form id="addUserform" role="form" class="informationArticleTitle">
+    <h4 class="informationArticleTitle">{{tittle}}</h4>
+    <form id="addUserform" role="form" class=".form-inline informationArticleTitle"><br>
       <div class="form-group">
         <label>Nombres: </label>
         <input class="form-control" value="{{user.userNames}}" name="userNames" id="userNames">
@@ -52,7 +46,7 @@
         <label>Certificado Medico</label>
         <input class="form-control" value="{{user.certificadoMedico}}" name="certificadoMedico" id="certificadoMedico">
       </div>
-       <div class="form-group">
+      <div class="form-group">
         <label>Enfermedades</label>
         <input class="form-control" value="{{user.enfermedades}}" name="enfermedades" id="enfermedades">
       </div>
@@ -67,6 +61,56 @@
       <label id="save" class="btn btn-primary">Enviar</label>
     </form>
     <br>
-    <br>
+  </div>
+  <br>
+  <br>
+</div>
+
+
+
+
+<div class ="row">
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-10">
+    
+    <form id="addUserform" role="form" class=".form-inline informationArticleTitle"><br>
+      <div class="form-group">
+        <div class="col-md-12">
+          <div class="form-group row">
+            
+            <label for="inputKey" class="col-md-1 control-label">Rut</label>
+            <div class="col-md-5">
+              <input type="text" class="form-control" id="inputKey" placeholder="Rut">
+            </div>
+
+            <label for="inputValue" class="col-md-2 control-label">Fecha Nacimiento</label>
+            <div class="col-md-4">
+              <input type="text" class="form-control" id="inputValue" placeholder="Value">
+            </div>
+          </div>
+          <div class="form-group row">
+
+            <label for="inputValue" class="col-md-1 control-label">Nombres</label>
+            <div class="col-md-5">
+              <input type="text" class="form-control" id="inputValue" placeholder="Value">
+            </div>
+
+            <label for="inputValue" class="col-md-1 control-label">Apellido Paterno</label>
+            <div class="col-md-2">
+              <input type="text" class="form-control" id="inputValue" placeholder="Value">
+            </div>
+
+            <label for="inputValue" class="col-md-1 control-label">Apellido Materno</label>
+            <div class="col-md-2">
+              <input type="text" class="form-control" id="inputValue" placeholder="Value">
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="col-md-1">
   </div>
 </div>
