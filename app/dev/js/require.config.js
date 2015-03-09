@@ -1,3 +1,5 @@
+var SwimmingPoolApplicationHost = "http://192.168.1.189:8080";
+
 
 require.config({
     baseUrl: 'app/dev/js',

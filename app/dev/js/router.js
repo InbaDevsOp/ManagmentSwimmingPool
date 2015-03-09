@@ -9,7 +9,8 @@ require(['backbone', 'jquery', 'Views/login',
             routes: {
                 "": "handleLogin",
                 "applicationIndex": "applicationIndex",
-                "managmentUsers":"managmentUsers"
+                "managmentUsers":"managmentUsers",
+                "exitUser": "exitUser"
             },
             handleLogin: function() {
                 this.login = new Login();
@@ -19,6 +20,10 @@ require(['backbone', 'jquery', 'Views/login',
             },
               managmentUsers: function() {
                  this.managmentUsers = new ManagmentUsers();
+            },
+            exitUser: function () {
+                localStorage.clear();
+                 window.location.href = "/index.html"
             }
 
 

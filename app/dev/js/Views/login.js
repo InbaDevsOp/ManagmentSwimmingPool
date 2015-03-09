@@ -1,35 +1,59 @@
-define(['backbone', 'jquery'],
-    function(Backbone, $) {
+define(['backbone', 'jquery', 'hbs!Templates/headerApplication', 'hbs!Templates/initialApplicationPage',
+        'hbs!Templates/login'
+    ],
+    function(Backbone, $, headerApplication, initialApplicationPage, loginTemplate) {
 
         LoginView = Backbone.View.extend({
-            el: $("#login-form"),
-
+            el: $("#applicationContent"),
+        
             events: {
                 "click #login": "login"
             },
 
+            initialize: function(argument) {
+
+                var flagSession = localStorage.getItem('sessionActive');
+                var userName = localStorage.getItem('userName');
+                
+                if (flagSession == 1) {
+                    $('#header').html(headerApplication({userName: userName}));
+                    $(this.el).html(initialApplicationPage());
+                } else {
+                    $(this.el).append(loginTemplate());
+                }
+
+            },
             login: function() {
+                var that = this;
                 var rut = $("#rut").val();
                 var password = $("#password").val();
 
                 var getParamsService = rut + "/" + password;
-                var url = "http://192.168.1.189:8080/SwimmingPoolServiceExample/rest/users/login/" + getParamsService;
+                var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/users/login/" + getParamsService;
 
                 $.ajax({
                     async: false,
                     url: url,
                     type: "GET",
                     success: function(data, status) {
+
                         if (data.status == "SUCCESSFUL") {
                             console.log("Logueado");
-                            $(location).attr('href', "#applicationIndex");
+                            var userName = data.idUser;
+
+                            $('#header').html(headerApplication({userName: userName}));
+                            $(that.el).html(initialApplicationPage());
+                            
+                            localStorage.setItem('sessionActive', 1);
+                            localStorage.setItem('userName', userName);
+
                         } else {
                             alert("Usuario no existente, favor consultar administración para recuperación de clave");
                             //this.initialize();
                         }
                     },
                     error: function(request, error) {
-                             alert("Error Interno, favor intente más tarde");
+                        alert("Error Interno, favor intente más tarde");
                     },
                 });
             },

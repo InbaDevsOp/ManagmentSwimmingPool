@@ -5,6 +5,7 @@
       <th>Nombres</th>
       <th>Apellido Paterno</th>
       <th>Rut</th>
+      <th>Acción</th>
     </tr>
   </thead>
   <tbody>
@@ -14,6 +15,8 @@
       <td>{{userNames}}</td>
       <td>{{apellidoPaterno}}</td>
       <td id="idUser">{{idUser}}</td>
+      <td align="center"><a><span id="viewUser" class="glyphicon glyphicon-zoom-in">
+        &nbsp;<a><span id="eliminateUser" class="glyphicon glyphicon-floppy-remove"></a></span></td>
     </tr>
     {{/users}}
   </tbody>

@@ -3,6 +3,12 @@
 	background-color: #66A2CA;
 	padding-top: 1%;
 }
+
+.headerApplicationText {
+	font-weight: 200;
+	color: #FFFFFF;
+}
+
 .headerIndex{
 	background-color: #0064A5;
 }

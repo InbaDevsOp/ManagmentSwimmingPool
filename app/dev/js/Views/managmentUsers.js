@@ -1,19 +1,32 @@
 define(['backbone', 'jquery', 'hbs!Templates/searchUsers', 'hbs!Templates/usersTable',
-    'hbs!Templates/createdUser'
-], function(Backbone, $, searchUsers, usersTable, createdUser) {
+    'hbs!Templates/createdUser', 'hbs!Templates/headerApplication',
+], function(Backbone, $, searchUsers, usersTable, createdUser, headerApplication) {
 
     managmentUsers = Backbone.View.extend({
         template: searchUsers,
-        el: $(".informationContainerSchool"),
+        el: $("#applicationContent"),
 
         events: {
             "click #search": "searchUsers",
-           // "click #usersInfo tbody tr": "fillUserInformation"
+            // "click #usersInfo tbody tr": "fillUserInformation"
         },
         initialize: function() {
             // alert("created index applicationIndex");
-            $(".informationContainerSchool").html('');
-            $(this.el).append(this.template());
+
+            var flagSession = localStorage.getItem('sessionActive');
+            var userName = localStorage.getItem('userName');
+
+            if (flagSession == 1) {
+                $('#header').html(headerApplication({
+                    userName: userName
+                }));
+                $(this.el).html(this.template());
+            } else {
+                localStorage.clear();
+                window.location.href = "/index.html"
+            }
+
+
 
         },
         searchUsers: function() {
@@ -21,7 +34,7 @@ define(['backbone', 'jquery', 'hbs!Templates/searchUsers', 'hbs!Templates/usersT
             var rut = $("#userId").val();
 
             var getParamsService = rut;
-            var url = "http://192.168.1.189:8080/SwimmingPoolServiceExample/rest/users/searchUsers/" + getParamsService;
+            var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/users/searchUsers/" + getParamsService;
 
             $.ajax({
                 async: false,
@@ -36,8 +49,12 @@ define(['backbone', 'jquery', 'hbs!Templates/searchUsers', 'hbs!Templates/usersT
                             users: data
                         }));
 
-                        $( "#usersInfo tbody tr" ).on( "click", function( event ) {
-                            that.fillUserInformation(this);
+                        $("#usersInfo #viewUser").on("click", function(event) {
+                            that.fillUserInformation($(this).parent().parent().parent());
+                        });
+
+                        $("#usersInfo #eliminateUser").on("click", function(event) {
+                            that.eliminateUser($(this).parent().parent().parent());
                         });
 
                     }
@@ -51,7 +68,7 @@ define(['backbone', 'jquery', 'hbs!Templates/searchUsers', 'hbs!Templates/usersT
         fillUserInformation: function(actualTr) {
 
             var getParamsService = $(actualTr).find("td").eq(3).html();
-            var url = "http://192.168.1.189:8080/SwimmingPoolServiceExample/rest/users/searchById/" + getParamsService;
+            var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/users/searchById/" + getParamsService;
 
             $.ajax({
                 async: false,
@@ -59,7 +76,10 @@ define(['backbone', 'jquery', 'hbs!Templates/searchUsers', 'hbs!Templates/usersT
                 type: "GET",
                 success: function(data, status) {
                     if (data.idUser != null) {
-                        $("#userModify").html(createdUser({tittle: "Usuario", user: data}));
+                        $("#userModify").html(createdUser({
+                            tittle: "Usuario",
+                            user: data
+                        }));
                     }
                 },
                 error: function(request, error) {
@@ -67,10 +87,25 @@ define(['backbone', 'jquery', 'hbs!Templates/searchUsers', 'hbs!Templates/usersT
                 },
             });
 
+        },
+        eliminateUser: function(actualTr) {
+            var userId = $(actualTr).find("td").eq(3).html();
+            var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/users/deleteUser/" + userId;
+
+            $.ajax({
+                async: false,
+                url: url,
+                type: "DELETE",
+                success: function(data, status) {
+                    alert("Usuario de la Piscina Eliminado exitosamente");
+                    $(actualTr).html("");
+                },
+                error: function(request, error) {
+                    alert("Error Interno, favor intente más tarde");
+                }
+            });
         }
-
     });
-
     return managmentUsers;
 
 });
