@@ -11,7 +11,6 @@ define(['backbone', 'jquery', 'hbs!Templates/headerApplication', 'hbs!Templates/
             },
 
             initialize: function(argument) {
-
                 var flagSession = localStorage.getItem('sessionActive');
                 var userName = localStorage.getItem('userName');
                 
@@ -36,7 +35,6 @@ define(['backbone', 'jquery', 'hbs!Templates/headerApplication', 'hbs!Templates/
                     url: url,
                     type: "GET",
                     success: function(data, status) {
-
                         if (data.status == "SUCCESSFUL") {
                             console.log("Logueado");
                             var userName = data.idUser;
@@ -49,7 +47,6 @@ define(['backbone', 'jquery', 'hbs!Templates/headerApplication', 'hbs!Templates/
 
                         } else {
                             alert("Usuario no existente, favor consultar administración para recuperación de clave");
-                            //this.initialize();
                         }
                     },
                     error: function(request, error) {
@@ -57,8 +54,6 @@ define(['backbone', 'jquery', 'hbs!Templates/headerApplication', 'hbs!Templates/
                     },
                 });
             },
-
-
         });
 
         return LoginView;

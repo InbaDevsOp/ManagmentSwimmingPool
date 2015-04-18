@@ -8,11 +8,8 @@ define(['backbone', 'jquery', 'hbs!Templates/searchUsers', 'hbs!Templates/usersT
 
         events: {
             "click #search": "searchUsers",
-            // "click #usersInfo tbody tr": "fillUserInformation"
         },
         initialize: function() {
-            // alert("created index applicationIndex");
-
             var flagSession = localStorage.getItem('sessionActive');
             var userName = localStorage.getItem('userName');
 
@@ -25,9 +22,6 @@ define(['backbone', 'jquery', 'hbs!Templates/searchUsers', 'hbs!Templates/usersT
                 localStorage.clear();
                 window.location.href = "/index.html"
             }
-
-
-
         },
         searchUsers: function() {
             var that = this;

@@ -29,7 +29,6 @@ define(['backbone', 'jquery', 'hbs!Templates/createdUser', 'hbs!Templates/errorM
             saveUser: function() {
 
                 var modelJson = this.serializeFormToJson("#addUserform");
-
                 this.model = new User();
 
                 this.model.save(modelJson, {
@@ -39,12 +38,9 @@ define(['backbone', 'jquery', 'hbs!Templates/createdUser', 'hbs!Templates/errorM
                         $('#addUserform').each(function() {
                             this.reset();
                         });
-
                     },
                     error: function(model, response) {
                         alert("Error Interno, favor intente más tarde");
-                        // $(".informationContainerSchool").append(errorMessage({errorValue : "Error Interno, favor intente más tarde"}))
-
                     }
                 });
             },
@@ -65,30 +61,6 @@ define(['backbone', 'jquery', 'hbs!Templates/createdUser', 'hbs!Templates/errorM
                     return jsonData;
                     console.log(jsonData);
                 }
-                // login: function() {
-                //     var rut = $("#rut").val();
-                //     var password = $("#password").val();
-
-            //     var getParamsService = rut + "/" + password;
-
-            //     $.get("http://localhost:8080/SwimmingPoolServiceExample/rest/users/login/" +
-            //         getParamsService,
-            //         function(data, status) {
-            //             alert("Data: " + data + "\nStatus: " + status);
-
-
-            //             if (data.status == "successful") {
-            //                 alert("Logueado");
-            //                 LoginView.loginFlag = true;
-
-            //             } else {
-            //                 alert("No existe");
-            //                 LoginView.loginFlag = false;
-            //             }
-
-            //         });
-            // }
-
         });
 
         return applicationIndex;

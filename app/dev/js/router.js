@@ -1,29 +1,29 @@
 require(['backbone', 'jquery', 'Views/login',
-        'Views/applicationIndex', 'Views/managmentUsers'
+        'Views/addUser', 'Views/managmentUsers'
     ],
-    
-    function(Backbone, $, Login, ApplicationIndex, ManagmentUsers) {
+
+    function(Backbone, $, Login, addUser, ManagmentUsers) {
 
         var myRouter = Backbone.Router.extend({
 
             routes: {
                 "": "handleLogin",
-                "applicationIndex": "applicationIndex",
-                "managmentUsers":"managmentUsers",
+                "addUser": "addUser",
+                "managmentUsers": "managmentUsers",
                 "exitUser": "exitUser"
             },
             handleLogin: function() {
                 this.login = new Login();
             },
-             applicationIndex: function() {
-                 this.applicationIndex = new ApplicationIndex();
+            applicationIndex: function() {
+                this.addUser = new addUSer();
             },
-              managmentUsers: function() {
-                 this.managmentUsers = new ManagmentUsers();
+            managmentUsers: function() {
+                this.managmentUsers = new ManagmentUsers();
             },
-            exitUser: function () {
+            exitUser: function() {
                 localStorage.clear();
-                 window.location.href = "/index.html"
+                window.location.href = "/index.html"
             }
 
 
@@ -33,5 +33,5 @@ require(['backbone', 'jquery', 'Views/login',
         router = new myRouter();
         Backbone.history.start();
         return router;
-    
+
     });
