@@ -11,7 +11,7 @@ define(['backbone', 'jquery', 'hbs!Templates/searchUsers', 'hbs!Templates/usersT
         },
         initialize: function() {
             var flagSession = localStorage.getItem('sessionActive');
-            var userName = localStorage.getItem('userName');
+            var userName = localStorage.getItem('names');
 
             if (flagSession == 1) {
                 $('#header').html(headerApplication({
@@ -28,7 +28,7 @@ define(['backbone', 'jquery', 'hbs!Templates/searchUsers', 'hbs!Templates/usersT
             var rut = $("#userId").val();
 
             var getParamsService = rut;
-            var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/users/searchUsers/" + getParamsService;
+            var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/users/swimmingPool/searchUsers/" + getParamsService;
 
             $.ajax({
                 async: false,
@@ -62,14 +62,14 @@ define(['backbone', 'jquery', 'hbs!Templates/searchUsers', 'hbs!Templates/usersT
         fillUserInformation: function(actualTr) {
 
             var getParamsService = $(actualTr).find("td").eq(3).html();
-            var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/users/searchById/" + getParamsService;
+            var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/users/swimmingPool/searchById/" + getParamsService;
 
             $.ajax({
                 async: false,
                 url: url,
                 type: "GET",
                 success: function(data, status) {
-                    if (data.idUser != null) {
+                    if (data.rut != null) {
                         $("#userModify").html(createdUser({
                             tittle: "Usuario",
                             user: data
@@ -84,7 +84,7 @@ define(['backbone', 'jquery', 'hbs!Templates/searchUsers', 'hbs!Templates/usersT
         },
         eliminateUser: function(actualTr) {
             var userId = $(actualTr).find("td").eq(3).html();
-            var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/users/deleteUser/" + userId;
+            var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/users/delete/" + userId;
 
             $.ajax({
                 async: false,

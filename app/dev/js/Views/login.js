@@ -12,7 +12,7 @@ define(['backbone', 'jquery', 'hbs!Templates/headerApplication', 'hbs!Templates/
 
             initialize: function(argument) {
                 var flagSession = localStorage.getItem('sessionActive');
-                var userName = localStorage.getItem('userName');
+                var userName = localStorage.getItem('names');
                 
                 if (flagSession == 1) {
                     $('#header').html(headerApplication({userName: userName}));
@@ -35,8 +35,7 @@ define(['backbone', 'jquery', 'hbs!Templates/headerApplication', 'hbs!Templates/
                     url: url,
                     type: "GET",
                     success: function(data, status) {
-                        if (data.status == "SUCCESSFUL") {
-                            console.log("Logueado");
+                        if (data.result == true) {
                             var userName = data.idUser;
 
                             $('#header').html(headerApplication({userName: userName}));
@@ -44,7 +43,6 @@ define(['backbone', 'jquery', 'hbs!Templates/headerApplication', 'hbs!Templates/
                             
                             localStorage.setItem('sessionActive', 1);
                             localStorage.setItem('userName', userName);
-
                         } else {
                             alert("Usuario no existente, favor consultar administración para recuperación de clave");
                         }

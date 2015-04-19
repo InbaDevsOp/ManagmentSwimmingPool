@@ -15,8 +15,8 @@ require(['backbone', 'jquery', 'Views/login',
             handleLogin: function() {
                 this.login = new Login();
             },
-            applicationIndex: function() {
-                this.addUser = new addUSer();
+            addUser: function() {
+                this.addUser = new addUser();
             },
             managmentUsers: function() {
                 this.managmentUsers = new ManagmentUsers();

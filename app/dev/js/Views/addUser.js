@@ -11,7 +11,7 @@ define(['backbone', 'jquery', 'hbs!Templates/createdUser', 'hbs!Templates/errorM
             initialize: function() {
 
                 var flagSession = localStorage.getItem('sessionActive');
-                var userName = localStorage.getItem('userName');
+                var userName = localStorage.getItem('names');
 
                 if (flagSession == 1) {
                     $('#header').html(headerApplication({
@@ -34,7 +34,6 @@ define(['backbone', 'jquery', 'hbs!Templates/createdUser', 'hbs!Templates/errorM
                 this.model.save(modelJson, {
                     success: function(model, respose) {
                         alert("Usuario de la Piscina guardado exitosamente");
-                        // $(this.el).append(errorMessage({errorMessage : "Error Interno, favor intente más tarde"}))
                         $('#addUserform').each(function() {
                             this.reset();
                         });

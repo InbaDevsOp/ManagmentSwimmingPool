@@ -1,71 +1,5 @@
 <br>
-<!-- <div class="row">
-  <div class="col-md-1">
-  </div>
-  
-  <div class="col-md-6">
-    <h4 class="informationArticleTitle">{{tittle}}</h4>
-    <form id="addUserform" role="form" class=".form-inline informationArticleTitle"><br>
-      <div class="form-group">
-        <label>Nombres: </label>
-        <input class="form-control" value="{{user.userNames}}" name="userNames" id="userNames">
-      </div>
-      <div class="form-group">
-        <label>RUT: </label>
-        <input class="form-control" value="{{user.idUser}}" name="idUser" id="idUser">
-      </div>
-      <div class="form-group">
-        <label>Apellido Paterno</label>
-        <input class="form-control" value="{{user.apellidoPaterno}}" name="apellidoPaterno" id="apellidoPaterno">
-      </div>
-      <div class="form-group">
-        <label>Apellido Materno</label>
-        <input class="form-control" value="{{user.apellidoMaterno}}" name="apellidoMaterno" id="apellidoMaterno">
-      </div>
-      <div class="form-group">
-        <label>Fecha Nacimiento</label>
-        <input class="form-control datepicker" value="{{user.fechaNacimiento}}" name="fechaNacimiento" id="datepicker">
-      </div>
-      <div class="form-group">
-        <label>Direcci&oacuten</label>
-        <input class="form-control" value="{{user.direccion}}" name="direccion" id="direccion">
-      </div>
-      <div class="form-group">
-        <label>Comuna</label>
-        <input class="form-control" value="{{user.comuna}}" name="comuna" id="comuna">
-      </div>
-      <div class="form-group">
-        <label>Email</label>
-        <input class="form-control" value="{{user.correo}}" name="correo" id="correo">
-      </div>
-      <div class="form-group">
-        <label>Telefono</label>
-        <input class="form-control" value="{{user.telefono}}" name="telefono" id="telefono">
-      </div>
-      <div class="form-group">
-        <label>Certificado Medico</label>
-        <input class="form-control" value="{{user.certificadoMedico}}" name="certificadoMedico" id="certificadoMedico">
-      </div>
-      <div class="form-group">
-        <label>Enfermedades</label>
-        <input class="form-control" value="{{user.enfermedades}}" name="enfermedades" id="enfermedades">
-      </div>
-      <div class="form-group">
-        <label>Observaciones</label>
-        <input class="form-control" value="{{user.observaciones}}" name="observaciones" id="observaciones">
-      </div>
-      <div class="form-group">
-        <label>Password</label>
-        <input class="form-control" type="password" name="clave" id="clave">
-      </div>
-      <label id="save" class="btn btn-primary">Enviar</label>
-    </form>
-    <br>
-  </div>
-  <br>
-  <br>
-</div>
--->
+
 <div class ="row">
   <div class="col-md-1">
   </div>
@@ -79,39 +13,39 @@
             
             <label for="inputKey" class="col-md-1 control-label">Rut</label>
             <div class="col-md-5">
-              <input type="text" class="form-control" value="{{user.idUser}}" name="idUser" id="idUser" placeholder="Rut">
+              <input type="text" class="form-control" value="{{user.rut}}" name="rut" id="rut" placeholder="Rut">
             </div>
             <label for="inputValue" class="col-md-2 control-label">Fecha Nacimiento</label>
             <div class="col-md-4">
-              <input type="text" class="form-control" value="{{user.fechaNacimiento}}" name="fechaNacimiento" id="datepicker" placeholder="AAAA-MM-DD">
+              <input type="text" class="form-control" value="{{user.birthDate}}" name="birthDate" id="datepicker" placeholder="AAAA-MM-DD">
             </div>
           </div>
           <div class="form-group row">
             <label for="inputValue" class="col-md-1 control-label">Nombres</label>
             <div class="col-md-5">
-              <input type="text" class="form-control" value="{{user.userNames}}" name="userNames" id="userNames" placeholder="Nombres">
+              <input type="text" class="form-control" value="{{user.names}}" name="names" id="names" placeholder="Nombres">
             </div>
             <label for="inputValue" class="col-md-1 control-label">Apellido Paterno</label>
             <div class="col-md-2">
-              <input type="text" class="form-control" value="{{user.apellidoPaterno}}" name="apellidoPaterno" id="apellidoPaterno" placeholder="Apellido Paterno">
+              <input type="text" class="form-control" value="{{user.firstLastName}}" name="firstLastName" id="firstLastName" placeholder="Apellido Paterno">
             </div>
             <label for="inputValue" class="col-md-1 control-label">Apellido Materno</label>
             <div class="col-md-2">
-              <input type="text" class="form-control" value="{{user.apellidoMaterno}}" name="apellidoMaterno" id="apellidoMaterno" placeholder="Apellido Materno">
+              <input type="text" class="form-control" value="{{user.secondLastName}}" name="secondLastName" id="secondLastName" placeholder="Apellido Materno">
             </div>
           </div>
           <div class="form-group row">
             
             <label for="inputKey" class="col-md-2 control-label">Certificado Medico</label>
             <div class="col-md-2">
-              <select name="certificadoMedico" class="form-control" value="{{user.certificadoMedico}}" id="certificadoMedico">
+              <select name="medicalCertificate" class="form-control" value="{{user.medicalCertificate}}" id="medicalCertificate">
                 <option value="Si">Sí</option>
                 <option value="No">No</option>
               </select>
             </div>
             <label for="inputValue" class="col-md-2 control-label">Enfermedades</label>
             <div class="col-md-6">
-              <input type="text" class="form-control" value="{{user.enfermedades}}" name="enfermedades" id="enfermedades" placeholder="Enfermedades">
+              <input type="text" class="form-control" value="{{user.sickness}}" name="sickness" id="sickness" placeholder="Enfermedades">
             </div>
             
           </div>
@@ -119,11 +53,11 @@
             
             <label for="inputKey" class="col-md-2 control-label">Correo Electrónico</label>
             <div class="col-md-5">
-              <input type="text" class="form-control" value="{{user.correo}}" name="correo" id="correo" placeholder="correo@correo.cl">
+              <input type="text" class="form-control" value="{{user.email}}" name="email" id="email" placeholder="correo@correo.cl">
             </div>
             <label for="inputValue" class="col-md-1 control-label">Telefono</label>
             <div class="col-md-4">
-              <input type="text" class="form-control" value="{{user.telefono}}" name="telefono" id="telefono" placeholder="+56981779012">
+              <input type="text" class="form-control" value="{{user.phone}}" name="phone" id="phone" placeholder="+56981779012">
             </div>
             
           </div>
@@ -131,18 +65,18 @@
             
             <label for="inputKey" class="col-md-1 control-label">Dirección </label>
             <div class="col-md-7">
-              <input type="text" class="form-control" value="{{user.direccion}}" name="direccion" id="direccion" placeholder="Dirección">
+              <input type="text" class="form-control" value="{{user.address}}" name="address" id="address" placeholder="Dirección">
             </div>
             <label for="inputValue" class="col-md-1 control-label">Comuna </label>
             <div class="col-md-3">
-              <input type="text" class="form-control" value="{{user.comuna}}" name="comuna" id="comuna" placeholder="Comuna">
+              <input type="text" class="form-control" value="{{user.state}}" name="state" id="state" placeholder="Comuna">
             </div>
           </div>
           <div class="form-group row">
             
             <label for="inputValue" class="col-md-2 control-label">Observaciones</label>
             <div class="col-md-10">
-              <textarea class="form-control" rows="3" maxlength="10" value="{{user.observaciones}}" name="observaciones" id="observaciones" placeholder="Observaciones"></textarea>
+              <textarea class="form-control" rows="3" maxlength="10" value="{{user.comments}}" name="comments" id="comments" placeholder="Observaciones"></textarea>
             </div>
             
           </div>
@@ -150,7 +84,7 @@
             
             <label for="inputValue" class="col-md-1 control-label">Clave</label>
             <div class="col-md-5">
-              <input class="form-control" name="clave" id="clave" placeholder="Contraseña" type="password">
+              <input class="form-control" name="password" id="password" placeholder="Contraseña" type="password">
             </div>
             <div class="col-md-2">
             </div>
