@@ -24,40 +24,39 @@
             </script>
           </div>
         </div>
-        
-        <script src="http://cdn.alloyui.com/3.0.1/aui/aui-min.js"></script>
-        <script> 
-        YUI().use(
-          'aui-scheduler',
-          function(Y) {
-           
-
-            var eventRecorder = new Y.SchedulerEventRecorder();
-            var weekView = new Y.SchedulerWeekView();
-
-            new Y.Scheduler(
-              {
-                boundingBox: '#myScheduler',
-                date: new Date(2013, 1, 4),
-                eventRecorder: eventRecorder,
-              
-                render: true,
-                views: [weekView]
-              }
-            );
-          }
-        );
-        </script>
         <div class="row">
           <div class="col-md-12">
-
-            <div id="wrapper">
-              <div id="myScheduler"></div>
-            </div>
+            
+            <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Lunes</th>
+                <th>Martes</th>
+                <th>Miercoles</th>
+                <th>Jueves</th>
+                <th>Viernes</th>
+                <th>Sabado</th>
+                <th>Domingo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>8:00 am - 9:00 am</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+            
           </div>
         </div>
         
-
         <br>
         <div id="footer"></div>
         <script type="text/javascript">

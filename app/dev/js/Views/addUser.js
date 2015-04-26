@@ -1,5 +1,5 @@
-define(['backbone', 'jquery', 'hbs!Templates/createdUser', 'hbs!Templates/errorMessage', 'hbs!Templates/headerApplication', 'Models/User'],
-    function(Backbone, $, createdUser, errorMessage, headerApplication, User) {
+define(['backbone', 'jquery', 'jquery.validate', 'hbs!Templates/createdUser', 'hbs!Templates/errorMessage', 'hbs!Templates/headerApplication', 'Models/User'],
+    function(Backbone, $, jqueryValidate, createdUser, errorMessage, headerApplication, User) {
 
         applicationIndex = Backbone.View.extend({
             template: createdUser,
@@ -20,13 +20,82 @@ define(['backbone', 'jquery', 'hbs!Templates/createdUser', 'hbs!Templates/errorM
                     $(this.el).html(this.template({
                         tittle: "Ingresa el nuevo Usuario de la Piscina"
                     }));
+                    this.validateForm();
                 } else {
                     localStorage.clear();
                     window.location.href = "/index.html"
                 }
 
             },
+            validateForm: function(form){
+
+                $.validator.addMethod("regexp", function(value, element, regexpr) {          
+                    var regexp = new RegExp(regexpr);
+                    return regexp.test(value);
+                }, "Por Favor Ingrese un valor con el formato correcto.");
+                $.validator.messages.required = "Campo requerido";
+
+
+                // validate signup form on keyup and submit
+                $("#addUserform").validate({
+                    rules: {
+                        rut: {
+                            required: true,
+                            regexp: "^([0-9]+)-[0-9|kK]$"
+                        },
+                        names: {
+                            required: true,
+                            regexp: "^[A-Za-z ]+$"
+                        },
+                        firstLastName: {
+                            required: true,
+                            regexp: "^[A-Za-z ]+$"
+                        },
+                        secondLastName: {
+                            required: true,
+                            regexp: "^[A-Za-z ]+$"
+                        },
+                        birthDate: {
+                            required: true,
+                            regexp: "^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$"
+                        },
+                        address: {
+                            required: true,
+                            regexp: "^[0-9a-zA-z ]+$"
+                        },
+                        state: {
+                            required: true,
+                            regexp: "^[A-Za-z ]+$"
+                        },
+                        password: {
+                            required: true
+                        },
+                        email: {
+                            required: true,
+                            regexp: "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
+                        },
+                        phone: {
+                            required: true,
+                            regexp: "^[0-9]+$"
+                        },
+                        sickness: {
+                        },
+                        comments: {
+                        }
+                    },
+                    messages: {
+                        required: "Campo requerido"
+                    },
+                    errorPlacement: function (error, element) {
+                    error.css({'color':'red'});
+                    error.insertAfter(element);
+                    }
+                });
+
+            },
             saveUser: function() {
+
+                if($("#addUserform").valid()){
 
                 var modelJson = this.serializeFormToJson("#addUserform");
                 this.model = new User();
@@ -42,6 +111,9 @@ define(['backbone', 'jquery', 'hbs!Templates/createdUser', 'hbs!Templates/errorM
                         alert("Error Interno, favor intente más tarde");
                     }
                 });
+
+                }
+            
             },
             serializeFormToJson: function(formSelector) {
                     var jsonData = {};

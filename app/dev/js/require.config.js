@@ -7,6 +7,8 @@ require.config({
     paths: {
 
         jquery: '../../../bower_components/jquery/jquery',
+        "jquery.validate": '../../../bower_components/jquery-validation/dist/jquery.validate',
+
         backbone: '../../../bower_components/backbone/backbone',
         underscore: '../../../bower_components/underscore/underscore',
         'bootstrap-modal': '../../../bower_components/bootstrap/js/modal',
@@ -22,7 +24,11 @@ require.config({
         /* styles */
         styles: '../styles',
     },
-
+    shim: {
+        'jquery.validate': {
+            deps: ['jquery']
+        }
+    },
     hbs: {
         disableI18n: true,
     },

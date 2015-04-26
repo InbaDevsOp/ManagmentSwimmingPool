@@ -1,0 +1,28 @@
+<br>
+<table id= "schedule" class="table table-bordered">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Lunes</th>
+            <th>Martes</th>
+            <th>Miercoles</th>
+            <th>Jueves</th>
+            <th>Viernes</th>
+            <th>Sabado</th>
+            <th>Domingo</th>
+        </tr>
+    </thead>
+    <tbody>
+            {{#each daySections}}
+            <tr>
+                <td>{{title}}</td>
+               {{#each daySectionId}}
+                    <td id={{this}}></td>
+                {{/each}}
+            </tr>
+            {{/each}}
+    </tbody>
+</table>
+<br>
+<label id="saveSchedule" class="col-md-3 control-label btn btn-primary">Guardar Horario</label>
+
