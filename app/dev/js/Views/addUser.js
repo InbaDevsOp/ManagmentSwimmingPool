@@ -1,5 +1,5 @@
-define(['backbone', 'jquery', 'jquery.validate', 'hbs!Templates/createdUser', 'hbs!Templates/errorMessage', 'hbs!Templates/headerApplication', 'Models/User'],
-    function(Backbone, $, jqueryValidate, createdUser, errorMessage, headerApplication, User) {
+define(['backbone', 'jquery', 'jquery.validate', 'Modules/login', 'Modules/utilForm', 'hbs!Templates/createdUser', 'hbs!Templates/errorMessage', 'Models/User'],
+    function(Backbone, $, jqueryValidate, login, utilForm, createdUser, errorMessage, User) {
 
         applicationIndex = Backbone.View.extend({
             template: createdUser,
@@ -10,26 +10,16 @@ define(['backbone', 'jquery', 'jquery.validate', 'hbs!Templates/createdUser', 'h
             },
             initialize: function() {
 
-                var flagSession = localStorage.getItem('sessionActive');
-                var userName = localStorage.getItem('names');
-
-                if (flagSession == 1) {
-                    $('#header').html(headerApplication({
-                        userName: userName
-                    }));
+                if (login.verifyIsUserlogded()) {
                     $(this.el).html(this.template({
                         tittle: "Ingresa el nuevo Usuario de la Piscina"
                     }));
                     this.validateForm();
-                } else {
-                    localStorage.clear();
-                    window.location.href = "/index.html"
                 }
-
             },
-            validateForm: function(form){
+            validateForm: function(form) {
 
-                $.validator.addMethod("regexp", function(value, element, regexpr) {          
+                $.validator.addMethod("regexp", function(value, element, regexpr) {
                     var regexp = new RegExp(regexpr);
                     return regexp.test(value);
                 }, "Por Favor Ingrese un valor con el formato correcto.");
@@ -78,60 +68,44 @@ define(['backbone', 'jquery', 'jquery.validate', 'hbs!Templates/createdUser', 'h
                             required: true,
                             regexp: "^[0-9]+$"
                         },
-                        sickness: {
-                        },
-                        comments: {
-                        }
+                        sickness: {},
+                        comments: {}
                     },
                     messages: {
                         required: "Campo requerido"
                     },
-                    errorPlacement: function (error, element) {
-                    error.css({'color':'red'});
-                    error.insertAfter(element);
+                    errorPlacement: function(error, element) {
+                        error.css({
+                            'color': 'red'
+                        });
+                        error.insertAfter(element);
                     }
                 });
 
             },
             saveUser: function() {
 
-                if($("#addUserform").valid()){
+                if ($("#addUserform").valid()) {
 
-                var modelJson = this.serializeFormToJson("#addUserform");
-                this.model = new User();
+                    var modelJson = utilForm.serializeFormToJson("#addUserform");
+                    this.model = new User();
 
-                this.model.save(modelJson, {
-                    success: function(model, respose) {
-                        alert("Usuario de la Piscina guardado exitosamente");
-                        $('#addUserform').each(function() {
-                            this.reset();
-                        });
-                    },
-                    error: function(model, response) {
-                        alert("Error Interno, favor intente más tarde");
-                    }
-                });
-
-                }
-            
-            },
-            serializeFormToJson: function(formSelector) {
-                    var jsonData = {};
-                    var formData = $(formSelector).serializeArray();
-                    $.each(formData, function() {
-                        if (jsonData[this.name]) {
-                            if (!jsonData[this.name].push) {
-                                jsonData[this.name] = [jsonData[this.name]];
-                            }
-                            jsonData[this.name].push(this.value || '');
-                        } else {
-                            jsonData[this.name] = this.value || '';
+                    this.model.save(modelJson, {
+                        success: function(model, respose) {
+                            alert("Usuario de la Piscina guardado exitosamente");
+                            $('#addUserform').each(function() {
+                                this.reset();
+                            });
+                        },
+                        error: function(model, response) {
+                            alert("Error Interno, favor intente más tarde");
                         }
-
                     });
-                    return jsonData;
-                    console.log(jsonData);
+
                 }
+
+            }
+
         });
 
         return applicationIndex;

@@ -1,6 +1,6 @@
 define(['backbone', 'jquery', 'hbs!Templates/searchUsers', 'hbs!Templates/usersTable',
-    'hbs!Templates/createdUser', 'hbs!Templates/headerApplication',
-], function(Backbone, $, searchUsers, usersTable, createdUser, headerApplication) {
+    'hbs!Templates/createdUser'
+], function(Backbone, $, searchUsers, usersTable, createdUser) {
 
     managmentUsers = Backbone.View.extend({
         template: searchUsers,
@@ -10,17 +10,8 @@ define(['backbone', 'jquery', 'hbs!Templates/searchUsers', 'hbs!Templates/usersT
             "click #search": "searchUsers",
         },
         initialize: function() {
-            var flagSession = localStorage.getItem('sessionActive');
-            var userName = localStorage.getItem('names');
-
-            if (flagSession == 1) {
-                $('#header').html(headerApplication({
-                    userName: userName
-                }));
+            if (login.verifyIsUserlogded()) {
                 $(this.el).html(this.template());
-            } else {
-                localStorage.clear();
-                window.location.href = "/index.html"
             }
         },
         searchUsers: function() {

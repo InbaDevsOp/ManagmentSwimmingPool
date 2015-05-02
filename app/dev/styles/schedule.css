@@ -1,3 +1,6 @@
 .selected{
-	background-color: red;
+	background-color: rgb(150, 176, 228);
+}
+.schedule {
+	background-color: #FFF;
 }
