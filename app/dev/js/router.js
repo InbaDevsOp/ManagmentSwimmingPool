@@ -1,8 +1,7 @@
-require(['backbone', 'jquery', 'Views/login',
-        'Views/addUser', 'Views/managmentUsers', 'Views/addSchedule'
+require(['backbone', 'jquery', 'Views/login', 'Views/swimmingPoolUser/addUser',
+        'Views/swimmingPoolUser/managmentUsers', 'Views/schedule/addSchedule', 'Views/schedule/managmentSchedules'
     ],
-
-    function(Backbone, $, Login, addUser, ManagmentUsers, AddSchedule) {
+    function(Backbone, $, login, addUser, managmentUsers, addSchedule, managmentSchedules) {
 
         var myRouter = Backbone.Router.extend({
 
@@ -11,19 +10,23 @@ require(['backbone', 'jquery', 'Views/login',
                 "addUser": "addUser",
                 "managmentUsers": "managmentUsers",
                 "addSchedule": "addSchedule",
+                "managmentSchedules": "managmentSchedules",
                 "exitUser": "exitUser"
             },
             handleLogin: function() {
-                this.login = new Login();
+                this.login = new login();
             },
             addUser: function() {
                 this.addUser = new addUser();
             },
             managmentUsers: function() {
-                this.managmentUsers = new ManagmentUsers();
+                this.managmentUsers = new managmentUsers();
             },
             addSchedule: function() {
-                this.addSchedule = new AddSchedule();
+                this.addSchedule = new addSchedule();
+            },
+            managmentSchedules: function() {
+                this.managmentSchedules = new managmentSchedules();
             },
             exitUser: function() {
                 localStorage.clear();

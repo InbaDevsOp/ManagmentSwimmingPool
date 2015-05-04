@@ -1,0 +1,101 @@
+<br>
+
+<div class ="row">
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-10">
+    
+    <form id="addUserform" role="form" class=".form-inline informationArticleTitle"><br>
+      <div class="form-group">
+        <div class="col-md-12">
+          
+          <div class="form-group row">
+            
+            <label for="inputKey" class="col-md-1 control-label">Rut</label>
+            <div class="col-md-5">
+              <input type="text" class="form-control" value="{{user.rut}}" name="rut" id="rut" placeholder="Rut" required>
+            </div>
+            <label for="inputValue" class="col-md-2 control-label">Fecha Nacimiento</label>
+            <div class="col-md-4">
+              <input type="text" class="form-control" value="{{user.birthDate}}" name="birthDate" id="datepicker" placeholder="AAAA-MM-DD">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputValue" class="col-md-1 control-label">Nombres</label>
+            <div class="col-md-5">
+              <input type="text" class="form-control" value="{{user.names}}" name="names" id="names" placeholder="Nombres">
+            </div>
+            <label for="inputValue" class="col-md-1 control-label">Apellido Paterno</label>
+            <div class="col-md-2">
+              <input type="text" class="form-control" value="{{user.firstLastName}}" name="firstLastName" id="firstLastName" placeholder="Apellido Paterno">
+            </div>
+            <label for="inputValue" class="col-md-1 control-label">Apellido Materno</label>
+            <div class="col-md-2">
+              <input type="text" class="form-control" value="{{user.secondLastName}}" name="secondLastName" id="secondLastName" placeholder="Apellido Materno">
+            </div>
+          </div>
+          <div class="form-group row">
+            
+            <label for="inputKey" class="col-md-2 control-label">Certificado Medico</label>
+            <div class="col-md-2">
+              <select name="medicalCertificate" class="form-control" value="{{user.medicalCertificate}}" id="medicalCertificate">
+                <option value="Si">Sí</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+            <label for="inputValue" class="col-md-2 control-label">Enfermedades</label>
+            <div class="col-md-6">
+              <input type="text" class="form-control" value="{{user.sickness}}" name="sickness" id="sickness" placeholder="Enfermedades">
+            </div>
+            
+          </div>
+          <div class="form-group row">
+            
+            <label for="inputKey" class="col-md-2 control-label">Correo Electrónico</label>
+            <div class="col-md-5">
+              <input type="text" class="form-control" value="{{user.email}}" name="email" id="email" placeholder="correo@correo.cl">
+            </div>
+            <label for="inputValue" class="col-md-1 control-label">Telefono</label>
+            <div class="col-md-4">
+              <input type="text" class="form-control" value="{{user.phone}}" name="phone" id="phone" placeholder="+56981779012">
+            </div>
+            
+          </div>
+          <div class="form-group row">
+            
+            <label for="inputKey" class="col-md-1 control-label">Dirección </label>
+            <div class="col-md-7">
+              <input type="text" class="form-control" value="{{user.address}}" name="address" id="address" placeholder="Dirección">
+            </div>
+            <label for="inputValue" class="col-md-1 control-label">Comuna </label>
+            <div class="col-md-3">
+              <input type="text" class="form-control" value="{{user.state}}" name="state" id="state" placeholder="Comuna">
+            </div>
+          </div>
+          <div class="form-group row">
+            
+            <label for="inputValue" class="col-md-2 control-label">Observaciones</label>
+            <div class="col-md-10">
+              <textarea class="form-control" rows="3" maxlength="10" value="{{user.comments}}" name="comments" id="comments" placeholder="Observaciones"></textarea>
+            </div>
+            
+          </div>
+          <div class="form-group row">
+            
+            <label for="inputValue" class="col-md-1 control-label">Clave</label>
+            <div class="col-md-5">
+              <input class="form-control" name="password" id="password" placeholder="Contraseña" type="password">
+            </div>
+            <div class="col-md-2">
+            </div>
+            
+            <label id="save" class="col-md-3 control-label btn btn-primary">Guardar Usuario</label>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="col-md-1">
+  </div>
+</div>
+<br>
