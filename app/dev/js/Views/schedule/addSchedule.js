@@ -8,7 +8,7 @@ define(['backbone', 'jquery', 'hbs!Templates/schedule/addSchedule', 'Modules/log
             el: $("#applicationContent"),
 
             events: {
-                "click td": "selectDaySection",
+                "click #schedule td": "selectDaySection",
                 "click #saveSchedule": "saveSchedule"
             },
             initialize: function() {

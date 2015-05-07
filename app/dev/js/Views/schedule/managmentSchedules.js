@@ -1,8 +1,9 @@
 define(['backbone', 'jquery', 'Modules/login', 'Modules/schedule/scheduleConfig',
         'hbs!Templates/schedule/managmentSchedules',
-        'hbs!Templates/schedule/schedulesTable', 'hbs!Templates/schedule/addSchedule'
+        'hbs!Templates/schedule/schedulesTable', 'hbs!Templates/schedule/addSchedule',
+        'Models/schedule'
     ],
-    function(Backbone, $, login, scheduleConfig, managmentSchedules, schedulesTable, addSchedule) {
+    function(Backbone, $, login, scheduleConfig, managmentSchedules, schedulesTable, addSchedule, schedule) {
 
         managmentSchedules = Backbone.View.extend({
             template: managmentSchedules,
@@ -38,7 +39,8 @@ define(['backbone', 'jquery', 'Modules/login', 'Modules/schedule/scheduleConfig'
                         that.schedules.array = data;
 
                         $("#scheduleInfo").html(schedulesTable({
-                            schedules: that.schedules.array.slice(that.schedules.count, that.schedules.count += that.schedules.group)
+                           // schedules: that.schedules.array.slice(that.schedules.count, that.schedules.count += that.schedules.group)
+                            schedules: that.schedules.array
                         }));
                     },
                     error: function(request, error) {
@@ -47,26 +49,26 @@ define(['backbone', 'jquery', 'Modules/login', 'Modules/schedule/scheduleConfig'
                 });
 
             },
-            backwardGroupSchedule: function() {
-                if (this.schedules.count > this.schedules.group) {
-                    console.log("atras" + this.schedules.count);
-                    $("#scheduleInfo").html(schedulesTable({
-                        schedules: this.schedules.array.slice(this.schedules.count -= (this.schedules.group * 2), this.schedules.count += this.schedules.group)
-                    }));
-                }
-            },
-            forwardGroupSchedule: function() {
-                if (this.schedules.count < this.schedules.array.length) {
-                    console.log("adelante" + this.schedules.count);
-                    $("#scheduleInfo").html(schedulesTable({
-                        schedules: this.schedules.array.slice(this.schedules.count, this.schedules.count += this.schedules.group)
-                    }));
-                }
-            },
+            // backwardGroupSchedule: function() {
+            //     if (this.schedules.count > this.schedules.group) {
+            //         console.log("atras" + this.schedules.count);
+            //         $("#scheduleInfo").html(schedulesTable({
+            //             schedules: this.schedules.array.slice(this.schedules.count -= (this.schedules.group * 2), this.schedules.count += this.schedules.group)
+            //         }));
+            //     }
+            // },
+            // forwardGroupSchedule: function() {
+            //     if (this.schedules.count < this.schedules.array.length) {
+            //         console.log("adelante" + this.schedules.count);
+            //         $("#scheduleInfo").html(schedulesTable({
+            //             schedules: this.schedules.array.slice(this.schedules.count, this.schedules.count += this.schedules.group)
+            //         }));
+            //     }
+            // },
             fillScheduleInformation: function(eventTd) {
 
-                var id = eventTd.currentTarget.closest("tr").id;
-                var schedule = this.schedules.array[--id];
+                var id = $(eventTd.currentTarget.closest("tr")).index();
+                var schedule = this.schedules.array[id];
 
                 $("#scheduleModify").html(addSchedule({
                     daySections: scheduleConfig,
@@ -84,6 +86,23 @@ define(['backbone', 'jquery', 'Modules/login', 'Modules/schedule/scheduleConfig'
                     var daySection = scheduleDaySections[i].id;
                     $("#scheduleModify table#schedule td#" + daySection).addClass("selected");
                 }
+
+            },
+            modifySchedule: function(eventTd) {
+                var scheduleJson = eventTd.currentTarget.closest("tr");
+                //var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/schedule/delete/" + schedule.id;
+
+                this.model = new schedule();
+                this.model.set();
+                this.model.save(scheduleJson, {
+                    success: function(model, respose) {
+                        alert("Horario modificado exitosamente");
+                        that._cleanSchedule();
+                    },
+                    error: function(model, response) {
+                        alert("Error Interno, favor intente más tarde");
+                    }
+                });
 
             },
             eliminateSchedule: function(eventTd) {
