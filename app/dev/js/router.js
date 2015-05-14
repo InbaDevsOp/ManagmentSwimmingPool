@@ -1,9 +1,11 @@
-require(['backbone', 'jquery', 'Views/login', 'Views/swimmingPoolUser/addUser',
-        'Views/swimmingPoolUser/managmentUsers', 'Views/schedule/addSchedule', 'Views/schedule/managmentSchedules'
+require(['backbone', 'marionette', 'jquery', 'Views/login', 'Views/swimmingPoolUser/addUser',
+        'Views/swimmingPoolUser/managmentUsers', 'Views/schedule/addSchedule', 'Views/schedule/managmentSchedules',
+        'Models/schedule', 'Models/User'
     ],
-    function(Backbone, $, login, addUser, managmentUsers, addSchedule, managmentSchedules) {
+    function(Backbone, Marionette, $, login, addUser, managmentUsers, addSchedule, managmentSchedules,
+        scheduleModel, userModel) {
 
-        var myRouter = Backbone.Router.extend({
+        var myRouter = Backbone.Marionette.AppRouter.extend({
 
             routes: {
                 "": "handleLogin",
@@ -17,13 +19,19 @@ require(['backbone', 'jquery', 'Views/login', 'Views/swimmingPoolUser/addUser',
                 this.login = new login();
             },
             addUser: function() {
-                this.addUser = new addUser();
+                this.addUser = new addUser({
+                    model: new userModel({}),
+                    el: $("#applicationContent")
+                });
             },
             managmentUsers: function() {
                 this.managmentUsers = new managmentUsers();
             },
             addSchedule: function() {
-                this.addSchedule = new addSchedule();
+                this.addSchedule = new addSchedule({
+                    model: new scheduleModel({}),
+                    el: $("#applicationContent")
+                });
             },
             managmentSchedules: function() {
                 this.managmentSchedules = new managmentSchedules();

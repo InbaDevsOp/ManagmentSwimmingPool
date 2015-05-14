@@ -27,6 +27,11 @@ define(['jquery'],
                     object[selector[i].name] = selector[i].value;
                 }
                 return object;
+            },
+            cleanDataForm: function(formSelector){
+                $(formSelector).each(function() {
+                    this.reset();
+                });
             }
 
         }

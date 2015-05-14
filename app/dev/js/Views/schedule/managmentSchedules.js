@@ -1,27 +1,30 @@
-define(['backbone', 'jquery', 'Modules/login', 'Modules/schedule/scheduleConfig',
-        'hbs!Templates/schedule/managmentSchedules',
-        'hbs!Templates/schedule/schedulesTable', 'hbs!Templates/schedule/addSchedule',
-        'Models/schedule'
+define(['backbone', 'jquery', 'Modules/login', 'Views/schedule/addSchedule', 'Modules/schedule/scheduleConfig',
+        'hbs!Templates/schedule/managmentSchedules', 'hbs!Templates/schedule/schedulesTable', 'Models/schedule'
     ],
-    function(Backbone, $, login, scheduleConfig, managmentSchedules, schedulesTable, addSchedule, schedule) {
+    function(Backbone, $, login, addScheduleView, scheduleConfig,
+        managmentSchedules, schedulesTable, schedule) {
 
         managmentSchedules = Backbone.View.extend({
             template: managmentSchedules,
+
             schedules: {
                 count: 0,
                 group: 5,
                 array: []
             },
+
+            childView: {},
+
             el: $("#applicationContent"),
 
             events: {
-                "click #save": "saveUser",
                 "click #backwardGroupSchedule": "backwardGroupSchedule",
                 "click #forwardGroupSchedule": "forwardGroupSchedule",
                 "click #scheduleInformation #viewSchedule": "fillScheduleInformation",
                 "click #scheduleInformation #deleteSchedule": "eliminateSchedule"
             },
             initialize: function() {
+
                 if (login.verifyIsUserlogded()) {
                     $(this.el).html(this.template());
                     this.searchSchedules();
@@ -39,7 +42,7 @@ define(['backbone', 'jquery', 'Modules/login', 'Modules/schedule/scheduleConfig'
                         that.schedules.array = data;
 
                         $("#scheduleInfo").html(schedulesTable({
-                           // schedules: that.schedules.array.slice(that.schedules.count, that.schedules.count += that.schedules.group)
+                            // schedules: that.schedules.array.slice(that.schedules.count, that.schedules.count += that.schedules.group)
                             schedules: that.schedules.array
                         }));
                     },
@@ -68,41 +71,21 @@ define(['backbone', 'jquery', 'Modules/login', 'Modules/schedule/scheduleConfig'
             fillScheduleInformation: function(eventTd) {
 
                 var id = $(eventTd.currentTarget.closest("tr")).index();
-                var schedule = this.schedules.array[id];
+                var scheduleJson = this.schedules.array[id];
 
-                $("#scheduleModify").html(addSchedule({
-                    daySections: scheduleConfig,
-                    name: schedule.name,
-                    description: schedule.description
-                }));
-
-                this._deserializeSchedule(schedule);
-
-            },
-            _deserializeSchedule: function(scheduleArray) {
-
-                var scheduleDaySections = scheduleArray.daySection;
-                for (var i = 0; i < scheduleDaySections.length; i++) {
-                    var daySection = scheduleDaySections[i].id;
-                    $("#scheduleModify table#schedule td#" + daySection).addClass("selected");
-                }
-
-            },
-            modifySchedule: function(eventTd) {
-                var scheduleJson = eventTd.currentTarget.closest("tr");
-                //var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/schedule/delete/" + schedule.id;
-
-                this.model = new schedule();
-                this.model.set();
-                this.model.save(scheduleJson, {
-                    success: function(model, respose) {
-                        alert("Horario modificado exitosamente");
-                        that._cleanSchedule();
-                    },
-                    error: function(model, response) {
-                        alert("Error Interno, favor intente más tarde");
-                    }
+                var scheduleModel = new schedule({
+                    id: scheduleJson.id,
+                    name: scheduleJson.name,
+                    description: scheduleJson.description,
+                    daySection: scheduleJson.daySection
                 });
+
+                this.childView = new addScheduleView({
+                    model: scheduleModel,
+                    el: $("#scheduleModify"),
+                });
+
+                this.childView.model.on('sync', this.initialize, this);
 
             },
             eliminateSchedule: function(eventTd) {

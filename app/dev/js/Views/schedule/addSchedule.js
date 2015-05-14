@@ -1,24 +1,26 @@
 define(['backbone', 'jquery', 'hbs!Templates/schedule/addSchedule', 'Modules/login', 'Modules/utilForm',
         'Modules/schedule/scheduleConfig', 'Models/schedule'
     ],
-    function(Backbone, $, scheduleTemplate, login, utilForm, scheduleConfig, Schedule) {
+    function(Backbone, $, addScheduleTemplate, login, utilForm, scheduleConfig, Schedule) {
 
         AddScheduleView = Backbone.View.extend({
-            template: scheduleTemplate,
-            el: $("#applicationContent"),
+            template: addScheduleTemplate,
 
             events: {
                 "click #schedule td": "selectDaySection",
-                "click #saveSchedule": "saveSchedule"
+                "click #saveSchedule": "saveSchedule",
             },
             initialize: function() {
 
                 if (login.verifyIsUserlogded()) {
 
-                    $(this.el).html(this.template({
-                        daySections: scheduleConfig
+                    $(this.el).html(addScheduleTemplate({
+                        daySections: scheduleConfig,
+                        name: this.model.get('name'),
+                        description: this.model.get('description')
                     }));
 
+                    this._deserializeSchedule(this.model);
                 }
             },
             selectDaySection: function(td) {
@@ -33,11 +35,11 @@ define(['backbone', 'jquery', 'hbs!Templates/schedule/addSchedule', 'Modules/log
                 var that = this;
                 var scheduleJson = utilForm.serializeFormToObject("#addScheduleForm");
                 var scheduleDaySectionJson = this._serializeSchedule();
-
                 scheduleJson.daySection = scheduleDaySectionJson;
 
-                this.model = new Schedule();
-                this.model.save(scheduleJson, {
+                this.model.set(scheduleJson);
+
+                this.model.save({}, {
                     success: function(model, respose) {
                         alert("Horario guardado exitosamente");
                         that._cleanSchedule();
@@ -49,12 +51,10 @@ define(['backbone', 'jquery', 'hbs!Templates/schedule/addSchedule', 'Modules/log
 
             },
             _cleanSchedule: function() {
-                $('#addScheduleForm').each(function() {
-                    this.reset();
-                });
+
+                utilForm.cleanDataForm("#addScheduleForm");
 
                 $('#schedule tr').each(function() {
-                    //TODO verify performance double each
                     $.each(this.cells, function() {
                         $(this).removeClass("selected");
                     });
@@ -71,7 +71,16 @@ define(['backbone', 'jquery', 'hbs!Templates/schedule/addSchedule', 'Modules/log
                     });
                 });
                 return daySectionSchedule;
-            }
+            },
+            _deserializeSchedule: function(schedule) {
+
+                var scheduleDaySections = schedule.get('daySection');
+                for (var i = 0; i < scheduleDaySections.length; i++) {
+                    var daySection = scheduleDaySections[i].id;
+                    $("#scheduleModify table#schedule td#" + daySection).addClass("selected");
+                }
+            },
+
 
         });
 

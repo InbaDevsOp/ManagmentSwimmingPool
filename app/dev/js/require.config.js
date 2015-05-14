@@ -6,10 +6,11 @@ require.config({
 
     paths: {
 
-        jquery: '../../../bower_components/jquery/jquery',
+        jquery: '../../../bower_components/jquery/dist/jquery',
         "jquery.validate": '../../../bower_components/jquery-validation/dist/jquery.validate',
 
         backbone: '../../../bower_components/backbone/backbone',
+        marionette: '../../../bower_components/backbone.marionette/lib/backbone.marionette',
         underscore: '../../../bower_components/underscore/underscore',
         'bootstrap-modal': '../../../bower_components/bootstrap/js/modal',
 
