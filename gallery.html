@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<head>
+  <!--<script src="bower_components/requirejs/require.js"></script>
+  <script src="app/dev/js/require.config.js"></script>
+  <script src="app/dev/js/router.js"></script>
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  -->
+
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
+  
+  <script src="bower_components/jquery/jquery.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="app/dev/styles/styles.css">
+  
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
+  <script src="gallery.js"></script>
+
+</head>
+<body>
+  <!--  Body   -->
+  
+  <div class="row backgroundImage">
+    <div class="container my-container">
+    <div class="row">
+      <div class="col-md-2">
+      </div>
+      <div class="col-md-8">
+        
+        <div class="row">
+          <div class="col-md-12">
+            <div class="headerInitialSpace"></div> <!-- only right space -->
+            <div id="header"></div>
+            <script type="text/javascript">
+            $('#header').load('header.html');
+            </script>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="informationContainer">
+              <br>
+              <br>
+              <br>
+              <div class="row">
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-10">
+
+                <div id="links">
+                  <a href="images/gallery/img20.JPG" title="Galeria Piscina Temperada de Santiago" data-gallery>
+                    <img src="images/imgGaleria.png" width="100%"; height="90%">
+                  </a>
+                  <a href="images/gallery/img1.JPG" title="Galeria Piscina Temperada de Santiago" data-gallery></a>
+                  <a href="images/gallery/img2.JPG" title="Galeria Piscina Temperada de Santiago" data-gallery></a>
+                  <a href="images/gallery/img2.JPG" title="Galeria Piscina Temperada de Santiago" data-gallery></a>
+                  <a href="images/gallery/img3.JPG" title="Galeria Piscina Temperada de Santiago" data-gallery></a>
+                  <a href="images/gallery/img4.JPG" title="Galeria Piscina Temperada de Santiago" data-gallery></a>
+                  <a href="images/gallery/img5.JPG" title="Galeria Piscina Temperada de Santiago" data-gallery></a>
+                  <a href="images/gallery/img6.JPG" title="Galeria Piscina Temperada de Santiago" data-gallery></a>
+                  <a href="images/gallery/img7.JPG" title="Galeria Piscina Temperada de Santiago" data-gallery></a>
+                  <a href="images/gallery/img8.JPG" title="Galeria Piscina Temperada de Santiago" data-gallery></a>
+                  <a href="images/gallery/img9.jpg" title="Galeria Piscina Temperada de Santiago" data-gallery></a>
+                  <a href="images/gallery/img10.jpg" title="Galeria Piscina Temperada de Santiago" data-gallery></a>
+                  <a href="images/gallery/img11.jpg" title="Galeria Piscina Temperada de Santiago" data-gallery></a>
+                  <a href="images/gallery/img12.jpg" title="Galeria Piscina Temperada de Santiago" data-gallery></a>
+                  <a href="images/gallery/img13.jpg" title="Galeria Piscina Temperada de Santiago" data-gallery></a>
+                  <a href="images/gallery/img14.jpg" title="Galeria Piscina Temperada de Santiago" data-gallery></a>
+                  <a href="images/gallery/img15.jpg" title="Galeria Piscina Temperada de Santiago" data-gallery></a>
+                  <a href="images/gallery/img16.jpg" title="Galeria Piscina Temperada de Santiago" data-gallery></a>
+                  <a href="images/gallery/img17.jpg" title="Galeria Piscina Temperada de Santiago" data-gallery></a>
+                  <a href="images/gallery/img18.jpg" title="Galeria Piscina Temperada de Santiago" data-gallery></a>
+                  <a href="images/gallery/img19.jpg" title="Galeria Piscina Temperada de Santiago" data-gallery></a>
+                  
+                </div>
+                <!-- The Bootstrap Image Gallery lightbox, should be a child element of the document body -->
+                <div id="blueimp-gallery" class="blueimp-gallery">
+                    <!-- The container for the modal slides -->
+                    <div class="slides"></div>
+                    <!-- Controls for the borderless lightbox -->
+                    <h3 class="title"></h3>
+                    <a class="prev"><</a>
+                    <a class="next">></a>
+                    <a class="close">X</a>
+                    <a class="play-pause"></a>
+                    <ol class="indicator"></ol>
+                    <!-- The modal dialog, which will be used to wrap the lightbox content -->
+                    <div class="modal fade">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title"></h4>
+                                </div>
+                                <div class="modal-body next"></div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default pull-left prev">
+                                        <i class="glyphicon glyphicon-chevron-left"></i>
+                                        Anterior
+                                    </button>
+                                    <button type="button" class="btn btn-primary next">
+                                        Siguiente
+                                        <i class="glyphicon glyphicon-chevron-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+                <br>
+                </div>
+
+              </div>
+            </div>
+            <div class="headerInitialSpace"></div> <!-- only right space -->
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  
+  <!--  Footer   -->
+  <div class="container my-container">
+    <div class="row">
+      <div class="col-md-2"></div>
+        <div class="col-md-8">
+          <div id="footer" ></div>
+            <script type="text/javascript">
+            $('#footer').load('footer.html');
+            </script>
+          </div>
+        </div>
+    </div>
+  <!-- FIN  Footer   -->
+<!-- <div id="navigation">
+  <a href="#">Home</a>
+  <a href="#/view1">Users</a>
+</div>
+<div id = 'content'></div>
+-->
+</body>

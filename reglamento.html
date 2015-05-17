@@ -5,20 +5,24 @@
   <script src="app/dev/js/router.js"></script>
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
   -->
-  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/jquery/jquery.js"></script>
   <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="app/dev/styles/styles.css">
   
 </head>
-<body>
-  <div class="container my-container">
+<body><!--  Body   -->
+  
+  <div class="row backgroundImage">
+    <div class="container my-container">
     <div class="row">
-      <div class="col-md-1">
+      <div class="col-md-2">
       </div>
-      <div class="col-md-10">
+      <div class="col-md-8">
         <div class="row">
           <div class="col-md-12">
+            <div class="headerInitialSpace"></div> <!-- only right space -->
+              
             <div id="header"></div>
             <script type="text/javascript">
             $('#header').load('header.html');
@@ -28,7 +32,7 @@
         
         <div class="row">
           <div class="col-md-12">
-            <div class="informationContainerSchool">
+            <div class="informationContainer">
               <br>
               <br>
               <br>
@@ -38,8 +42,8 @@
                 
                 <div class="col-md-10">
                   <article>
-                    <h3 class="informationArticleTitle">REGLAMENTO PISCINA 2015</h3><br>
-                    <ol class="bodytext">
+                    <p class="informationArticleTitle textTitle">REGLAMENTO PISCINA 2015</p><br>
+                    <ol class="bodytext textNormal">
                       <li>Le sugerimos llegar con traje de ba&ntildeo c&oacutemodo, gorro, hawaianas y toalla. Todo ello debe estar al alcance del alumno durante la clase.</li><br>
                       <li>Bloqueador solar 30 minutos antes de la entrada al agua.</li><br>
                       <li>Pasar al ba&ntildeo antes de dejarlo con su profesor, de lo contrario s&oacutelo podr&aacute el apoderado
@@ -61,15 +65,26 @@
                 <br>
               </div>
             </div>
+            <div id="applicationContent" class="informationContainerSchool"> </div>
           </div>
-          <div id="footer"></div>
-          <script type="text/javascript">
-          $('#footer').load('footer.html');
-          </script>
+          <div class="headerInitialSpace"></div> <!-- only right space -->
         </div>
       </div>
     </div>
-  </div>
+    </div>
+<!--  Footer   -->
+  <div class="container my-container">
+    <div class="row">
+      <div class="col-md-2"></div>
+        <div class="col-md-8">
+          <div id="footer" ></div>
+            <script type="text/javascript">
+            $('#footer').load('footer.html');
+            </script>
+          </div>
+        </div>
+    </div>
+  <!-- FIN  Footer   -->
   <!-- <div id="navigation">
     <a href="#">Home</a>
     <a href="#/view1">Users</a>

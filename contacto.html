@@ -30,81 +30,87 @@
   
 </head>
 <body>
-  <div class="container my-container">
-    <div class="row">
-      <div class="col-md-1">
-      </div>
-      <div class="col-md-10">
-        <div class="row">
-          <div class="col-md-12">
-            <div id="header"></div>
-            <script type="text/javascript">
-            $('#header').load('header.html');
-            </script>
-          </div>
+  <!--  Body   -->
+  <div class="row backgroundImage">
+    <div class="container my-container">
+      <div class="row">
+        <div class="col-md-2">
         </div>
-        
-        <div class="row">
-          <div class="col-md-12">
-            <div class="informationContainerSchool">
-              <br>
-              <br>
-              <br>
-              <div class="row">
-                <div class="col-md-1">
-                </div>
-                
-                <div class="col-md-10">
+        <div class="col-md-8">
+          <div class="row">
+            <div class="col-md-12">
+                  <div class="headerInitialSpace"></div> <!-- only right space -->
+              <div id="header"></div>
+              <script type="text/javascript">
+              $('#header').load('header.html');
+              </script>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-md-12">
+              <div class="headerInitialSpace"></div> <!-- only right space -->
+              <div class="informationContainer">
+                <br>
+                <div class="row">
+                  <div class="col-md-1">
+                  </div>
                   
-                  <div class="row">
-                    <div class="col-md-8">
-                
-
-                  <h3 class="informationArticleTitle">CONTACTO</h3><br>
-                  
-                  <form role="form" class="informationArticleTitle">
-                    <div class="form-group">
-                      <label>NOMBRE</label>
-                      <input class="form-control" id="name">
-                    </div>
-                    <div class="form-group">
-                      <label for="email">EMAIL</label>
-                      <input type="email" class="form-control" id="email">
-                    </div>
-                    <div class="form-group">
-                      <div class="form-group">
-                        <label for="name">COMENTARIOS</label>
-                        <textarea class="form-control" rows="5"></textarea>
+                  <div class="col-md-10">
+                    
+                    <div class="row">
+                      <div class="col-md-8">
+                        <p class="informationArticleTitle  textTitle">CONTACTO</p>
+                        
+                        <form role="form" class="informationArticleTitle" action="nodemail.js">
+                          <div class="form-group">
+                            <label class="textSmall">NOMBRE</label>
+                            <input class="form-control" id="name">
+                          </div>
+                          <div class="form-group">
+                            <label class="textSmall" for="email">EMAIL</label>
+                            <input type="email" class="form-control" id="email">
+                          </div>
+                          <div class="form-group">
+                            <div class="form-group">
+                              <label class="textSmall" for="name">COMENTARIOS</label>
+                              <textarea class="form-control" rows="5"></textarea>
+                            </div>
+                          </div>
+                          <button id="sendMail"type="submit" onclick="mail();" class="btn btn-default">Enviar</button>
+                          
+                        </form> 
                       </div>
                     </div>
-                    <button type="submit" class="btn btn-default">Enviar</button>
-                  </form>
-                  
+                    <br>
+                    <p class="informationArticleTitle">info@piscinatemperadasantiago.cl<br>  +56 2 259 21 590</p>
+                    <p class="informationArticleTitle textTitle">UBICACI&OacuteN</p>
+                    <div id="googleMap" style="width: 280px; height: 180px"></div>
                   </div>
                 </div>
-
-                  <br>
-                  <h4 class="informationArticleTitle">info@piscinatemperadasantiago.cl<br>  +56 2 267 54 67</h4>
-                  <br>
-                  <h3 class="informationArticleTitle">UBICACI&OacuteN</h3><br>
-                  <div id="googleMap" style="width: 315px; height: 300px"></div>
-                </div>
+                <br>
               </div>
-              <br>
-              <br>
-              <br>
-              
+              <div class="headerInitialSpace"></div> <!-- only right space -->
             </div>
           </div>
         </div>
-        <div id="footer"></div>
-        <script type="text/javascript">
-        $('#footer').load('footer.html');
-        </script>
       </div>
     </div>
+    
   </div>
-</div>
+<!--  Footer   -->
+  <div class="container my-container">
+    <div class="row">
+      <div class="col-md-2"></div>
+        <div class="col-md-8">
+          <div id="footer" ></div>
+            <script type="text/javascript">
+            $('#footer').load('footer.html');
+            </script>
+          </div>
+        </div>
+    </div>
+  <!-- FIN  Footer   -->
 <!-- <div id="navigation">
   <a href="#">Home</a>
   <a href="#/view1">Users</a>
