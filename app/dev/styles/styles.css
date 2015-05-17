@@ -74,7 +74,8 @@ font-weight: 200;
 }
 
 .footerText {
-font-weight: bold;
+font-weight: normal;
+font-size: 12px;
 }
 
 .borderInformationContainerIndex {
