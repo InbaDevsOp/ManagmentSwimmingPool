@@ -40,7 +40,7 @@ define(['backbone', 'jquery', 'Modules/login', 'Modules/utilForm',
             },
             saveUser: function() {
 
-                if ($("#addUserform").valid()) {
+                if (addSwimmingPoolUserValidation.isValidForm()) {
 
                     var modelJson = utilForm.serializeFormToJson("#addUserform");
                     this.model.set(modelJson);

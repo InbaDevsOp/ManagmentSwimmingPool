@@ -73,10 +73,10 @@ define(['jquery', 'jquery.validate'], function($, jqueryValidate) {
                         regexp: "Formato Incorrecto: Ej: 1989-08-12"
                     },
                     address: {
-                        regexp: "Formato Incorrecto: Ej: Números y letras"
+                        regexp: "Formato Incorrecto: Números y letras"
                     },
                     state: {
-                        regexp: "Formato Incorrecto: Ej: Solo letras"
+                        regexp: "Formato Incorrecto: Solo letras"
                     },
                     password: {
                         regexp: "Formato Incorrecto: De 6 a 15 caracteres"
@@ -96,6 +96,9 @@ define(['jquery', 'jquery.validate'], function($, jqueryValidate) {
                 }
             });
 
+        },
+        isValidForm: function(){
+            return $("#addUserform").valid();
         }
     }
 

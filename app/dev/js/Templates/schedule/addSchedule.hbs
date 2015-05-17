@@ -25,7 +25,6 @@
 
                 </div>
             </div>
-        </form>
         
         <table id= "schedule" class="table table-bordered schedule">
             <thead>
@@ -45,13 +44,17 @@
                 <tr>
                     <td>{{title}}</td>
                     {{#each daySectionId}}
-                    <td id={{this}}></td>
+                    <td class="nonSelected" id={{this}}></td>
                     {{/each}}
                 </tr>
                 {{/each}}
             </tbody>
         </table>
         
+        <input type="hidden" class="form-control" name="scheduleValidation" id="scheduleValidation">
+
+        </form>
+        <br>
         <div class="form-group row">    
             <div class="col-md-5">
                 <label id="saveSchedule" class="control-label btn btn-primary">Guardar Horario</label>
