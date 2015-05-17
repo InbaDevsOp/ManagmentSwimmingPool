@@ -13,7 +13,7 @@ define(['backbone', 'jquery', 'Modules/login', 'Views/schedule/addSchedule', 'Mo
                 array: []
             },
 
-            childView: {},
+            childView: null,
 
             el: $("#applicationContent"),
 
@@ -89,6 +89,7 @@ define(['backbone', 'jquery', 'Modules/login', 'Views/schedule/addSchedule', 'Mo
 
             },
             eliminateSchedule: function(eventTd) {
+                var that = this;
                 var schedule = eventTd.currentTarget.closest("tr");
                 var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/schedule/delete/" + schedule.id;
 
@@ -99,6 +100,14 @@ define(['backbone', 'jquery', 'Modules/login', 'Views/schedule/addSchedule', 'Mo
                     success: function(data, status) {
                         alert("Horario Eliminado exitosamente");
                         $(eventTd.currentTarget).closest("tr").html("");
+
+                        //TODO managment in a backbone Collection 
+                        if (!$.isEmptyObject(that.childView) && (that.childView.model.get("id") == schedule.id)) {
+                            that.childView.$el.html('')
+                            that.childView.undelegateEvents();
+                            that.childView.stopListening();
+                            that.childView = null;
+                        }
                     },
                     error: function(request, error) {
                         alert("Error Interno, favor intente más tarde");
@@ -106,6 +115,7 @@ define(['backbone', 'jquery', 'Modules/login', 'Views/schedule/addSchedule', 'Mo
                 });
             }
         });
+
         return managmentSchedules;
 
     });

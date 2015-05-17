@@ -1,13 +1,14 @@
 define(['backbone', 'jquery', 'hbs!Templates/schedule/addSchedule', 'Modules/login', 'Modules/utilForm',
-        'Modules/schedule/scheduleConfig', 'Models/schedule'
+        'Modules/schedule/scheduleConfig', 'Views/schedule/addScheduleValidation', 'Models/schedule'
     ],
-    function(Backbone, $, addScheduleTemplate, login, utilForm, scheduleConfig, Schedule) {
+    function(Backbone, $, addScheduleTemplate, login, utilForm, scheduleConfig, addScheduleValidation, Schedule) {
 
         AddScheduleView = Backbone.View.extend({
             template: addScheduleTemplate,
 
             events: {
-                "click #schedule td": "selectDaySection",
+                "click #schedule td.nonSelected": "selectDaySection",
+                "click #schedule td.selected": "deselectDaySection",
                 "click #saveSchedule": "saveSchedule",
             },
             initialize: function() {
@@ -20,34 +21,44 @@ define(['backbone', 'jquery', 'hbs!Templates/schedule/addSchedule', 'Modules/log
                         description: this.model.get('description')
                     }));
 
+                    addScheduleValidation.validateForm();
+
                     this._deserializeSchedule(this.model);
                 }
             },
             selectDaySection: function(td) {
+                $(td.toElement).removeClass("nonSelected");
+                $(td.toElement).addClass("selected");
+            },
+            deselectDaySection: function(td) {
 
-                if ($("tr  .selected#" + td.toElement.getAttribute("id")).length) {
+                if (td.toElement.getAttribute("id")) {
                     $(td.toElement).removeClass("selected");
-                } else {
-                    $(td.toElement).addClass("selected");
+                    $(td.toElement).addClass("nonSelected");
                 }
+
             },
             saveSchedule: function() {
                 var that = this;
-                var scheduleJson = utilForm.serializeFormToObject("#addScheduleForm");
-                var scheduleDaySectionJson = this._serializeSchedule();
-                scheduleJson.daySection = scheduleDaySectionJson;
 
-                this.model.set(scheduleJson);
+                if (addScheduleValidation.isValidForm()) {
 
-                this.model.save({}, {
-                    success: function(model, respose) {
-                        alert("Horario guardado exitosamente");
-                        that._cleanSchedule();
-                    },
-                    error: function(model, response) {
-                        alert("Error Interno, favor intente más tarde");
-                    }
-                });
+                    var scheduleJson = utilForm.serializeFormToObject("#addScheduleForm :visible");
+                    var scheduleDaySectionJson = this._serializeSchedule();
+                    scheduleJson.daySection = scheduleDaySectionJson;
+
+                    this.model.set(scheduleJson);
+
+                    this.model.save({}, {
+                        success: function(model, respose) {
+                            alert("Horario guardado exitosamente");
+                            that._cleanSchedule();
+                        },
+                        error: function(model, response) {
+                            alert("Error Interno, favor intente más tarde");
+                        }
+                    });
+                }
 
             },
             _cleanSchedule: function() {

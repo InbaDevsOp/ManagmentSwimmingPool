@@ -39,8 +39,8 @@
             <label for="inputKey" class="col-md-2 control-label">Certificado Medico</label>
             <div class="col-md-2">
               <select name="medicalCertificate" class="form-control" value="{{user.medicalCertificate}}" id="medicalCertificate">
-                <option value="Si">Sí</option>
-                <option value="No">No</option>
+                <option {{selected user.medicalCertificate "Si"}} value="Si">Sí</option>
+                <option {{selected user.medicalCertificate "No"}} value="No">No</option>
               </select>
             </div>
             <label for="inputValue" class="col-md-2 control-label">Enfermedades</label>
@@ -84,7 +84,7 @@
             
             <label for="inputValue" class="col-md-1 control-label">Clave</label>
             <div class="col-md-5">
-              <input class="form-control" name="password" id="password" placeholder="Contraseña" type="password">
+              <input class="form-control" name="password" id="password" value="{{user.password}}" placeholder="Contraseña" type="password">
             </div>
             <div class="col-md-2">
             </div>

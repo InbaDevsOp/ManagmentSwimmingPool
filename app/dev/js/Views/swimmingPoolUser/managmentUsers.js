@@ -50,8 +50,8 @@ define(['backbone', 'jquery', 'Modules/login', 'hbs!Templates/swimmingPoolUser/m
         },
         fillUserInformation: function(eventTd) {
             var that = this;
-            var idUser = $(eventTd.currentTarget.closest("tr")).find("td#idUser").html();
-            var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/users/swimmingPool/searchById/" + idUser;
+            var user = eventTd.currentTarget.closest("tr");
+            var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/users/swimmingPool/" + user.id;
 
             $.ajax({
                 async: false,
@@ -62,14 +62,17 @@ define(['backbone', 'jquery', 'Modules/login', 'hbs!Templates/swimmingPoolUser/m
 
                         var user = new userModel(data);
 
-                        this.childView = new addUserView({
+                        that.childView = new addUserView({
                             model: user,
                             el: $("#userModify")
                         });
 
-                        this.childView.model.on('sync', function() {
+                        that.childView.model.on('sync', function() {
+                            that.$el.html('');
                             that.initialize();
+                            that.render();
                             that.searchUsers(that.searchUserPattern);
+                            return that;
                         }, that);
                     }
                 },
@@ -80,8 +83,9 @@ define(['backbone', 'jquery', 'Modules/login', 'hbs!Templates/swimmingPoolUser/m
 
         },
         eliminateUser: function(eventTd) {
-            var userId = $(eventTd.currentTarget.closest("tr")).find("td#idUser").html();
-            var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/users/delete/" + userId;
+            var that = this;
+            var user = eventTd.currentTarget.closest("tr");
+            var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/users/delete/" + user.id;
 
             $.ajax({
                 async: false,
@@ -90,6 +94,14 @@ define(['backbone', 'jquery', 'Modules/login', 'hbs!Templates/swimmingPoolUser/m
                 success: function(data, status) {
                     alert("Usuario de la Piscina Eliminado exitosamente");
                     $(eventTd.currentTarget.closest("tr")).html("");
+
+                    //TODO managment in a backbone Collection
+                    if (!$.isEmptyObject(that.childView) && (that.childView.model.get("id") == user.id)) {
+                        that.childView.$el.html('')
+                        that.childView.undelegateEvents();
+                        that.childView.stopListening();
+                        that.childView = null;
+                    }
                 },
                 error: function(request, error) {
                     alert("Error Interno, favor intente más tarde");
