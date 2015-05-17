@@ -5,7 +5,7 @@ require(['backbone', 'marionette', 'jquery', 'Views/login', 'Views/swimmingPoolU
     function(Backbone, Marionette, $, login, addUser, managmentUsers, addSchedule, managmentSchedules,
         scheduleModel, userModel) {
 
-        var myRouter = Backbone.Marionette.AppRouter.extend({
+        var myRouter = Backbone.Router.extend({
 
             routes: {
                 "": "handleLogin",
@@ -15,32 +15,42 @@ require(['backbone', 'marionette', 'jquery', 'Views/login', 'Views/swimmingPoolU
                 "managmentSchedules": "managmentSchedules",
                 "exitUser": "exitUser"
             },
+
+            currentView: null,
+
             handleLogin: function() {
                 this.login = new login();
             },
             addUser: function() {
-                this.addUser = new addUser({
+                this.switchView(this.addUser = new addUser({
                     model: new userModel({}),
                     el: $("#applicationContent")
-                });
+                }));
             },
             managmentUsers: function() {
-                this.managmentUsers = new managmentUsers();
+                this.switchView(new managmentUsers());
             },
             addSchedule: function() {
-                this.addSchedule = new addSchedule({
+                this.switchView(new addSchedule({
                     model: new scheduleModel({}),
                     el: $("#applicationContent")
-                });
+                }));
             },
             managmentSchedules: function() {
-                this.managmentSchedules = new managmentSchedules();
+                this.switchView(new managmentSchedules());
             },
             exitUser: function() {
                 localStorage.clear();
                 window.location.href = "/index.html"
-            }
-
+            },
+            switchView: function(view) {
+                if (this.currentView) {
+                    this.currentView.undelegateEvents();
+                    this.currentView.stopListening();
+                    this.currentView = null;
+                }
+                this.currentView = view;
+            },
 
 
         });

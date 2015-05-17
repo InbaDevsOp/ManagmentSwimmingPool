@@ -8,6 +8,7 @@ define(['backbone', 'jquery', 'hbs!Templates/schedule/addSchedule', 'Modules/log
 
             events: {
                 "click #schedule td": "selectDaySection",
+                "click #schedule td.selected": "deselectDaySection",
                 "click #saveSchedule": "saveSchedule",
             },
             initialize: function() {
@@ -25,11 +26,17 @@ define(['backbone', 'jquery', 'hbs!Templates/schedule/addSchedule', 'Modules/log
             },
             selectDaySection: function(td) {
 
-                if ($("tr  .selected#" + td.toElement.getAttribute("id")).length) {
-                    $(td.toElement).removeClass("selected");
-                } else {
+                if (td.toElement.getAttribute("id")) {
                     $(td.toElement).addClass("selected");
                 }
+
+            },
+            deselectDaySection: function(td) {
+
+                if ($("tr  .selected#" + td.toElement.getAttribute("id")).length) {
+                    $(td.toElement).removeClass("selected");
+                }
+                
             },
             saveSchedule: function() {
                 var that = this;

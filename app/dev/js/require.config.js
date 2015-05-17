@@ -32,6 +32,10 @@ require.config({
     },
     hbs: {
         disableI18n: true,
+        helperPathCallback: // Callback to determine the path to look for helpers
+            function(name) { // ('/templates/helpers/'+name by default)
+            return 'Templates/helpers/' + name;
+        },
     },
 
 });

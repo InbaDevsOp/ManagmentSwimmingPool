@@ -1,7 +1,6 @@
 define(['backbone', 'jquery'], function(Backbone, $) {
 
 	User = Backbone.Model.extend({
-		idAttribute: 'rut',
 		url: SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/users/swimmingPool/",
 
 		getCustomUrl: function(method) {
@@ -25,6 +24,31 @@ define(['backbone', 'jquery'], function(Backbone, $) {
 			options.url = this.getCustomUrl(method.toLowerCase());
 
 			return Backbone.sync.apply(this, arguments);
+		},
+		validate: function(attrs, options) {
+			var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/users/isUserExist/" + attrs.rut;
+			var error;
+
+			if (this.isNew()) {
+
+				$.ajax({
+					async: false,
+					url: url,
+					type: "GET",
+					success: function(data, status) {
+						if (data.result == true) {
+							error = "El Usuario con ese rut, ya existe en nuestros registros.";
+						}
+					},
+					error: function(request, error) {
+						error = "Error Interno, favor intente más tarde";
+					}
+				});
+
+			}
+
+			return error;
+
 		}
 
 	});
