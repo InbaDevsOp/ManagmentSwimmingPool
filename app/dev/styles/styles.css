@@ -108,14 +108,14 @@ border: 2px solid #3580BC !important;
 
 @font-face {
     font-family: UniversCn;
-    src: url(http://localhost:8000/app/dev/styles/font/UniversLTStd-Cn.otf);
+    src: url(font/UniversLTStd-Cn.otf);
     
 }
 
 
 @font-face {
     font-family: UniversBoldCn;
-    src: url(http://localhost:8000/app/dev/styles/font/UniversLTStd-BoldCn.otf);
+    src: url(font/UniversLTStd-BoldCn.otf);
     
 }
 
