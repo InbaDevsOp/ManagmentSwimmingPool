@@ -21,7 +21,7 @@ validateForm = {
             },
             content: {
                 required: true,
-                regexp: "^[a-zA-Z0-9]+$"
+                regexp: "^[a-zA-Z0-9 ]+$"
             }
         },
         messages: {
