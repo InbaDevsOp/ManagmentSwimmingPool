@@ -1,9 +1,10 @@
 require(['backbone', 'marionette', 'jquery', 'Views/login', 'Views/swimmingPoolUser/addUser',
         'Views/swimmingPoolUser/managmentUsers', 'Views/schedule/addSchedule', 'Views/schedule/managmentSchedules',
-        'Models/schedule', 'Models/User'
+        'Views/plan/addPlan', 'Views/plan/managmentPlans', 'Views/payment/addPayment', 'Models/plan', 
+        'Models/schedule', 'Models/User', 'Models/payment'
     ],
-    function(Backbone, Marionette, $, login, addUser, managmentUsers, addSchedule, managmentSchedules,
-        scheduleModel, userModel) {
+    function(Backbone, Marionette, $, login, addUser, managmentUsers, addSchedule, managmentSchedules, addPlan, 
+        managmentPlans, addPayment, planModel, scheduleModel, userModel, paymentModel) {
 
         var myRouter = Backbone.Router.extend({
 
@@ -13,6 +14,9 @@ require(['backbone', 'marionette', 'jquery', 'Views/login', 'Views/swimmingPoolU
                 "managmentUsers": "managmentUsers",
                 "addSchedule": "addSchedule",
                 "managmentSchedules": "managmentSchedules",
+                "addPlan": "addPlan",
+                "managmentPlan": "managmentPlan",
+                "addPayment": "addPayment",
                 "exitUser": "exitUser"
             },
 
@@ -38,6 +42,21 @@ require(['backbone', 'marionette', 'jquery', 'Views/login', 'Views/swimmingPoolU
             },
             managmentSchedules: function() {
                 this.switchView(new managmentSchedules());
+            },
+            addPlan: function() {
+                this.switchView(new addPlan({
+                    model: new planModel({}),
+                    el: $("#applicationContent")
+                }));
+            },
+            addPayment: function() {
+                this.switchView(new addPayment({
+                    model: new paymentModel({}),
+                    el: $("#applicationContent")
+                }));
+            },
+            managmentPlans: function() {
+                this.switchView(new managmentPlans());
             },
             exitUser: function() {
                 localStorage.clear();

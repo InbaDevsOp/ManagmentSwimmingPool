@@ -15,16 +15,35 @@ define(['backbone', 'jquery', 'hbs!Templates/schedule/addSchedule', 'Modules/log
 
                 if (login.verifyIsUserlogded()) {
 
+                    var plansJson = this.findPlans();
+
                     $(this.el).html(addScheduleTemplate({
                         daySections: scheduleConfig,
                         name: this.model.get('name'),
-                        description: this.model.get('description')
+                        description: this.model.get('description'),
+                        plans: plansJson
                     }));
 
                     addScheduleValidation.validateForm();
 
                     this._deserializeSchedule(this.model);
                 }
+            },
+            findPlans: function() {
+                var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/plan/getAll";
+                var dataJson;
+                $.ajax({
+                    async: false,
+                    url: url,
+                    type: "GET",
+                    success: function(data, status) {
+                        dataJson = data;
+                    },
+                    error: function(request, error) {
+                        alert("Error Interno, favor intente más tarde");
+                    },
+                });
+                return dataJson;
             },
             selectDaySection: function(td) {
                 $(td.toElement).removeClass("nonSelected");
@@ -43,7 +62,10 @@ define(['backbone', 'jquery', 'hbs!Templates/schedule/addSchedule', 'Modules/log
 
                 if (addScheduleValidation.isValidForm()) {
 
-                    var scheduleJson = utilForm.serializeFormToObject("#addScheduleForm :visible");
+                    var scheduleJson = utilForm.serializeFormToObject("#addScheduleForm .serializable");
+                    scheduleJson.plan = {
+                        id: $("#plans option:selected").attr('id')
+                    };
                     var scheduleDaySectionJson = this._serializeSchedule();
                     scheduleJson.daySection = scheduleDaySectionJson;
 
