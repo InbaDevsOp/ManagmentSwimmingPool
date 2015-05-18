@@ -9,8 +9,9 @@
   <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="app/dev/styles/styles.css">
-  
   <script src="http://maps.googleapis.com/maps/api/js"></script>
+  <script src="bower_components/jquery-validation/dist/jquery.validate.js"></script>
+  <script src="sendEmailValidate.js"></script>
   <script>
   function initialize() {
   var myLatlng = new google.maps.LatLng(-33.46239772,-70.65803289);
@@ -26,8 +27,34 @@
   });
   }
   google.maps.event.addDomListener(window, 'load', initialize);
-  </script>
+
+
+  $(document).ready(function(){
+      $("#send_email").click(function(){ 
+        var name,to,subject,text;
+        validateForm.validateForm();
+        if(validateForm.isValidForm()){
+         
+          name=$("#from").val();
+          to=$("#to").val();
+          subject="Responder a: "+name+" "+to;
+          text=$("#content").val();
+          alert("Correo enviado");
+          $.get("http://localhost:3000/send",{subject:subject,text:text},function(data){
+            if(data=="sent")
+            {
+                alert("Su consulta se ha enviado con exito!");
+            }
+          });
+        }
+      });
   
+
+  });
+
+</script>
+
+
 </head>
 <body>
   <!--  Body   -->
@@ -62,25 +89,23 @@
                     <div class="row">
                       <div class="col-md-8">
                         <p class="informationArticleTitle  textTitle">CONTACTO</p>
-                        
-                        <form role="form" class="informationArticleTitle" action="nodemail.js">
+                        <form role="form" class="informationArticleTitle" id="sendEmailform">
                           <div class="form-group">
                             <label class="textSmall">NOMBRE</label>
-                            <input class="form-control" id="name">
+                            <input class="form-control" name="from" id="from">
                           </div>
                           <div class="form-group">
-                            <label class="textSmall" for="email">EMAIL</label>
-                            <input type="email" class="form-control" id="email">
+                            <label class="textSmall" for="email" >EMAIL</label>
+                            <input class="form-control" name="to" id="to">
                           </div>
                           <div class="form-group">
                             <div class="form-group">
-                              <label class="textSmall" for="name">COMENTARIOS</label>
-                              <textarea class="form-control" rows="5"></textarea>
+                              <label class="textSmall" for="name">MENSAJE</label>
+                              <textarea class="form-control" rows="5" name="content" id="content"></textarea>
                             </div>
                           </div>
-                          <button id="sendMail"type="submit" onclick="mail();" class="btn btn-default">Enviar</button>
-                          
-                        </form> 
+                          <button id="send_email" type="submit" class="btn btn-default">Enviar</button>
+                         </form> 
                       </div>
                     </div>
                     <br>
