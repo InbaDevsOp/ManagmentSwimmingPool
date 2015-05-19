@@ -11,36 +11,36 @@ define(['backbone', 'jquery', 'hbs!Templates/plan/addPlan', 'Modules/login', 'Mo
             },
             initialize: function() {
 
-                if (login.verifyIsUserlogded()) {
+                //if (login.verifyIsUserlogded()) {
 
                     $(this.el).html(addPlanTemplate({
                         //name: this.model.get('name'),
                         //description: this.model.get('description')
                     }));
 
-                    //addPlanValidation.validateForm();
+                    addPlanValidation.validateForm();
 
-                }
+                //}
             },
             savePlan: function() {
                 var that = this;
 
-                //if (addScheduleValidation.isValidForm()) {
+                if (addPlanValidation.isValidForm()) {
 
-                var planJson = utilForm.serializeFormToObject("#addPlanForm :visible");
+                    var planJson = utilForm.serializeFormToObject("#addPlanForm :visible");
 
-                this.model.set(planJson);
+                    this.model.set(planJson);
 
-                this.model.save({}, {
-                    success: function(model, respose) {
-                        alert("Plan guardado exitosamente");
-                        utilForm.cleanDataForm("#addPlanForm");
-                    },
-                    error: function(model, response) {
-                        alert("Error Interno, favor intente más tarde");
-                    }
-                });
-                //}
+                    this.model.save({}, {
+                        success: function(model, respose) {
+                            alert("Plan guardado exitosamente");
+                            utilForm.cleanDataForm("#addPlanForm");
+                        },
+                        error: function(model, response) {
+                            alert("Error Interno, favor intente más tarde");
+                        }
+                    });
+                }
 
             },
             // _cleanSchedule: function() {

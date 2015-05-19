@@ -214,3 +214,9 @@ table thead {
 	border-right: 5px solid #ddd !important;	
 }
 
+.botonGuardar{
+	text-align: right;
+	font-size: 14px;
+	font-family: UniversBoldCn;
+}
+
