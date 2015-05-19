@@ -108,14 +108,14 @@ border: 2px solid #3580BC !important;
 
 @font-face {
     font-family: UniversCn;
-    src: url(http://localhost:8000/app/dev/styles/font/UniversLTStd-Cn.otf);
+    src: url(font/UniversLTStd-Cn.otf);
     
 }
 
 
 @font-face {
     font-family: UniversBoldCn;
-    src: url(http://localhost:8000/app/dev/styles/font/UniversLTStd-BoldCn.otf);
+    src: url(font/UniversLTStd-BoldCn.otf);
     
 }
 
@@ -144,6 +144,7 @@ border: 2px solid #3580BC !important;
 	font-family: UniversBoldCn;
 }
 
+
 .textNormal{
 	font-size: 14px;
 }
@@ -155,3 +156,61 @@ border: 2px solid #3580BC !important;
 .textCursiva{
 	font-style: italic
 }
+
+form label{
+	font-size: 14px;
+	font-family: UniversBoldCn;
+}
+
+form input{
+	font-size: 12px;
+	font-weight: normal;
+}
+
+form select{
+	font-size: 12px;
+	font-weight: normal;
+}
+
+
+form ::-webkit-input-placeholder{
+	font-size: 12px;
+	font-style: italic;
+	font-weight: normal;
+	color: #f00;
+
+}
+
+form ::-moz-placeholder {
+	font-size: 12px;
+	font-style: italic;
+	font-weight: normal;
+	color: #f00;
+
+}
+form :-ms-input-placeholder 
+{
+	font-size: 12px;
+	font-style: italic;
+	font-weight: normal;
+	color: #f00;
+
+}
+form input:-moz-placeholder {
+	font-size: 12px;
+	font-style: italic;
+	font-weight: normal;
+	color: #f00;
+
+}
+
+table thead {
+	background-color: #f6f6f6;
+	border-bottom: 5px solid #ddd !important;
+}
+
+.thTable{
+	background-color: #f6f6f6;
+	border-right: 5px solid #ddd !important;	
+}
+
