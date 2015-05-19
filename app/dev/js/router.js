@@ -1,7 +1,9 @@
-require(['backbone', 'marionette', 'jquery', 'Views/login', 'Views/swimmingPoolUser/addUser',
-        'Views/swimmingPoolUser/managmentUsers', 'Views/schedule/addSchedule', 'Views/schedule/managmentSchedules',
-        'Views/plan/addPlan', 'Views/plan/managmentPlans', 'Views/payment/addPayment', 'Models/plan', 
-        'Models/schedule', 'Models/User', 'Models/payment'
+require(['backbone', 'marionette', 'jquery', 'Views/login', 
+    'Views/swimmingPoolUser/addUser', 'Views/swimmingPoolUser/managmentUsers', 
+    'Views/schedule/addSchedule', 'Views/schedule/managmentSchedules',
+    'Views/plan/addPlan', 'Views/plan/managmentPlans', 
+    'Views/payment/addPayment', 
+    'Models/plan', 'Models/schedule', 'Models/User', 'Models/payment'
     ],
     function(Backbone, Marionette, $, login, addUser, managmentUsers, addSchedule, managmentSchedules, addPlan, 
         managmentPlans, addPayment, planModel, scheduleModel, userModel, paymentModel) {
@@ -15,7 +17,7 @@ require(['backbone', 'marionette', 'jquery', 'Views/login', 'Views/swimmingPoolU
                 "addSchedule": "addSchedule",
                 "managmentSchedules": "managmentSchedules",
                 "addPlan": "addPlan",
-                "managmentPlan": "managmentPlan",
+                "managmentPlans": "managmentPlans",
                 "addPayment": "addPayment",
                 "exitUser": "exitUser"
             },

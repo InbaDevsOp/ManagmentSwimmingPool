@@ -7,7 +7,7 @@ define(['backbone', 'jquery', 'Modules/login', 'hbs!Templates/swimmingPoolUser/m
 
         el: $("#applicationContent"),
 
-        childView: {},
+        childView: null,
 
         searchUserPattern: '',
 
@@ -61,6 +61,13 @@ define(['backbone', 'jquery', 'Modules/login', 'hbs!Templates/swimmingPoolUser/m
                     if (data.rut != null) {
 
                         var user = new userModel(data);
+
+                        if (that.childView) {
+                            that.childView.$el.html('')
+                            that.childView.undelegateEvents();
+                            that.childView.stopListening();
+                            that.childView = null;
+                        }
 
                         that.childView = new addUserView({
                             model: user,
