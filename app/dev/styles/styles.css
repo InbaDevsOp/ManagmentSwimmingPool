@@ -136,11 +136,13 @@ border: 2px solid #3580BC !important;
 .textTitle{
 	font-size: 20px;
 	font-family: UniversBoldCn;
+	color:#575756;
 }
 
 .textTitleBasic{
 	font-size: 14px;
 	font-family: UniversBoldCn;
+	color:#575756;
 }
 
 
@@ -161,10 +163,17 @@ form label{
 	font-family: UniversBoldCn;
 }
 
+
 form input{
 	font-size: 12px;
 	font-weight: normal;
 }
+
+form textarea{
+	font-size: 12px;
+	font-weight: normal;
+}
+
 
 form select{
 	font-size: 12px;
