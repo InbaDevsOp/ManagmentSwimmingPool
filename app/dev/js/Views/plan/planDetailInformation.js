@@ -3,12 +3,14 @@ define(['backbone', 'jquery'], function(Backbone, $) {
     planDetailInformation = Backbone.View.extend({
 
         initialize: function(options) {
-            planJson = this.fillPlanInformation(options.planId);
-            
-            if (planJson) {
-                $(this.el).html(options.template({
+            if (options.planId) {
+             
+                planJson = this.fillPlanInformation(options.planId);
+                if (planJson) {
+                    $(this.el).html(options.template({
                         plan: planJson
-                }));
+                    }));
+                }
             }
         },
         fillPlanInformation: function(planId) {
@@ -19,9 +21,7 @@ define(['backbone', 'jquery'], function(Backbone, $) {
                 url: url,
                 type: "GET",
                 success: function(data, status) {
-                    if (data.rut != null) {
-                        planJson = data;
-                    }
+                    planJson = data;
                 },
                 error: function(request, error) {
                     alert("Error Interno, favor intente más tarde");

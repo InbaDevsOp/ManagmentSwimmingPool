@@ -4,6 +4,8 @@ define(['backbone', 'jquery', 'hbs!Templates/payment/addPayment', 'Modules/login
         'Views/swimmingPoolUser/userDetailInformation', 'hbs!Templates/swimmingPoolUser/userDetailInformation',
         'Views/plan/plansInformation', 'hbs!Templates/plan/plansCombo',
         'Views/plan/planDetailInformation', 'hbs!Templates/plan/planDetailInformation',
+        'Views/schedule/schedulesInformation', 'hbs!Templates/schedule/schedulesCombo',
+        'Views/schedule/scheduleDetailInformation', 'hbs!Templates/schedule/scheduleDetailInformation',
         'Models/payment'
     ],
     function(Backbone, $, addPaymentTemplate, login, utilForm, addPaymentValidation,
@@ -11,6 +13,8 @@ define(['backbone', 'jquery', 'hbs!Templates/payment/addPayment', 'Modules/login
         userDetailInformationView, userDetailInformationTemplate,
         plansInformationView, plansInformationTemplate,
         planDetailInformationView, planDetailInformationTemplate,
+        schedulesInformationView, schedulesInformationTemplate,
+        scheduleDetailInformationView, scheduleDetailInformationTemplate,
         paymentModel) {
 
         AddPaymentView = Backbone.View.extend({
@@ -21,6 +25,7 @@ define(['backbone', 'jquery', 'hbs!Templates/payment/addPayment', 'Modules/login
                 "click #savePayment": "savePayment",
                 "change #usersCombo": "fillUserInformation",
                 "change #plansCombo": "fillPlanInformation",
+                "change #schedulesCombo": "fillScheduleInformation",
             },
             initialize: function() {
 
@@ -30,11 +35,6 @@ define(['backbone', 'jquery', 'hbs!Templates/payment/addPayment', 'Modules/login
                         //name: this.model.get('name'),
                         //description: this.model.get('description')
                     }));
-
-                    // new plansInformationView({
-                    //     el: $("#plansInformation"),
-                    //     template: plansInformationTemplate
-                    // });
 
                     //addPlanValidation.validateForm();
 
@@ -57,6 +57,11 @@ define(['backbone', 'jquery', 'hbs!Templates/payment/addPayment', 'Modules/login
                     userId: $(event.currentTarget).find("option:selected").attr("id")
                 });
 
+                new plansInformationView({
+                        el: $("#plansInformation"),
+                        template: plansInformationTemplate
+                });
+
             },
             fillPlanInformation: function(event) {
 
@@ -65,6 +70,22 @@ define(['backbone', 'jquery', 'hbs!Templates/payment/addPayment', 'Modules/login
                     template: planDetailInformationTemplate,
                     planId: $(event.currentTarget).find("option:selected").attr("id")
                 });
+
+                new schedulesInformationView({
+                    el: $("#schedulesInformation"),
+                    template: schedulesInformationTemplate,
+                    searchSchedulePattern: $(event.currentTarget).find("option:selected").attr("name")
+                });
+
+            },
+             fillScheduleInformation: function(event) {
+
+                new scheduleDetailInformationView({
+                    el: $("#scheduleDetailInformation"),
+                    template: scheduleDetailInformationTemplate,
+                    scheduleId: $(event.currentTarget).find("option:selected").attr("id")
+                });
+
 
             },
             // selectDaySection: function(td) {
