@@ -47,7 +47,7 @@ define(['backbone', 'jquery', 'Modules/login', 'Views/schedule/addSchedule', 'Mo
                         }));
                     },
                     error: function(request, error) {
-                        alert("Error Interno, favor intente más tarde");
+                        alertDGC("Error Interno, favor intente más tarde");
                     },
                 });
 
@@ -98,7 +98,7 @@ define(['backbone', 'jquery', 'Modules/login', 'Views/schedule/addSchedule', 'Mo
                     url: url,
                     type: "DELETE",
                     success: function(data, status) {
-                        alert("Horario Eliminado exitosamente");
+                        alertDGC("Horario Eliminado exitosamente");
                         $(eventTd.currentTarget).closest("tr").html("");
 
                         //TODO managment in a backbone Collection 
@@ -110,7 +110,7 @@ define(['backbone', 'jquery', 'Modules/login', 'Views/schedule/addSchedule', 'Mo
                         }
                     },
                     error: function(request, error) {
-                        alert("Error Interno, favor intente más tarde");
+                        alertDGC("Error Interno, favor intente más tarde");
                     }
                 });
             }

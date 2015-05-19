@@ -111,11 +111,11 @@ define(['backbone', 'jquery', 'hbs!Templates/payment/addPayment', 'Modules/login
 
                 this.model.save({}, {
                     success: function(model, respose) {
-                        alert("Payment guardado exitosamente");
+                        alertDGC("Payment guardado exitosamente");
                         utilForm.cleanDataForm("#addPaymentForm");
                     },
                     error: function(model, response) {
-                        alert("Error Interno, favor intente más tarde");
+                        alertDGC("Error Interno, favor intente más tarde");
                     }
                 });
                 //}

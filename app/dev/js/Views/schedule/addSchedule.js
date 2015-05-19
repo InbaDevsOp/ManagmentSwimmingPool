@@ -40,7 +40,7 @@ define(['backbone', 'jquery', 'hbs!Templates/schedule/addSchedule', 'Modules/log
                         dataJson = data;
                     },
                     error: function(request, error) {
-                        alert("Error Interno, favor intente más tarde");
+                        alertDGC("Error Interno, favor intente más tarde");
                     },
                 });
                 return dataJson;
@@ -73,11 +73,11 @@ define(['backbone', 'jquery', 'hbs!Templates/schedule/addSchedule', 'Modules/log
 
                     this.model.save({}, {
                         success: function(model, respose) {
-                            alert("Horario guardado exitosamente");
+                            alertDGC("Horario guardado exitosamente");
                             that._cleanSchedule();
                         },
                         error: function(model, response) {
-                            alert("Error Interno, favor intente más tarde");
+                            alertDGC("Error Interno, favor intente más tarde");
                         }
                     });
                 }

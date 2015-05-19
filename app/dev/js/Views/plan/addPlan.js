@@ -33,11 +33,11 @@ define(['backbone', 'jquery', 'hbs!Templates/plan/addPlan', 'Modules/login', 'Mo
 
                     this.model.save({}, {
                         success: function(model, respose) {
-                            alert("Plan guardado exitosamente");
+                            alertDGC("Plan guardado exitosamente");
                             utilForm.cleanDataForm("#addPlanForm");
                         },
                         error: function(model, response) {
-                            alert("Error Interno, favor intente más tarde");
+                            alertDGC("Error Interno, favor intente más tarde");
                         }
                     });
                 }
