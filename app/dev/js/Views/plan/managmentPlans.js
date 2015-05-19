@@ -1,121 +1,113 @@
-define(['backbone', 'jquery', 'Modules/login', 'Views/schedule/addSchedule', 'Modules/schedule/scheduleConfig',
-        'hbs!Templates/schedule/managmentSchedules', 'hbs!Templates/schedule/schedulesTable', 'Models/schedule'
-    ],
-    function(Backbone, $, login, addScheduleView, scheduleConfig,
-        managmentSchedules, schedulesTable, schedule) {
+define(['backbone', 'jquery', 'Modules/login', 'hbs!Templates/plan/managmentPlans', 'hbs!Templates/plan/plansTable',
+    'Views/plan/addPlan', 'Models/plan'
+], function(Backbone, $, login, managmentPlansTemplate, plansTableTemplate, addplanView, planModel) {
 
-        managmentSchedules = Backbone.View.extend({
-            template: managmentSchedules,
+    managmentplans = Backbone.View.extend({
+        template: managmentPlansTemplate,
 
-            schedules: {
-                count: 0,
-                group: 5,
-                array: []
-            },
+        el: $("#applicationContent"),
 
-            childView: null,
+        childView: null,
 
-            el: $("#applicationContent"),
+        events: {
+            "click #search": "searchPlans",
+            "click #planInfo #viewPlan": "fillPlanInformation",
+            "click #planInfo #deletePlan": "eliminatePlan"
+        },
 
-            events: {
-                "click #backwardGroupSchedule": "backwardGroupSchedule",
-                "click #forwardGroupSchedule": "forwardGroupSchedule",
-                "click #scheduleInformation #viewSchedule": "fillScheduleInformation",
-                "click #scheduleInformation #deleteSchedule": "eliminateSchedule"
-            },
-            initialize: function() {
+        initialize: function() {
+            if (login.verifyIsUserlogded()) {
+                $(this.el).html(this.template());
+                this.searchPlans();
+            }
+        },
+        searchPlans: function() {
+            var that = this;
+            var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/plan/getAll";
 
-                if (login.verifyIsUserlogded()) {
-                    $(this.el).html(this.template());
-                    this.searchSchedules();
-                }
-            },
-            searchSchedules: function() {
-                var that = this;
-                var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/schedule/getAll";
+            $.ajax({
+                async: false,
+                url: url,
+                type: "GET",
+                success: function(data, status) {
 
-                $.ajax({
-                    async: false,
-                    url: url,
-                    type: "GET",
-                    success: function(data, status) {
-                        that.schedules.array = data;
+                    $("#planInfo").html(plansTableTemplate({
+                        plans: data
+                    }));
+                },
+                error: function(request, error) {
+                    alertDGC("Error Interno, favor intente más tarde");
+                },
+            });
 
-                        $("#scheduleInfo").html(schedulesTable({
-                            // schedules: that.schedules.array.slice(that.schedules.count, that.schedules.count += that.schedules.group)
-                            schedules: that.schedules.array
-                        }));
-                    },
-                    error: function(request, error) {
-                        alertDGC("Error Interno, favor intente más tarde");
-                    },
-                });
+        },
+        fillPlanInformation: function(eventTd) {
+            var that = this;
+            var plan = eventTd.currentTarget.closest("tr");
+            var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/plan/" + plan.id;
 
-            },
-            // backwardGroupSchedule: function() {
-            //     if (this.schedules.count > this.schedules.group) {
-            //         console.log("atras" + this.schedules.count);
-            //         $("#scheduleInfo").html(schedulesTable({
-            //             schedules: this.schedules.array.slice(this.schedules.count -= (this.schedules.group * 2), this.schedules.count += this.schedules.group)
-            //         }));
-            //     }
-            // },
-            // forwardGroupSchedule: function() {
-            //     if (this.schedules.count < this.schedules.array.length) {
-            //         console.log("adelante" + this.schedules.count);
-            //         $("#scheduleInfo").html(schedulesTable({
-            //             schedules: this.schedules.array.slice(this.schedules.count, this.schedules.count += this.schedules.group)
-            //         }));
-            //     }
-            // },
-            fillScheduleInformation: function(eventTd) {
+            $.ajax({
+                async: false,
+                url: url,
+                type: "GET",
+                success: function(data, status) {
+                    if (data) {
 
-                var id = $(eventTd.currentTarget.closest("tr")).index();
-                var scheduleJson = this.schedules.array[id];
+                        var plan = new planModel(data);
 
-                var scheduleModel = new schedule({
-                    id: scheduleJson.id,
-                    name: scheduleJson.name,
-                    description: scheduleJson.description,
-                    daySection: scheduleJson.daySection
-                });
-
-                this.childView = new addScheduleView({
-                    model: scheduleModel,
-                    el: $("#scheduleModify"),
-                });
-
-                this.childView.model.on('sync', this.initialize, this);
-
-            },
-            eliminateSchedule: function(eventTd) {
-                var that = this;
-                var schedule = eventTd.currentTarget.closest("tr");
-                var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/schedule/delete/" + schedule.id;
-
-                $.ajax({
-                    async: false,
-                    url: url,
-                    type: "DELETE",
-                    success: function(data, status) {
-                        alertDGC("Horario Eliminado exitosamente");
-                        $(eventTd.currentTarget).closest("tr").html("");
-
-                        //TODO managment in a backbone Collection 
-                        if (!$.isEmptyObject(that.childView) && (that.childView.model.get("id") == schedule.id)) {
+                        if (that.childView) {
                             that.childView.$el.html('')
                             that.childView.undelegateEvents();
                             that.childView.stopListening();
                             that.childView = null;
                         }
-                    },
-                    error: function(request, error) {
-                        alertDGC("Error Interno, favor intente más tarde");
+
+                        that.childView = new addplanView({
+                            model: plan,
+                            el: $("#planModify")
+                        });
+
+                        that.childView.model.on('sync', function() {
+                            that.$el.html('');
+                            that.initialize();
+                            that.render();
+                            return that;
+                        }, that);
                     }
-                });
-            }
-        });
+                },
+                error: function(request, error) {
+                    alertDGC("Error Interno, favor intente más tarde");
+                },
+            });
 
-        return managmentSchedules;
+        },
+        eliminatePlan: function(eventTd) {
+            var that = this;
+            var plan = eventTd.currentTarget.closest("tr");
+            var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/plan/delete/" + plan.id;
 
+            $.ajax({
+                async: false,
+                url: url,
+                type: "DELETE",
+                success: function(data, status) {
+                    alertDGC("Plan Eliminado exitosamente");
+                    $(eventTd.currentTarget.closest("tr")).html("");
+
+                    //TODO managment in a backbone Collection
+                    if (!$.isEmptyObject(that.childView) && (that.childView.model.get("id") == plan.id)) {
+                        that.childView.$el.html('')
+                        that.childView.undelegateEvents();
+                        that.childView.stopListening();
+                        that.childView = null;
+                    }
+                },
+                error: function(request, error) {
+                    alertDGC("Error Interno, favor intente más tarde");
+                }
+            });
+        }
     });
+    return managmentplans;
+
+});
