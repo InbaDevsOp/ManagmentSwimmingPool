@@ -10,23 +10,30 @@ define(['backbone', 'jquery', 'hbs!Templates/schedule/addSchedule', 'Modules/log
                 "click #schedule td.nonSelected": "selectDaySection",
                 "click #schedule td.selected": "deselectDaySection",
                 "click #saveSchedule": "saveSchedule",
+                "change #plansScheduleCombo": "fillRestrictionMessage",
             },
+
+            plans: null,
+
             initialize: function() {
 
                 if (login.verifyIsUserlogded()) {
 
-                    var plansJson = this.findPlans();
+                    this.plans = this.findPlans();
 
                     $(this.el).html(addScheduleTemplate({
                         daySections: scheduleConfig,
                         name: this.model.get('name'),
                         description: this.model.get('description'),
-                        plans: plansJson
+                        plans: this.plans
                     }));
 
                     addScheduleValidation.validateForm();
 
-                    this._deserializeSchedule(this.model);
+                    if (this.model.get("id")) {
+                        this.selectedPlan(this.model.get('plan'));
+                        this._deserializeSchedule(this.model);
+                    }
                 }
             },
             findPlans: function() {
@@ -44,6 +51,37 @@ define(['backbone', 'jquery', 'hbs!Templates/schedule/addSchedule', 'Modules/log
                     },
                 });
                 return dataJson;
+            },
+            fillRestrictionMessage: function(event) {
+
+                var id = $(event.currentTarget).find("option:selected").attr("id");
+                var planJson;
+
+                for (var i = 0; i < this.plans.length; i++) {
+                    if (this.plans[i].id == id) {
+                        planJson = this.plans[i];
+                    }
+                }
+
+                if (planJson) {
+                    $("#planHoursRestrictionMessage").text("El plan " + planJson.name + " tiene restricciones horarias de " +
+                        planJson.hoursPerWeek + " horas a la semana.");
+                    $("#hoursCount").attr("value", planJson.hoursPerWeek);
+
+                } else {    
+                    $("#planHoursRestrictionMessage").text('');
+                    $("#hoursCount").attr("value", '');
+                }
+
+            },
+            selectedPlan: function(planJson) {
+                if (planJson) {
+                    $("#plansScheduleCombo option[id=" + planJson.id + "]").attr("selected", "selected");
+                    $("#planHoursRestrictionMessage").text("El plan " + planJson.name + " tiene restricciones horarias de " +
+                        planJson.hoursPerWeek + " horas a la semana.");
+                    $("#hoursCount").attr("value", planJson.hoursPerWeek);
+
+                }
             },
             selectDaySection: function(td) {
                 $(td.toElement).removeClass("nonSelected");
@@ -64,7 +102,7 @@ define(['backbone', 'jquery', 'hbs!Templates/schedule/addSchedule', 'Modules/log
 
                     var scheduleJson = utilForm.serializeFormToObject("#addScheduleForm .serializable");
                     scheduleJson.plan = {
-                        id: $("#plans option:selected").attr('id')
+                        id: $("#plansScheduleCombo option:selected").attr('id')
                     };
                     var scheduleDaySectionJson = this._serializeSchedule();
                     scheduleJson.daySection = scheduleDaySectionJson;
@@ -75,6 +113,8 @@ define(['backbone', 'jquery', 'hbs!Templates/schedule/addSchedule', 'Modules/log
                         success: function(model, respose) {
                             alert("Horario guardado exitosamente");
                             that._cleanSchedule();
+                            $("#planHoursRestrictionMessage").text('');
+                            $("#hoursCount").attr("value", planJson.hoursPerWeek);
                         },
                         error: function(model, response) {
                             alert("Error Interno, favor intente más tarde");

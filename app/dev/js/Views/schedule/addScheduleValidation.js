@@ -16,6 +16,17 @@ define(['jquery', 'jquery.validate'], function($, jqueryValidate) {
                 return false;
             }, "Error: Ingrese algún bloque al horario");
 
+            $.validator.addMethod("count", function() {
+                if ($("#hoursCount").attr("value")) {
+
+                    if ($("#schedule").find("td.selected").length == parseInt($("#hoursCount").attr("value"))) {
+                        return true;
+                    }
+                    return false;
+
+                }
+            }, "Error: Ingrese la cantidad de bloques con respecto a la restricción de horas del plan");
+
             $.validator.messages.required = "Campo requerido";
 
             $("#addScheduleForm").validate({
@@ -25,17 +36,24 @@ define(['jquery', 'jquery.validate'], function($, jqueryValidate) {
                         required: true,
                         regexp: "^[0-9A-Za-zñ ]+$"
                     },
+                    plansScheduleCombo: {
+                        required: true
+                    },
                     description: {
                         required: true
                     },
                     scheduleValidation: {
-                        schedule: true
+                        schedule: true,
+                        count: true
                     }
                 },
                 messages: {
                     name: {
                         regexp: "Formato Incorrecto: Solo números y letras"
-                    }
+                    },
+                    plansScheduleCombo: {
+                        required: "Por Favor seleccione algúna opción"
+                    },
                 },
                 errorPlacement: function(error, element) {
                     error.css({
