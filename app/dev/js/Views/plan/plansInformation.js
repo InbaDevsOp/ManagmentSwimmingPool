@@ -25,7 +25,7 @@ define(['backbone', 'jquery'],
                             plansJson = data;
                     },
                     error: function(request, error) {
-                        alert("Error Interno, favor intente más tarde");
+                        alertDGC("Error Interno, favor intente más tarde");
                     },
                 });
 

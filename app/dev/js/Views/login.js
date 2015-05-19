@@ -44,11 +44,11 @@ define(['backbone', 'jquery', 'hbs!Templates/headerApplication', 'hbs!Templates/
                             localStorage.setItem('sessionActive', 1);
                             localStorage.setItem('userName', userName);
                         } else {
-                            alert("Usuario no existente, favor consultar administración para recuperación de clave");
+                            alertDGC("Usuario no existente, favor consultar administración para recuperación de clave");
                         }
                     },
                     error: function(request, error) {
-                        alert("Error Interno, favor intente más tarde");
+                        alertDGC("Error Interno, favor intente más tarde");
                     },
                 });
             },

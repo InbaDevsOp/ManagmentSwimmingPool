@@ -28,7 +28,7 @@ define(['backbone', 'jquery', 'Modules/login', 'Modules/utilForm',
                     
                     //verify if move code to model
                     this.model.on('invalid', function(model, error) {
-                        alert(error);
+                        alertDGC(error);
                     });
                 }
 
@@ -47,12 +47,12 @@ define(['backbone', 'jquery', 'Modules/login', 'Modules/utilForm',
 
                     this.model.save({}, {
                         success: function(model, respose) {
-                            alert("Usuario de la Piscina guardado exitosamente");
+                            alertDGC("Usuario de la Piscina guardado exitosamente");
                             utilForm.cleanDataForm("#addUserform");
 
                         },
                         error: function(model, response) {
-                            alert("Error Interno, favor intente más tarde");
+                            alertDGC("Error Interno, favor intente más tarde");
                         }
                     });
 

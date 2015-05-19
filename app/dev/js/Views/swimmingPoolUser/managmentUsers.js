@@ -34,7 +34,7 @@ define(['backbone', 'jquery', 'Modules/login', 'hbs!Templates/swimmingPoolUser/m
                 type: "GET",
                 success: function(data, status) {
                     if (data.length == 0) {
-                        alert("Usuario no encontrado, favor intente nuevamente");
+                        alertDGC("Usuario no encontrado, favor intente nuevamente");
                     } else {
                         $("#usersInfo").html("");
                         $("#usersInfo").append(usersTable({
@@ -43,7 +43,7 @@ define(['backbone', 'jquery', 'Modules/login', 'hbs!Templates/swimmingPoolUser/m
                     }
                 },
                 error: function(request, error) {
-                    alert("Error Interno, favor intente más tarde");
+                    alertDGC("Error Interno, favor intente más tarde");
                 },
             });
 
@@ -77,7 +77,7 @@ define(['backbone', 'jquery', 'Modules/login', 'hbs!Templates/swimmingPoolUser/m
                     }
                 },
                 error: function(request, error) {
-                    alert("Error Interno, favor intente más tarde");
+                    alertDGC("Error Interno, favor intente más tarde");
                 },
             });
 
@@ -92,7 +92,7 @@ define(['backbone', 'jquery', 'Modules/login', 'hbs!Templates/swimmingPoolUser/m
                 url: url,
                 type: "DELETE",
                 success: function(data, status) {
-                    alert("Usuario de la Piscina Eliminado exitosamente");
+                    alertDGC("Usuario de la Piscina Eliminado exitosamente");
                     $(eventTd.currentTarget.closest("tr")).html("");
 
                     //TODO managment in a backbone Collection
@@ -104,7 +104,7 @@ define(['backbone', 'jquery', 'Modules/login', 'hbs!Templates/swimmingPoolUser/m
                     }
                 },
                 error: function(request, error) {
-                    alert("Error Interno, favor intente más tarde");
+                    alertDGC("Error Interno, favor intente más tarde");
                 }
             });
         }

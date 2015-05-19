@@ -31,7 +31,7 @@ define(['backbone', 'jquery', 'hbs!Templates/schedule/scheduleDetailInformation'
                         scheduleJson = data;
                     },
                     error: function(request, error) {
-                        alert("Error Interno, favor intente más tarde");
+                        alertDGC("Error Interno, favor intente más tarde");
                     },
                 });
 

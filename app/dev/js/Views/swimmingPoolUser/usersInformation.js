@@ -23,13 +23,13 @@ define(['backbone', 'jquery'],
                     type: "GET",
                     success: function(data, status) {
                         if (data.length == 0) {
-                            alert("Usuario no encontrado, favor intente nuevamente");
+                            alertDGC("Usuario no encontrado, favor intente nuevamente");
                         } else {
                             usersJson = data;
                         }
                     },
                     error: function(request, error) {
-                        alert("Error Interno, favor intente más tarde");
+                        alertDGC("Error Interno, favor intente más tarde");
                     },
                 });
 
