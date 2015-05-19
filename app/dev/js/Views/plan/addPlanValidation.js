@@ -1,6 +1,6 @@
 define(['jquery', 'jquery.validate'], function($, jqueryValidate) {
 
-    addScheduleValidation = {
+    addPlanValidation = {
 
         validateForm: function() {
 
@@ -9,7 +9,7 @@ define(['jquery', 'jquery.validate'], function($, jqueryValidate) {
                 return regexp.test(value);
             }, "Por Favor Ingrese un valor con el formato correcto.");
 
-            $.validator.addMethod("schedule", function() {
+            $.validator.addMethod("plan", function() {
                 if ($("tr:has(td.selected)").length) {
                     return true;
                 }
@@ -18,7 +18,7 @@ define(['jquery', 'jquery.validate'], function($, jqueryValidate) {
 
             $.validator.messages.required = "Campo requerido";
 
-            $("#addScheduleForm").validate({
+            $("#addPlanForm").validate({
                 ignore: [],
                 rules: {
                     name: {
@@ -28,13 +28,24 @@ define(['jquery', 'jquery.validate'], function($, jqueryValidate) {
                     description: {
                         required: true
                     },
-                    scheduleValidation: {
-                        schedule: true
+                    price: {
+                        required: true,
+                        regexp: "^[0-9]+$"
+                    },
+                    hoursPerWeek: {
+                        required: true,
+                        regexp: "^[0-9]+$"
                     }
                 },
                 messages: {
                     name: {
                         regexp: "Formato Incorrecto: Solo números y letras"
+                    },
+                    price: {
+                        regexp: "Solo números Ej: 35000"
+                    },
+                    hoursPerWeek: {
+                        regexp: "Solo números \"6\" = 6 horas a la semana "
                     }
                 },
                 errorPlacement: function(error, element) {
@@ -48,11 +59,11 @@ define(['jquery', 'jquery.validate'], function($, jqueryValidate) {
         },
 
         isValidForm: function() {
-            return $("#addScheduleForm").valid();
+            return $("#addPlanForm").valid();
         }
 
     }
 
-    return addScheduleValidation;
+    return addPlanValidation;
 
 });
