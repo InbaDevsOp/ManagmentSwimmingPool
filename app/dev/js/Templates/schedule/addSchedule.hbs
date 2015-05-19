@@ -27,15 +27,19 @@
 
                         <label for="inputKey" class="col-md-3 control-label">Tipo de Plan</label>
                         <div class="col-md-5">
-                            <select name="plans" class="form-control" value="plans" id="plans">
-                                <option  selected value=""></option>
+                            <select class="form-control" name="plansScheduleCombo" value="plans" id="plansScheduleCombo">
+                                <option  selected ></option>
                                 {{#each plans}}
                                 <option  id="{{id}}" value="{{name}}">{{name}}</option>
                                 {{/each}}
                             </select>
                         </div>
-
                     </div>
+                    <div class="form-group row">
+                        <label id="planHoursRestrictionMessage" style= "color:red"class="control-label"></label>
+                        <label type="hidden" id="hoursCount" value=""></label>
+                    </div>
+
                 </div>
             </div>
         <table id= "schedule" class="table table-bordered schedule textTitleBasic">

@@ -42,7 +42,7 @@ define(['backbone', 'jquery', 'hbs!Templates/schedule/scheduleDetailInformation'
                 var scheduleDaySections = schedule.daySection;
                 for (var i = 0; i < scheduleDaySections.length; i++) {
                     var daySection = scheduleDaySections[i].id;
-                    $("table#schedule td#" + daySection).addClass("selected");
+                    $("#scheduleDetailInformation td#" + daySection).addClass("selected");
                 }
             },
 

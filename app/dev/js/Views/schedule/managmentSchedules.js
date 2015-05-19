@@ -77,8 +77,16 @@ define(['backbone', 'jquery', 'Modules/login', 'Views/schedule/addSchedule', 'Mo
                     id: scheduleJson.id,
                     name: scheduleJson.name,
                     description: scheduleJson.description,
-                    daySection: scheduleJson.daySection
+                    daySection: scheduleJson.daySection,
+                    plan: scheduleJson.plan
                 });
+
+                if (this.childView) {
+                    this.childView.$el.html('')
+                    this.childView.undelegateEvents();
+                    this.childView.stopListening();
+                    this.childView = null;
+                }
 
                 this.childView = new addScheduleView({
                     model: scheduleModel,
