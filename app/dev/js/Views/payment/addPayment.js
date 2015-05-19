@@ -1,8 +1,15 @@
 define(['backbone', 'jquery', 'hbs!Templates/payment/addPayment', 'Modules/login', 'Modules/utilForm',
-        'Views/payment/addPaymentValidation', 'Views/swimmingPoolUser/usersInformation', 'hbs!Templates/swimmingPoolUser/usersCombo', 'Models/payment'
+        'Views/payment/addPaymentValidation',
+        'Views/swimmingPoolUser/usersInformation', 'hbs!Templates/swimmingPoolUser/usersCombo',
+        'Views/swimmingPoolUser/userDetailInformation', 'hbs!Templates/swimmingPoolUser/userDetailInformation',
+        'Views/plan/plansInformation', 'hbs!Templates/plan/plansCombo',
+        'Models/payment'
     ],
     function(Backbone, $, addPaymentTemplate, login, utilForm, addPaymentValidation,
-        usersInformationView, usersInformationTemplate, paymentModel) {
+        usersInformationView, usersInformationTemplate,
+        userDetailInformationView, userDetailInformationTemplate,
+        plansInformationView, plansInformationTemplate,
+        paymentModel) {
 
         AddPaymentView = Backbone.View.extend({
             template: addPaymentTemplate,
@@ -10,6 +17,8 @@ define(['backbone', 'jquery', 'hbs!Templates/payment/addPayment', 'Modules/login
             events: {
                 "click #searchUsers": "searchUsers",
                 "click #savePayment": "savePayment",
+                "change #usersCombo": "fillUserInformation",
+                "change #plansCombo": "fillPlanInformation",
             },
             initialize: function() {
 
@@ -19,6 +28,11 @@ define(['backbone', 'jquery', 'hbs!Templates/payment/addPayment', 'Modules/login
                         //name: this.model.get('name'),
                         //description: this.model.get('description')
                     }));
+
+                    new plansInformationView({
+                        el: $("#plansInformation"),
+                        template: plansInformationTemplate
+                    });
 
                     //addPlanValidation.validateForm();
 
@@ -30,6 +44,15 @@ define(['backbone', 'jquery', 'hbs!Templates/payment/addPayment', 'Modules/login
                     el: $("#usersInformation"),
                     template: usersInformationTemplate,
                     searchUserPattern: $("#userId").val()
+                });
+
+            },
+            fillUserInformation: function(event) {
+
+                new userDetailInformationView({
+                    el: $("#userDetailInformation"),
+                    template: userDetailInformationTemplate,
+                    userId: $(event.currentTarget).find("option:selected").attr("id")
                 });
 
             },

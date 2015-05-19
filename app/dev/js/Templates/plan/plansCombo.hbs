@@ -1,0 +1,10 @@
+<label for="inputValue" class="col-md-2 control-label">Planes</label>
+<div class="col-md-5">
+  <select id= "plansCombo" class="form-control">
+    <option value=""></option>
+    {{#plans}}
+    <option id="{{id}}}" value="{{id}}">{{name}}, ${{price}}</option>
+    {{/plans}}
+  </select>
+</div>
+</div>

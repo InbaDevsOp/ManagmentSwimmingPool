@@ -4,9 +4,14 @@ define(['backbone', 'jquery'],
         usersInformation = Backbone.View.extend({
 
             initialize: function(options) {
-                $(this.el).html(options.template({
-                    users: this.usersInformation(options.searchUserPattern)
-                }));
+
+                var usersJson = this.usersInformation(options.searchUserPattern);
+
+                if (usersJson) {
+                    $(this.el).html(options.template({
+                        users: usersJson
+                    }));
+                }
             },
             usersInformation: function(searchUserPattern) {
                 var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/users/swimmingPool/searchUsers/" + searchUserPattern;

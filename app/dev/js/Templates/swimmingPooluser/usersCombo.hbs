@@ -1,9 +1,9 @@
 <label for="inputKey" class="col-md-2 control-label">Usuarios</label>
-<div class="col-md-2">
-  <select name="medicalCertificate" class="form-control" value="{{user.medicalCertificate}}" id="medicalCertificate">
+<div class="col-md-5">
+  <select id= "usersCombo" class="form-control">
     <option value=""></option>
     {{#users}}
-    <option id="{{id}}}" value="{{rut}}">{{firstLastName}}, {{rut}}</option>
+    <option id="{{id}}}" value="{{rut}}">{{names}} {{firstLastName}}, {{rut}}</option>
     {{/users}}
   </select>
 </div>

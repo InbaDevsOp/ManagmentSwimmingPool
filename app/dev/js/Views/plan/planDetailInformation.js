@@ -1,26 +1,26 @@
 define(['backbone', 'jquery'], function(Backbone, $) {
 
-    userDetailInformation = Backbone.View.extend({
+    planDetailInformation = Backbone.View.extend({
 
         initialize: function(options) {
-            userJson = this.fillUserInformation(options.userId);
+            planJson = this.fillPlanInformation(options.planId);
             
-            if (userJson) {
+            if (planJson) {
                 $(this.el).html(options.template({
-                        user: userJson
+                        plan: planJson
                 }));
             }
         },
-        fillUserInformation: function(userId) {
-            var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/users/swimmingPool/" + userId;
-            var userJson;
+        fillPlanInformation: function(planId) {
+            var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/plans/swimmingPool/" + planId;
+            var planJson;
             $.ajax({
                 async: false,
                 url: url,
                 type: "GET",
                 success: function(data, status) {
                     if (data.rut != null) {
-                        userJson = data;
+                        planJson = data;
                     }
                 },
                 error: function(request, error) {
@@ -28,10 +28,10 @@ define(['backbone', 'jquery'], function(Backbone, $) {
                 },
             });
 
-            return userJson;
+            return planJson;
         },
 
     });
-    return userDetailInformation;
+    return planDetailInformation;
 
 });
