@@ -12,7 +12,7 @@ define(['backbone', 'jquery'], function(Backbone, $) {
             }
         },
         fillPlanInformation: function(planId) {
-            var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/plans/swimmingPool/" + planId;
+            var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/plan/" + planId;
             var planJson;
             $.ajax({
                 async: false,

@@ -3,12 +3,14 @@ define(['backbone', 'jquery', 'hbs!Templates/payment/addPayment', 'Modules/login
         'Views/swimmingPoolUser/usersInformation', 'hbs!Templates/swimmingPoolUser/usersCombo',
         'Views/swimmingPoolUser/userDetailInformation', 'hbs!Templates/swimmingPoolUser/userDetailInformation',
         'Views/plan/plansInformation', 'hbs!Templates/plan/plansCombo',
+        'Views/plan/planDetailInformation', 'hbs!Templates/plan/planDetailInformation',
         'Models/payment'
     ],
     function(Backbone, $, addPaymentTemplate, login, utilForm, addPaymentValidation,
         usersInformationView, usersInformationTemplate,
         userDetailInformationView, userDetailInformationTemplate,
         plansInformationView, plansInformationTemplate,
+        planDetailInformationView, planDetailInformationTemplate,
         paymentModel) {
 
         AddPaymentView = Backbone.View.extend({
@@ -29,10 +31,10 @@ define(['backbone', 'jquery', 'hbs!Templates/payment/addPayment', 'Modules/login
                         //description: this.model.get('description')
                     }));
 
-                    new plansInformationView({
-                        el: $("#plansInformation"),
-                        template: plansInformationTemplate
-                    });
+                    // new plansInformationView({
+                    //     el: $("#plansInformation"),
+                    //     template: plansInformationTemplate
+                    // });
 
                     //addPlanValidation.validateForm();
 
@@ -53,6 +55,15 @@ define(['backbone', 'jquery', 'hbs!Templates/payment/addPayment', 'Modules/login
                     el: $("#userDetailInformation"),
                     template: userDetailInformationTemplate,
                     userId: $(event.currentTarget).find("option:selected").attr("id")
+                });
+
+            },
+            fillPlanInformation: function(event) {
+
+                new planDetailInformationView({
+                    el: $("#planDetailInformation"),
+                    template: planDetailInformationTemplate,
+                    planId: $(event.currentTarget).find("option:selected").attr("id")
                 });
 
             },
