@@ -22,7 +22,7 @@ app.get('/',function(req,res){
 
 app.get('/send',function(req,res){
 	var mailOptions={
-		to : "gabriel.lopezs@usach.cl",
+		to : "felipe.alfarom@usach.cl",
 		subject : req.query.subject,
 		text : req.query.text
 	}

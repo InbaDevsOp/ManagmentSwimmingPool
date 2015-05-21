@@ -1,8 +1,7 @@
 var SwimmingPoolApplicationHost = "http://localhost:9090";
 
-
 require.config({
-    baseUrl: 'app/dev/js',
+    baseUrl: '../app/dev/js',
 
     paths: {
 
@@ -22,8 +21,6 @@ require.config({
         json2: '../../../bower_components/require-handlebars-plugin/hbs/json2',
         hbs: '../../../bower_components/require-handlebars-plugin/hbs',
 
-        /* styles */
-        styles: '../styles',
     },
     shim: {
         'jquery.validate': {
@@ -32,8 +29,8 @@ require.config({
     },
     hbs: {
         disableI18n: true,
-        helperPathCallback: // Callback to determine the path to look for helpers
-            function(name) { // ('/templates/helpers/'+name by default)
+        helperPathCallback:
+            function(name) {
             return 'Templates/helpers/' + name;
         },
     },

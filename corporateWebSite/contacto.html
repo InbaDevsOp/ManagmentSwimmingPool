@@ -1,63 +1,55 @@
 <!DOCTYPE html>
 <head>
-  <!--<script src="bower_components/requirejs/require.js"></script>
-  <script src="app/dev/js/require.config.js"></script>
-  <script src="app/dev/js/router.js"></script>
-  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-  -->
-  <script src="bower_components/jquery/dist/jquery.min.js"></script>
-  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="app/dev/styles/styles.css">
+  <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../styles/styles.css">
+  
   <script src="http://maps.googleapis.com/maps/api/js"></script>
-  <script src="bower_components/jquery-validation/dist/jquery.validate.js"></script>
-  <script src="sendEmailValidate.js"></script>
+  <script src="../bower_components/jquery-validation/dist/jquery.validate.js"></script>
+  <script src="../sendEmailValidate.js"></script>
+  
   <script>
   function initialize() {
-  var myLatlng = new google.maps.LatLng(-33.46239772,-70.65803289);
-  var mapOptions = {
-  zoom: 15,
-  center: myLatlng
+    var myLatlng = new google.maps.LatLng(-33.46239772, -70.65803289);
+    var mapOptions = {
+      zoom: 15,
+      center: myLatlng
+    }
+    var map = new google.maps.Map(document.getElementById('googleMap'), mapOptions);
+    var marker = new google.maps.Marker({
+      position: myLatlng,
+      map: map,
+      title: 'Piscina Temperada De Santiago'
+    });
   }
-  var map = new google.maps.Map(document.getElementById('googleMap'), mapOptions);
-  var marker = new google.maps.Marker({
-  position: myLatlng,
-  map: map,
-  title: 'Piscina Temperada De Santiago'
-  });
-  }
+
   google.maps.event.addDomListener(window, 'load', initialize);
-
-
-  $(document).ready(function(){
-      $("#send_email").click(function(){ 
-        var name,to,subject,text;
-        validateForm.validateForm();
-        if(validateForm.isValidForm()){
-         
-          name=$("#from").val();
-          to=$("#to").val();
-          subject="Responder a: "+name+" "+to;
-          text=$("#content").val();
-          alert("Correo enviado");
-          $.get("http://localhost:3000/send",{subject:subject,text:text},function(data){
-            if(data=="sent")
-            {
-                alert("Su consulta se ha enviado con exito!");
-            }
-          });
-        }
-      });
   
-
+  $(document).ready(function() {
+    $("#send_email").click(function() {
+      var name, to, subject, text;
+      validateForm.validateForm();
+      if (validateForm.isValidForm()) {
+        name = $("#from").val();
+        to = $("#to").val();
+        subject = "Responder a: " + name + " " + to;
+        text = $("#content").val();
+        alert("Correo enviado");
+        $.get("http://localhost:3000/send", {
+          subject: subject,
+          text: text
+        }, function(data) {
+          if (data == "sent") {
+            alert("Su consulta se ha enviado con exito!");
+          }
+        });
+      }
+    });
   });
-
-</script>
-
-
+  </script>
 </head>
 <body>
-  <!--  Body   -->
   <div class="row backgroundImage">
     <div class="container my-container">
       <div class="row">
@@ -66,7 +58,7 @@
         <div class="col-md-8">
           <div class="row">
             <div class="col-md-12">
-                  <div class="headerInitialSpace"></div> <!-- only right space -->
+              <div class="headerInitialSpace"></div>
               <div id="header"></div>
               <script type="text/javascript">
               $('#header').load('header.html');
@@ -105,7 +97,7 @@
                             </div>
                           </div>
                           <button id="send_email" type="submit" class="btn btn-default">Enviar</button>
-                         </form> 
+                        </form>
                       </div>
                     </div>
                     <br>
@@ -116,31 +108,23 @@
                 </div>
                 <br>
               </div>
-              <div class="headerInitialSpace"></div> <!-- only right space -->
+              <div class="headerInitialSpace"></div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    
   </div>
-<!--  Footer   -->
+
   <div class="container my-container">
     <div class="row">
       <div class="col-md-2"></div>
-        <div class="col-md-8">
-          <div id="footer" ></div>
-            <script type="text/javascript">
-            $('#footer').load('footer.html');
-            </script>
-          </div>
-        </div>
+      <div class="col-md-8">
+        <div id="footer" ></div>
+        <script type="text/javascript">
+        $('#footer').load('footer.html');
+        </script>
+      </div>
     </div>
-  <!-- FIN  Footer   -->
-<!-- <div id="navigation">
-  <a href="#">Home</a>
-  <a href="#/view1">Users</a>
-</div>
-<div id = 'content'></div>
--->
+  </div>
 </body>

@@ -62,7 +62,7 @@ require(['backbone', 'marionette', 'jquery', 'Views/login',
             },
             exitUser: function() {
                 localStorage.clear();
-                window.location.href = "/index.html"
+                window.location.href = "/corporateWebSite/index.html"
             },
             switchView: function(view) {
                 if (this.currentView) {
