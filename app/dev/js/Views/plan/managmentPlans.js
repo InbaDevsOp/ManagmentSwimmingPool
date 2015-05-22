@@ -91,15 +91,26 @@ define(['backbone', 'jquery', 'Modules/login', 'hbs!Templates/plan/managmentPlan
                 url: url,
                 type: "DELETE",
                 success: function(data, status) {
-                    alertDGC("Plan Eliminado exitosamente");
-                    $(eventTd.currentTarget.closest("tr")).html("");
+                    if (data) {
+                        // var scheduleMessage = "\n";
+                        // for (var count in data) {
+                        //     var schedule = data[count];
+                        //     scheduleMessage += "Nombre Horario:" + schedule.name + "\n";
+                        // }
+                        // alertDGC("Error: Hay Horarios que dependen del plan, \n" + scheduleMessage);
+                        alertDGC("Error: Hay Horarios que dependen del plan");
 
-                    //TODO managment in a backbone Collection
-                    if (!$.isEmptyObject(that.childView) && (that.childView.model.get("id") == plan.id)) {
-                        that.childView.$el.html('')
-                        that.childView.undelegateEvents();
-                        that.childView.stopListening();
-                        that.childView = null;
+                    } else {
+                        alertDGC("Plan Eliminado exitosamente");
+                        $(eventTd.currentTarget.closest("tr")).html("");
+
+                        //TODO managment in a backbone Collection
+                        if (!$.isEmptyObject(that.childView) && (that.childView.model.get("id") == plan.id)) {
+                            that.childView.$el.html('')
+                            that.childView.undelegateEvents();
+                            that.childView.stopListening();
+                            that.childView = null;
+                        }
                     }
                 },
                 error: function(request, error) {

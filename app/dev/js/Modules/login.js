@@ -4,19 +4,19 @@ define(['jquery', 'hbs!Templates/headerApplication'],
         var Login = {
 
             verifyIsUserlogded: function() {
-                var flagSession = localStorage.getItem('sessionActive');
-                var userName = localStorage.getItem('userName');
+                var flagSession = sessionStorage.getItem('sessionActive');
+                var userName = sessionStorage.getItem('userName');
 
                 if (flagSession == 1) {
 
                     $('#header').html(headerApplicationTemplate({
                         userName: userName
                     }));
-
                     return true;
+                    
                 } else {
-                    localStorage.clear();
-                    window.location.href = "/index.html"
+                    sessionStorage.clear();
+                    window.location.href = "/corporateWebSite/index.html";
                 }
             }
         }

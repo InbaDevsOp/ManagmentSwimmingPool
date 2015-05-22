@@ -12,8 +12,8 @@ define(['backbone', 'jquery', 'hbs!Templates/headerApplication', 'hbs!Templates/
 
             initialize: function(argument) {
                 loginValidation.validateForm();
-                var flagSession = localStorage.getItem('sessionActive');
-                var userName = localStorage.getItem('names');
+                var flagSession = sessionStorage.getItem('sessionActive');
+                var userName = sessionStorage.getItem('userName');
                 if (flagSession == 1) {
                     $('#header').html(headerApplication({userName: userName}));
                     $(this.el).html(initialApplicationPage());
@@ -29,21 +29,21 @@ define(['backbone', 'jquery', 'hbs!Templates/headerApplication', 'hbs!Templates/
                     var password = $("#password").val();
 
                     var getParamsService = rut + "/" + password;
-                    var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/users/login/" + getParamsService;
+                    var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/users/admin/login/" + getParamsService;
 
                     $.ajax({
                         async: false,
                         url: url,
                         type: "GET",
                         success: function(data, status) {
-                            if (data.result == true) {
-                                var userName = data.idUser;
+                            if (data) {
+                                var userName = data.names;
 
                                 $('#header').html(headerApplication({userName: userName}));
                                 $(that.el).html(initialApplicationPage());
                                 
-                                localStorage.setItem('sessionActive', 1);
-                                localStorage.setItem('userName', userName);
+                                sessionStorage.setItem('sessionActive', 1);
+                                sessionStorage.setItem('userName', userName);
                             } else {
                                 alertDGC("Usuario no existente, favor consultar administración para recuperación de clave");
                             }
