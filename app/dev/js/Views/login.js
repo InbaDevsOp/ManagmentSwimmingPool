@@ -11,7 +11,6 @@ define(['backbone', 'jquery', 'hbs!Templates/headerApplication', 'hbs!Templates/
             },
 
             initialize: function(argument) {
-                loginValidation.validateForm();
                 var flagSession = sessionStorage.getItem('sessionActive');
                 var userName = sessionStorage.getItem('userName');
                 if (flagSession == 1) {
@@ -20,6 +19,7 @@ define(['backbone', 'jquery', 'hbs!Templates/headerApplication', 'hbs!Templates/
                 } else {
                     $(this.el).append(loginTemplate());
                 }
+                loginValidation.validateForm();
 
             },
             login: function() {
@@ -45,7 +45,7 @@ define(['backbone', 'jquery', 'hbs!Templates/headerApplication', 'hbs!Templates/
                                 sessionStorage.setItem('sessionActive', 1);
                                 sessionStorage.setItem('userName', userName);
                             } else {
-                                alertDGC("Usuario no existente, favor consultar administración para recuperación de clave");
+                                alertDGC("Usuario no existente o contraseña incorrecta, favor consultar administración para recuperación de clave");
                             }
                         },
                         error: function(request, error) {
