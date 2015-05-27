@@ -24,7 +24,7 @@ define(['jquery', 'jquery.validate'], function($, jqueryValidate) {
                 },
                 messages: {
                     rut: {
-                        regexp: "Formato Incorrecto, Ej: 00000000-k"
+                        regexp: "Formato Incorrecto, Ej: 00000000-k (Sin puntos y con guión)"
                     }
                 },
                 errorPlacement: function(error, element) {

@@ -1,3 +1,14 @@
+<script src="../../../../../../../bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<script src="../../../../../../../bower_components/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js">
+</script>
+<link href="../../../../../../../bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" rel="stylesheet" media="screen">
+<script>
+$('#birthDate').datepicker({
+language: "es",
+orientation: "top auto"
+});
+</script>
+
 <br>
 
 <div class ="row">
@@ -19,7 +30,7 @@
             </div>
             <label for="inputValue" class="col-md-2 control-label">Fecha Nacimiento</label>
             <div class="col-md-4">
-              <input type="text" class="form-control" value="{{user.birthDate}}" name="birthDate" id="datepicker" placeholder="AAAA-MM-DD">
+              <input id="birthDate" type="text" class="form-control" value="{{user.birthDate}}" name="birthDate" id="datepicker" placeholder="DD/MM/AAAA">
             </div>
           </div>
           <div class="form-group row">
