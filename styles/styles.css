@@ -10,7 +10,7 @@
 ol.circle {list-style-type: circle;}
 
 .marginLeft{
-	margin-left: 9%;
+	margin-left: 5%;
 }
 
 .headerApplicationText {
@@ -162,6 +162,11 @@ border: 2px solid #3580BC !important;
 .blueTextTitleMedium{
 	font-size: 17px;
 	font-family: UniversBoldCn;
+	color:#015FAD;
+}
+
+.blueTextTitleNormal{
+	font-size: 15px;
 	color:#015FAD;
 }
 
