@@ -165,6 +165,11 @@ border: 2px solid #3580BC !important;
 	color:#015FAD;
 }
 
+.blueTextTitleNormal{
+	font-size: 15px;
+	color:#015FAD;
+}
+
 .textTitleBasic{
 	font-size: 14px;
 	font-family: UniversBoldCn;
