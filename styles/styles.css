@@ -10,7 +10,7 @@
 ol.circle {list-style-type: circle;}
 
 .marginLeft{
-	margin-left: 15%;
+	margin-left: 9%;
 }
 
 .headerApplicationText {
@@ -44,13 +44,9 @@ ol.circle {list-style-type: circle;}
 	padding-left: 7%;
 }
 
-.bodytext {
-	font-size: large;
-	font-weight: 200;
-}
 
 .informationContainer {
-	background-color: #EDF1F8;
+	background-color: #FFFFFF;
 }
 
 .theaderTables {
@@ -84,8 +80,8 @@ font-size: 12px;
     border-right-style: solid;
     border-left-style: solid;
     border-width: 1px;
-    border-color: #F4F4F4;
-    background-color: #EDF1F8;
+    border-color: #FFFFFF;
+    background-color: #FFFFFF;
 
 }
 
@@ -121,11 +117,21 @@ border: 2px solid #3580BC !important;
     
 }
 
+.bodytext {
+	font-size: large;
+	font-weight: 200;
+}
+
+
+.bodyTextSmall{
+	font-family: UniversCn;
+	font-size: 12px;
+}
 
 .navbarText {
 	font-family: UniversCn;
 	color: #FFFFFF;
-	font-size: 12px;
+	font-size: 15px;
 	font-weight: 100;
 }
 
@@ -141,13 +147,39 @@ border: 2px solid #3580BC !important;
 	color:#575756;
 }
 
+.blueTextTitleLarge{
+	font-size: 24px;
+	font-family: UniversBoldCn;
+	color:#015FAD;
+}
+
+.dashedLineBlue{
+	border-style: dashed;
+    border-width: 1px;
+    color:#015FAD;
+}
+
+.blueTextTitleMedium{
+	font-size: 17px;
+	font-family: UniversBoldCn;
+	color:#015FAD;
+}
+
 .textTitleBasic{
 	font-size: 14px;
 	font-family: UniversBoldCn;
 	color:#575756;
 }
 
+.textIndexSchedule{
+	font-size: 17px;
+	font-family: UniversCn;
+}
 
+.textWebPage{
+	font-size: 15px;
+	font-weight: bold;
+}
 .textNormal{
 	font-size: 14px;
 }
