@@ -31,7 +31,7 @@ define(['jquery', 'jquery.validate'], function($, jqueryValidate) {
                     },
                     birthDate: {
                         required: true,
-                        regexp: "^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$"
+                        regexp: "^(0[1-9]|[1-2][0-9]|3[0-1])/(0[1-9]|1[0-2])/[0-9]{4}$"
                     },
                     address: {
                         required: true,
@@ -58,7 +58,7 @@ define(['jquery', 'jquery.validate'], function($, jqueryValidate) {
                 },
                 messages: {
                     rut: {
-                        regexp: "Formato Incorrecto, Ej: 00000000-k"
+                        regexp: "Formato Incorrecto, Ej: 00000000-k (Sin puntos y con guión)"
                     },
                     names: {
                         regexp: "Formato Incorrecto: Solo letras"
@@ -70,7 +70,7 @@ define(['jquery', 'jquery.validate'], function($, jqueryValidate) {
                         regexp: "Formato Incorrecto: Solo letras"
                     },
                     birthDate: {
-                        regexp: "Formato Incorrecto: Ej: 1989-08-12"
+                        regexp: "Formato Incorrecto: Ej: 31/12/1989"
                     },
                     address: {
                         regexp: "Formato Incorrecto: Números y letras"

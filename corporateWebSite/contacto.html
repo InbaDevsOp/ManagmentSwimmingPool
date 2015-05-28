@@ -11,10 +11,11 @@
   
   <script>
   function initialize() {
-    var myLatlng = new google.maps.LatLng(-33.46239772, -70.65803289);
+    var myLatlng = new google.maps.LatLng(-33.464480, -70.658463);
     var mapOptions = {
-      zoom: 15,
-      center: myLatlng
+      zoom: 16,
+      center: myLatlng,
+      mapTypeId: google.maps.MapTypeId.SATELLITE
     }
     var map = new google.maps.Map(document.getElementById('googleMap'), mapOptions);
     var marker = new google.maps.Marker({
@@ -101,7 +102,7 @@
                       </div>
                     </div>
                     <br>
-                    <p class="informationArticleTitle">info@piscinatemperadasantiago.cl<br>  +56 2 259 21 590</p>
+                    <p class="informationArticleTitle">recepcionpot@cordesan.cl<br>  +56 2 259 21 590</p>
                     <p class="informationArticleTitle textTitle">UBICACI&OacuteN</p>
                     <div id="googleMap" style="width: 280px; height: 180px"></div>
                   </div>

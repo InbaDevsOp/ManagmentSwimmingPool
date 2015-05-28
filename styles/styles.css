@@ -7,8 +7,10 @@
 	padding-top: 1%;
 }
 
+ol.circle {list-style-type: circle;}
+
 .marginLeft{
-	margin-left: 10%;
+	margin-left: 15%;
 }
 
 .headerApplicationText {
