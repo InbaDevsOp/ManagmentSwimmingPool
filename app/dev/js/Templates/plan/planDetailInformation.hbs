@@ -4,6 +4,14 @@
     <label class="control-label" value="{{plan.name}}">Nombre: {{plan.name}}</label><br>
     <label class="control-label" value="{{plan.description}}">Descripción: {{plan.description}}</label><br>
     <label class="control-label" value="{{plan.price}}">Precio: ${{plan.price}}</label><br>
-    <label class="control-label" style="color: red"value="{{plan.hoursPerWeek}}">Horas por Semana: {{plan.hoursPerWeek}}</label>
+    
+    {{#if_eq plan.typeOfPlan "typeHoursPerWeek" }}
+    <label class="control-label" style="color: red" value="{{plan.hoursPerWeek}}">Horas por Semana: {{plan.hoursPerWeek}}</label>
+    {{/if_eq}}
+
+    {{#if_eq plan.typeOfPlan "typeBlocksPerWeek" }}
+    <label class="control-label" style="color: red"value="{{plan.hoursPerWeek}}">Bloques por Semana: {{plan.blocksPerWeek}}</label>
+    {{/if_eq}}
+
     <br>
 </div>

@@ -46,7 +46,6 @@ define(['backbone', 'jquery', 'hbs!Templates/schedule/scheduleDetailInformation'
                 }
             },
 
-
         });
         return scheduleDetailInformation;
 

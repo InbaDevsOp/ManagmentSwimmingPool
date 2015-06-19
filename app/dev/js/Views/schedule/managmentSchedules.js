@@ -106,15 +106,26 @@ define(['backbone', 'jquery', 'Modules/login', 'Views/schedule/addSchedule', 'Mo
                     url: url,
                     type: "DELETE",
                     success: function(data, status) {
-                        alertDGC("Horario Eliminado exitosamente");
-                        $(eventTd.currentTarget).closest("tr").html("");
+                        if (data == false) {
+                            // var scheduleMessage = "\n";
+                            // for (var count in data) {
+                            //     var schedule = data[count];
+                            //     scheduleMessage += "Nombre Horario:" + schedule.name + "\n";
+                            // }
+                            // alertDGC("Error: Hay Horarios que dependen del plan, \n" + scheduleMessage);
+                            alertDGC("Error: Hay Pagos que dependen del Horario");
 
-                        //TODO managment in a backbone Collection 
-                        if (!$.isEmptyObject(that.childView) && (that.childView.model.get("id") == schedule.id)) {
-                            that.childView.$el.html('')
-                            that.childView.undelegateEvents();
-                            that.childView.stopListening();
-                            that.childView = null;
+                        } else {
+                            alertDGC("Horario Eliminado exitosamente");
+                            $(eventTd.currentTarget).closest("tr").html("");
+
+                            //TODO managment in a backbone Collection
+                            if (!$.isEmptyObject(that.childView) && (that.childView.model.get("id") == schedule.id)) {
+                                that.childView.$el.html('')
+                                that.childView.undelegateEvents();
+                                that.childView.stopListening();
+                                that.childView = null;
+                            }
                         }
                     },
                     error: function(request, error) {

@@ -74,3 +74,4 @@ define(['jquery', 'jquery.validate'], function($, jqueryValidate) {
     return addScheduleValidation;
 
 });
+

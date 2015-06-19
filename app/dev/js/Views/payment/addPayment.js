@@ -5,7 +5,7 @@ define(['backbone', 'jquery', 'hbs!Templates/payment/addPayment', 'Modules/login
         'Views/plan/plansInformation', 'hbs!Templates/plan/plansCombo',
         'Views/plan/planDetailInformation', 'hbs!Templates/plan/planDetailInformation',
         'Views/schedule/schedulesInformation', 'hbs!Templates/schedule/schedulesCombo',
-        'Views/schedule/scheduleDetailInformation', 'hbs!Templates/schedule/scheduleDetailInformation',
+        'Views/schedule/scheduleDetailInformation', 'Views/schedule/scheduleFreeHoursPerWeekDetailInformation', 'hbs!Templates/schedule/scheduleDetailInformation',
         'Models/payment'
     ],
     function(Backbone, $, addPaymentTemplate, login, utilForm, addPaymentValidation,
@@ -14,12 +14,11 @@ define(['backbone', 'jquery', 'hbs!Templates/payment/addPayment', 'Modules/login
         plansInformationView, plansInformationTemplate,
         planDetailInformationView, planDetailInformationTemplate,
         schedulesInformationView, schedulesInformationTemplate,
-        scheduleDetailInformationView, scheduleDetailInformationTemplate,
+        scheduleDetailInformationView, scheduleFreeHoursPerWeekDetailInformationView, scheduleDetailInformationTemplate,
         paymentModel) {
 
         AddPaymentView = Backbone.View.extend({
             template: addPaymentTemplate,
-
             events: {
                 "click #searchUsers": "searchUsers",
                 "click #savePayment": "savePayment",
@@ -30,9 +29,8 @@ define(['backbone', 'jquery', 'hbs!Templates/payment/addPayment', 'Modules/login
             initialize: function() {
 
                 if (login.verifyIsUserlogded()) {
-
                     $(this.el).html(addPaymentTemplate({}));
-                    //addPlanValidation.validateForm();
+                    addPaymentValidation.validateForm();
                 }
             },
             searchUsers: function() {
@@ -46,12 +44,15 @@ define(['backbone', 'jquery', 'hbs!Templates/payment/addPayment', 'Modules/login
             },
             fillUserInformation: function(event) {
 
+                $("#userDetailInformation").html('');
+                var userId = $(event.currentTarget).find("option:selected").attr("id")
                 new userDetailInformationView({
                     el: $("#userDetailInformation"),
                     template: userDetailInformationTemplate,
-                    userId: $(event.currentTarget).find("option:selected").attr("id")
+                    userId: userId
                 });
 
+                $("#plansInformation").html('');
                 new plansInformationView({
                     el: $("#plansInformation"),
                     template: plansInformationTemplate
@@ -60,48 +61,122 @@ define(['backbone', 'jquery', 'hbs!Templates/payment/addPayment', 'Modules/login
             },
             fillPlanInformation: function(event) {
 
+                $("#planDetailInformation").html('');
+                var planId = $(event.currentTarget).find("option:selected").attr("id");
                 new planDetailInformationView({
                     el: $("#planDetailInformation"),
                     template: planDetailInformationTemplate,
-                    planId: $(event.currentTarget).find("option:selected").attr("id")
+                    planId: planId
                 });
 
-                new schedulesInformationView({
-                    el: $("#schedulesInformation"),
-                    template: schedulesInformationTemplate,
-                    searchSchedulePattern: $(event.currentTarget).find("option:selected").attr("name")
-                });
+                var typeOfPlan = $(event.currentTarget).find("option:selected").attr("typeOfPlan");
+
+                if (typeOfPlan == "typeBlocksPerWeek") {
+
+                    $("#schedulesInformation").html('');
+                    $("#scheduleDetailInformation").html('');
+                    new schedulesInformationView({
+                        el: $("#schedulesInformation"),
+                        template: schedulesInformationTemplate,
+                        searchSchedulePattern: $(event.currentTarget).find("option:selected").attr("blocksPerWeek")
+                    });
+
+                } else if (typeOfPlan == "typeHoursPerWeek") {
+
+                    $("#schedulesInformation").html('');
+                    $("#scheduleDetailInformation").html('');
+                    new scheduleFreeHoursPerWeekDetailInformationView({
+                        el: $("#scheduleDetailInformation"),
+                        template: scheduleDetailInformationTemplate,
+                        hoursPerWeek: $(event.currentTarget).find("option:selected").attr("hoursPerWeek")
+                    });
+                    
+                    $("#addPaymentForm").hide();
+                    $("#addPaymentForm").show();
+                }
 
             },
             fillScheduleInformation: function(event) {
 
+                $("#scheduleDetailInformation").html('');
+                var scheduleId = $(event.currentTarget).find("option:selected").attr("id");
                 new scheduleDetailInformationView({
                     el: $("#scheduleDetailInformation"),
                     template: scheduleDetailInformationTemplate,
-                    scheduleId: $(event.currentTarget).find("option:selected").attr("id")
+                    scheduleId: scheduleId
                 });
-
+                $("#addPaymentForm").hide();
+                $("#addPaymentForm").show();
 
             },
             savePayment: function() {
                 var that = this;
 
-                //if (addScheduleValidation.isValidForm()) {
+                if (addPaymentValidation.isValidForm()) {
 
-                var paymentJson = utilForm.serializeFormToObject("#addPaymentForm :visible");
+                    var paymentJson = this.serializeFormToObject();
+                    this.model.set(paymentJson);
 
-                this.model.set(paymentJson);
+                    this.model.save({}, {
+                        success: function(model, respose) {
+                            alertDGC("Pago guardado exitosamente");
+                            that.cleanDataForm();
+                        },
+                        error: function(model, response) {
+                            alertDGC("Error Interno, favor intente más tarde");
+                        }
+                    });
 
-                this.model.save({}, {
-                    success: function(model, respose) {
-                        alertDGC("Payment guardado exitosamente");
-                        utilForm.cleanDataForm("#addPaymentForm");
-                    },
-                    error: function(model, response) {
-                        alertDGC("Error Interno, favor intente más tarde");
-                    }
-                });
+                }
             },
+            serializeFormToObject: function() {
+
+                var paymentJson = {
+                    swimmingPoolUser: {
+                        id: $("#usersCombo").find("option:selected").attr("id")
+                    },
+                    product: {
+                        productPK: {
+                            plan: {
+                                id: $("#plansCombo").find("option:selected").attr("id")
+                            }
+                        }
+                    }
+                };
+
+                if ($("#schedulesCombo").find("option:selected").attr("id")) {
+
+                    paymentJson.product.productPK["schedule"] = {
+                        id: $("#schedulesCombo").find("option:selected").attr("id")
+                    };
+                }
+
+                var paymentDataJson = utilForm.serializeFormToObject("#addPaymentForm :visible");
+
+                paymentJson["bank"] = paymentDataJson.bank;
+                paymentJson["chequeNumber"] = paymentDataJson.chequeNumber;
+                paymentJson["formOfPayment"] = paymentDataJson.formOfPayment;
+                paymentJson.product["startValidDate"] = paymentDataJson.startValidDate;
+                paymentJson.product["endValidDate"] = paymentDataJson.endValidDate;
+                paymentJson["observations"] = paymentDataJson.observations;
+                paymentJson["numberOfTicket"] = paymentDataJson.numberOfTicket;
+
+
+                return paymentJson;
+
+            },
+            cleanDataForm: function() {
+
+                utilForm.cleanDataForm("#addPaymentForm");
+                $("#addPaymentForm").hide('');
+                $("#usersInformation").html('');
+                $("#userDetailInformation").html('');
+                $("#plansInformation").html('');
+                $("#planDetailInformation").html('');
+                $("#schedulesInformation").html('');
+                $("#scheduleDetailInformation").html('');
+
+            }
 
         });
 
