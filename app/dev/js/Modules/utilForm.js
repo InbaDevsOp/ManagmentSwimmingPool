@@ -28,6 +28,19 @@ define(['jquery'],
                 }
                 return object;
             },
+
+            serializeFormToObjectChangePass : function(formSelector) {
+                
+                var selector = $(formSelector).serializeArray();
+                var object = {};
+                for (var i in selector) {
+                    if(selector[i].name=="id" || selector[i].name=="password")
+                    object[selector[i].name] = selector[i].value;
+                }
+                return object;
+            },
+
+
             cleanDataForm: function(formSelector){
                 $(formSelector).each(function() {
                     this.reset();

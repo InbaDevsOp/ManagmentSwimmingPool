@@ -2,11 +2,11 @@ require(['backbone', 'marionette', 'jquery', 'Views/login',
     'Views/swimmingPoolUser/addUser', 'Views/swimmingPoolUser/managmentUsers', 
     'Views/schedule/addSchedule', 'Views/schedule/managmentSchedules',
     'Views/plan/addPlan', 'Views/plan/managmentPlans', 
-    'Views/payment/addPayment', 
-    'Models/plan', 'Models/schedule', 'Models/User', 'Models/payment'
+    'Views/payment/addPayment','Views/poolMember/changePass','Views/poolMember/poolMemberInfoActive',
+    'Models/plan', 'Models/schedule', 'Models/User', 'Models/payment','Models/poolMember'
     ],
     function(Backbone, Marionette, $, login, addUser, managmentUsers, addSchedule, managmentSchedules, addPlan, 
-        managmentPlans, addPayment, planModel, scheduleModel, userModel, paymentModel) {
+        managmentPlans, addPayment, changePass, poolMemberInfoActive, planModel, scheduleModel, userModel, paymentModel, poolMemberModel) {
 
         var myRouter = Backbone.Router.extend({
 
@@ -19,7 +19,10 @@ require(['backbone', 'marionette', 'jquery', 'Views/login',
                 "addPlan": "addPlan",
                 "managmentPlans": "managmentPlans",
                 "addPayment": "addPayment",
+                "changePass":"changePass",
+                "poolMemberInfoActive":"poolMemberInfoActive",
                 "exitUser": "exitUser"
+
             },
 
             currentView: null,
@@ -54,6 +57,18 @@ require(['backbone', 'marionette', 'jquery', 'Views/login',
             addPayment: function() {
                 this.switchView(new addPayment({
                     model: new paymentModel({}),
+                    el: $("#applicationContent")
+                }));
+            },
+            changePass: function() {
+                this.switchView(this.changePass = new changePass({
+                    model: new poolMemberModel({}),
+                    el: $("#applicationContent")
+                }));
+            },
+            poolMemberInfoActive: function() {
+                this.switchView(this.poolMemberInfoActive = new poolMemberInfoActive({
+                    model: new poolMemberModel({}),
                     el: $("#applicationContent")
                 }));
             },

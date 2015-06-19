@@ -1,0 +1,25 @@
+<table id="payInformation"class="table table-striped table-bordered table-hover table-condensed">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Nro. Boleta</th>
+      <th>Plan</th>
+      <th>Metodo de Pago</th>
+      <th>Monto</th>
+      <th>Fecha</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#users}} <!-- qu hace esto ? -->
+    <tr>
+      <td>#</td>
+      <td>{{nBoleta}}</td>
+      <td>{{namePlan}}</td>
+      <td>{{mathodPay}}</td>
+      <td>{{amount}}</td>
+      <td>{{datePay}}</td>
+      <td id="idUser">{{rut}}</td> <!-- Este ya estaria dado por la conexion --> 
+    </tr>
+    {{/users}} <!-- qu hace esto ? -->
+  </tbody>
+</table>
