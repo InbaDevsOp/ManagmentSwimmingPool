@@ -91,14 +91,14 @@ define(['backbone', 'jquery', 'Modules/login', 'hbs!Templates/plan/managmentPlan
                 url: url,
                 type: "DELETE",
                 success: function(data, status) {
-                    if (data) {
+                    if (data == false) {
                         // var scheduleMessage = "\n";
                         // for (var count in data) {
                         //     var schedule = data[count];
                         //     scheduleMessage += "Nombre Horario:" + schedule.name + "\n";
                         // }
                         // alertDGC("Error: Hay Horarios que dependen del plan, \n" + scheduleMessage);
-                        alertDGC("Error: Hay Horarios que dependen del plan");
+                        alertDGC("Error: Hay Horarios o Pagos que dependen del Plan");
 
                     } else {
                         alertDGC("Plan Eliminado exitosamente");

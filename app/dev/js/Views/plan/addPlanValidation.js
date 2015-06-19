@@ -7,14 +7,26 @@ define(['jquery', 'jquery.validate'], function($, jqueryValidate) {
             $.validator.addMethod("regexp", function(value, element, regexpr) {
                 var regexp = new RegExp(regexpr);
                 return regexp.test(value);
+
             }, "Por Favor Ingrese un valor con el formato correcto.");
 
-            $.validator.addMethod("plan", function() {
-                if ($("tr:has(td.selected)").length) {
-                    return true;
+            $.validator.addMethod("typeOfPlanValidation", function() {
+
+                var element;
+                if ($("#hoursPerWeek").val()) {
+                    element = $("#hoursPerWeek").val();
+                } else if ($("#blocksPerWeek").val()) {
+                    element = $("#blocksPerWeek").val();
                 }
-                return false;
-            }, "Error: Ingrese algún bloque al horario");
+
+                if ($("#blocksPerWeekContainer").is(':visible') || $("#hoursPerWeekContainer").is(':visible')) {
+                    var regexp = new RegExp("^[0-9]+$");
+                    return regexp.test(element);
+                }
+                return true;
+
+            }, "Solo números Ej: 6");
+
 
             $.validator.messages.required = "Campo requerido";
 
@@ -32,9 +44,11 @@ define(['jquery', 'jquery.validate'], function($, jqueryValidate) {
                         required: true,
                         regexp: "^[0-9]+$"
                     },
-                    hoursPerWeek: {
+                    typeOfPlan: {
                         required: true,
-                        regexp: "^[0-9]+$"
+                    },
+                    addPlanValidation: {
+                        typeOfPlanValidation: true
                     }
                 },
                 messages: {
@@ -44,8 +58,11 @@ define(['jquery', 'jquery.validate'], function($, jqueryValidate) {
                     price: {
                         regexp: "Solo números Ej: 35000"
                     },
-                    hoursPerWeek: {
-                        regexp: "Solo números \"6\" = 6 horas a la semana "
+                    typeOfPlan: {
+                        required: "Seleccione alguna opción"
+                    },
+                    addPlanValidation: {
+                        typeOfPlanValidation: "Solo números Ej: 6"
                     }
                 },
                 errorPlacement: function(error, element) {
