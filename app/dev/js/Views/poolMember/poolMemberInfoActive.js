@@ -26,7 +26,6 @@ define(['backbone', 'jquery', 'hbs!Templates/poolMember/poolMemberInfoActive', '
 
                     var userId = sessionStorage.getItem('flag');
                     var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/payment/swimmingPoolUser/" + userId;
-                    var test;
 
                     $.ajax({
                         async: false,
@@ -34,11 +33,13 @@ define(['backbone', 'jquery', 'hbs!Templates/poolMember/poolMemberInfoActive', '
                         type: "GET",
                         success: function(data, status) {
                             if(data){
-                                this.test = data[0].id;
+                                var idPayment = data[0].id;
                                 
 
                                 $("#paymentsInformation").html(paymentsTableTemplate({
-                                payments: data }));    
+                                payments: data })); 
+
+                                sessionStorage.setItem('idPayment', idPayment);   
                                 
                             }
                             
@@ -47,15 +48,15 @@ define(['backbone', 'jquery', 'hbs!Templates/poolMember/poolMemberInfoActive', '
                             alertDGC("Error Interno, favor intente más tarde");
                         },
                     });
-                    this.fillPaymentInformation(this.test);
+                    this.fillPaymentInformation(sessionStorage.getItem('idPayment'));
                     
 
                 }
             },
 
-            fillPaymentInformation: function(idPay) {
+            fillPaymentInformation: function(idPayment) {
                 var that = this;
-                var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/payment/" + "1";
+                var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/payment/" + idPayment;
 
 
                 $.ajax({
