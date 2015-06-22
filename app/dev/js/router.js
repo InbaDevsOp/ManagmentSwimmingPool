@@ -1,13 +1,15 @@
 require(['backbone', 'marionette', 'jquery', 'Views/login', 
     'Views/swimmingPoolUser/addUser', 'Views/swimmingPoolUser/managmentUsers', 
     'Views/schedule/addSchedule', 'Views/schedule/managmentSchedules',
-    'Views/plan/addPlan', 'Views/plan/managmentPlans', 'Views/payment/managmentPayments', 
-    'Views/product/addProduct', 
+    'Views/plan/addPlan', 'Views/plan/managmentPlans', 'Views/payment/managmentPayments', 'Views/product/addProduct', 
+    'Views/poolMember/changePass','Views/poolMember/poolMemberInfoActive',
     'Models/plan', 'Models/schedule', 'Models/User',
     ],
     function(Backbone, Marionette, $, login, addUser, managmentUsers, addSchedule, managmentSchedules, addPlan, 
-        managmentPlans, managmentPayments, 
-        addProduct, planModel, scheduleModel, userModel) {
+        managmentPlans, managmentPayments, addProduct,
+        changePass, poolMemberInfoActive, 
+        planModel, scheduleModel, userModel) {
+
 
         var myRouter = Backbone.Router.extend({
 
@@ -21,7 +23,10 @@ require(['backbone', 'marionette', 'jquery', 'Views/login',
                 "managmentPlans": "managmentPlans",
                 "addProduct": "addProduct",
                 "managmentPayments": "managmentPayments",
+                "changePass":"changePass",
+                "poolMemberInfoActive":"poolMemberInfoActive",
                 "exitUser": "exitUser"
+
             },
 
             currentView: null,
@@ -55,6 +60,18 @@ require(['backbone', 'marionette', 'jquery', 'Views/login',
             },
             addProduct: function() {
                 this.switchView(new addProduct({
+                    el: $("#applicationContent")
+                }));
+            },
+            changePass: function() {
+                this.switchView(this.changePass = new changePass({
+                    model: new poolMemberModel({}),
+                    el: $("#applicationContent")
+                }));
+            },
+            poolMemberInfoActive: function() {
+                this.switchView(this.poolMemberInfoActive = new poolMemberInfoActive({
+                    model: new poolMemberModel({}),
                     el: $("#applicationContent")
                 }));
             },
