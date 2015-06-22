@@ -3,12 +3,14 @@ define(['backbone', 'jquery', 'Modules/login', 'Views/payment/addPayment',
         'Views/swimmingPoolUser/usersInformation', 'hbs!Templates/swimmingPoolUser/usersCombo',
         'Views/plan/planDetailInformation', 'hbs!Templates/plan/planDetailInformation',
         'Views/schedule/scheduleDetailInformation', 'hbs!Templates/schedule/scheduleDetailInformation',
+        'hbs!Templates/payment/paymentDetailInformation'
     ],
     function(Backbone, $, login, addpaymentView,
         managmentPayments, paymentsTableTemplate, paymentModel,
         usersInformationView, usersInformationTemplate,
         planDetailInformationView, planDetailInformationTemplate,
-        scheduleDetailInformationView, scheduleDetailInformationTemplate) {
+        scheduleDetailInformationView, scheduleDetailInformationTemplate,
+        paymentDetailInformationTemplate) {
 
         managmentPayments = Backbone.View.extend({
             template: managmentPayments,
@@ -60,22 +62,6 @@ define(['backbone', 'jquery', 'Modules/login', 'Views/payment/addPayment',
                 });
 
             },
-            // backwardGroupSchedule: function() {
-            //     if (this.schedules.count > this.schedules.group) {
-            //         console.log("atras" + this.schedules.count);
-            //         $("#scheduleInfo").html(schedulesTable({
-            //             schedules: this.schedules.array.slice(this.schedules.count -= (this.schedules.group * 2), this.schedules.count += this.schedules.group)
-            //         }));
-            //     }
-            // },
-            // forwardGroupSchedule: function() {
-            //     if (this.schedules.count < this.schedules.array.length) {
-            //         console.log("adelante" + this.schedules.count);
-            //         $("#scheduleInfo").html(schedulesTable({
-            //             schedules: this.schedules.array.slice(this.schedules.count, this.schedules.count += this.schedules.group)
-            //         }));
-            //     }
-            // },
             fillPaymentInformation: function(eventTd) {
                 var that = this;
                 var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/payment/" + $(eventTd.currentTarget.closest("tr")).attr("id");
@@ -87,13 +73,15 @@ define(['backbone', 'jquery', 'Modules/login', 'Views/payment/addPayment',
                     type: "GET",
                     success: function(data, status) {
 
+                        var payment = data;
+                        that.currentPaymentId = payment.id;
+                        var planId = payment.product.productPK.plan.id;
+
                         $("#planDetailInformation").html('');
                         $("#scheduleDetailInformation").html('');
+                        $("#paymentDetailInformation").html('');
+                        $("#paymentDetailInformation").html(paymentDetailInformationTemplate({payment : payment}));
 
-                        that.currentPaymentId = data.id;
-
-                        var payment = data;
-                        var planId = payment.product.productPK.plan.id;
 
                         new planDetailInformationView({
                             el: $("#planDetailInformation"),
