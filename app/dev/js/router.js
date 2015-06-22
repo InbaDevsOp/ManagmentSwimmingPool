@@ -1,12 +1,13 @@
 require(['backbone', 'marionette', 'jquery', 'Views/login', 
     'Views/swimmingPoolUser/addUser', 'Views/swimmingPoolUser/managmentUsers', 
     'Views/schedule/addSchedule', 'Views/schedule/managmentSchedules',
-    'Views/plan/addPlan', 'Views/plan/managmentPlans', 
-    'Views/payment/addPayment', 
-    'Models/plan', 'Models/schedule', 'Models/User', 'Models/payment'
+    'Views/plan/addPlan', 'Views/plan/managmentPlans', 'Views/payment/managmentPayments', 
+    'Views/product/addProduct', 
+    'Models/plan', 'Models/schedule', 'Models/User',
     ],
     function(Backbone, Marionette, $, login, addUser, managmentUsers, addSchedule, managmentSchedules, addPlan, 
-        managmentPlans, addPayment, planModel, scheduleModel, userModel, paymentModel) {
+        managmentPlans, managmentPayments, 
+        addProduct, planModel, scheduleModel, userModel) {
 
         var myRouter = Backbone.Router.extend({
 
@@ -18,7 +19,8 @@ require(['backbone', 'marionette', 'jquery', 'Views/login',
                 "managmentSchedules": "managmentSchedules",
                 "addPlan": "addPlan",
                 "managmentPlans": "managmentPlans",
-                "addPayment": "addPayment",
+                "addProduct": "addProduct",
+                "managmentPayments": "managmentPayments",
                 "exitUser": "exitUser"
             },
 
@@ -51,14 +53,16 @@ require(['backbone', 'marionette', 'jquery', 'Views/login',
                     el: $("#applicationContent")
                 }));
             },
-            addPayment: function() {
-                this.switchView(new addPayment({
-                    model: new paymentModel({}),
+            addProduct: function() {
+                this.switchView(new addProduct({
                     el: $("#applicationContent")
                 }));
             },
             managmentPlans: function() {
                 this.switchView(new managmentPlans());
+            },
+            managmentPayments: function() {
+                this.switchView(new managmentPayments());
             },
             exitUser: function() {
                 sessionStorage.clear();
