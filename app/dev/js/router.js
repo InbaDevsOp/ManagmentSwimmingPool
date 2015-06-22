@@ -2,13 +2,13 @@ require(['backbone', 'marionette', 'jquery', 'Views/login',
     'Views/swimmingPoolUser/addUser', 'Views/swimmingPoolUser/managmentUsers', 
     'Views/schedule/addSchedule', 'Views/schedule/managmentSchedules',
     'Views/plan/addPlan', 'Views/plan/managmentPlans', 'Views/payment/managmentPayments', 'Views/product/addProduct', 
-    'Views/poolMember/changePass','Views/poolMember/poolMemberInfoActive',
-    'Models/plan', 'Models/schedule', 'Models/User',
+    'Views/poolMember/changePass','Views/poolMember/poolMemberInfoActive','Views/poolMember/payHistory',
+    'Models/plan', 'Models/schedule', 'Models/User', 'Models/poolMember',
     ],
     function(Backbone, Marionette, $, login, addUser, managmentUsers, addSchedule, managmentSchedules, addPlan, 
         managmentPlans, managmentPayments, addProduct,
-        changePass, poolMemberInfoActive, 
-        planModel, scheduleModel, userModel) {
+        changePass, poolMemberInfoActive, payHistory, 
+        planModel, scheduleModel, userModel, poolMemberModel) {
 
 
         var myRouter = Backbone.Router.extend({
@@ -25,6 +25,7 @@ require(['backbone', 'marionette', 'jquery', 'Views/login',
                 "managmentPayments": "managmentPayments",
                 "changePass":"changePass",
                 "poolMemberInfoActive":"poolMemberInfoActive",
+                "payHistory":"payHistory",
                 "exitUser": "exitUser"
 
             },
@@ -71,6 +72,12 @@ require(['backbone', 'marionette', 'jquery', 'Views/login',
             },
             poolMemberInfoActive: function() {
                 this.switchView(this.poolMemberInfoActive = new poolMemberInfoActive({
+                    model: new poolMemberModel({}),
+                    el: $("#applicationContent")
+                }));
+            },
+            payHistory: function() {
+                this.switchView(this.payHistory = new payHistory({
                     model: new poolMemberModel({}),
                     el: $("#applicationContent")
                 }));

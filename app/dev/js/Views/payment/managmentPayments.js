@@ -41,7 +41,6 @@ define(['backbone', 'jquery', 'Modules/login', 'Views/payment/addPayment',
 
             },
             fillPaymentsTable: function(event) {
-
                 var userId = $(event.currentTarget).find("option:selected").attr("id");
                 var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/payment/swimmingPoolUser/" + userId;
 
