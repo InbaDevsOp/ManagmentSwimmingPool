@@ -9,7 +9,7 @@ define(['jquery', 'hbs!Templates/headerApplication', 'hbs!Templates/headerMember
                 var userProfile = sessionStorage.getItem('userProfile');
                 var flag = sessionStorage.getItem('flag');
                 var pass = sessionStorage.getItem('pass');
-                
+                var info = sessionStorage.getItem('info');
                 if (flagSession == 1) {
 
                     switch (userProfile){

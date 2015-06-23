@@ -16,6 +16,7 @@ define(['backbone', 'jquery', 'hbs!Templates/headerApplication', 'hbs!Templates/
                 var userProfile = sessionStorage.getItem('userProfile');
                 var flag = sessionStorage.getItem('flag');
                 var pass = sessionStorage.getItem('pass');
+                var info = sessionStorage.getItem('info');
                 if (flagSession == 1) {
                     switch (userProfile){
                         case "2":
@@ -48,6 +49,7 @@ define(['backbone', 'jquery', 'hbs!Templates/headerApplication', 'hbs!Templates/
                         type: "GET",
                         success: function(data, status) {
                             if (data) {
+                                sessionStorage.info = data;
                                 var userName = data.names;
                                 var userNew = data.id_profile;
                                 var flag = data.id;
@@ -67,6 +69,8 @@ define(['backbone', 'jquery', 'hbs!Templates/headerApplication', 'hbs!Templates/
                                 sessionStorage.setItem('userProfile', userNew);
                                 sessionStorage.setItem('flag', flag);
                                 sessionStorage.setItem('pass', pass);
+                                
+                                //sessionStorage.setItem('info', info);
                                
                             } else {
                                 alertDGC("Usuario no existente o contraseña incorrecta, favor consultar administración para recuperación de clave");

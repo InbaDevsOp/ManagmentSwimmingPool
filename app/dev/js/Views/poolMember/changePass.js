@@ -23,10 +23,9 @@ define(['backbone', 'jquery', 'hbs!Templates/poolMember/changePass', 'Modules/lo
             },
             changePass: function() {
                 var that = this;
-
                 if (changePassValidation.isValidForm()) {
                     $("#id").val(sessionStorage.getItem('flag'));
-                    var poolManagerJson = utilForm.serializeFormToObjectChangePass("#changePassForm");
+                    var poolManagerJson = utilForm.serializeFormToObjectChangePass($("#password").val() );
 
                     this.model.set(poolManagerJson);
 

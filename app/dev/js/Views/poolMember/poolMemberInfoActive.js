@@ -1,7 +1,7 @@
 define(['backbone', 'jquery', 'hbs!Templates/poolMember/poolMemberInfoActive', 'Modules/login', 'Modules/utilForm',
-        'Views/poolMember/changePassValidation', 'Models/poolMember',
+         'Models/poolMember',
         'Views/plan/planDetailInformation', 'hbs!Templates/plan/planDetailInformation',
-        'Views/schedule/scheduleDetailInformation', 'hbs!Templates/schedule/scheduleDetailInformation','hbs!Templates/payment/paymentsTable'
+        'Views/schedule/scheduleDetailInformation', 'hbs!Templates/schedule/scheduleDetailInformation','hbs!Templates/poolMember/tablePayment'
     ],
     function(Backbone, $, infoActiveTemplate, login, utilForm, poolMemberModel,planDetailInformationView, planDetailInformationTemplate,
         scheduleDetailInformationView, scheduleDetailInformationTemplate,paymentsTableTemplate) {
@@ -34,13 +34,12 @@ define(['backbone', 'jquery', 'hbs!Templates/poolMember/poolMemberInfoActive', '
                         success: function(data, status) {
                             if(data){
                                 var idPayment = data[0].id;
-                                
+                                //if(){
+                                    $("#paymentsInformation").html(paymentsTableTemplate({
+                                    payments: data })); 
 
-                                $("#paymentsInformation").html(paymentsTableTemplate({
-                                payments: data })); 
-
-                                sessionStorage.setItem('idPayment', idPayment);   
-                                
+                                    sessionStorage.setItem('idPayment', idPayment);   
+                                //}
                             }
                             
                         },

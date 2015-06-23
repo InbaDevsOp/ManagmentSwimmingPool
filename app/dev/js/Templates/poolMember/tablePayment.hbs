@@ -4,23 +4,24 @@
       <th>#</th>
       <th>Nombre Plan</th>
       <th>Nombre Horario</th>
-      <th>Precio $</th>
-      <th>Num.Boleta</th>
       <th>Vigencia</th>
+      <th>Pago $</th>
       <th>Fecha de Pago</th>
+      <th>Num. Boleta</th>
     </tr>
   </thead>
   <tbody>
     {{#payments}}
     <tr id="{{id}}" class="{{#isProductActive product.startValidDate product.endValidDate}}success{{/isProductActive}}" >
       <td></td>
+      <td>{{swimmingPoolUser.names}} {{swimmingPoolUser.firstLastName}} </td>
       <td>{{product.productPK.plan.name}}</td>
       <td>{{product.productPK.schedule.name}}</td>
-      <td>{{product.productPK.plan.price}}</td>
-      <td>{{numberOfTicket}}</td>
-      <td>{{datepay}}</td>
       <td>{{#isProductActive product.startValidDate product.endValidDate}}ACTIVO{{/isProductActive}}</td>
-    </tr>
+      <td>{product.productPK.schedule.name}}</td>
+      <td>{product.productPK.schedule.name}}</td>
+      <td>{product.productPK.schedule.name}}</td>
+     </tr>
     {{/payments}}
   </tbody>
 </table>
