@@ -24,10 +24,13 @@ define(['backbone', 'jquery', 'hbs!Templates/poolMember/payHistory', 'Modules/lo
                     url: url,
                     type: "GET",
                     success: function(data, status) {
-
-                        $("#paymentsInformation").html(payHistory({
-                            payments: data
-                        }));
+                        if(data[0]!=null){
+                            $("#paymentsInformation").html(payHistory({
+                                payments: data
+                            }));
+                        }
+                        else
+                            alertDGC("No tiene pagos realizados");
                     },
                     error: function(request, error) {
                         alertDGC("Error Interno, favor intente más tarde");

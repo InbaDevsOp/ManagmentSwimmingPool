@@ -32,19 +32,18 @@ define(['backbone', 'jquery', 'hbs!Templates/poolMember/poolMemberInfoActive', '
                         url: url,
                         type: "GET",
                         success: function(data, status) {
-                            if(data){
+                            if(data[0]!=null){
                                 var idPayment = data[0].id;
-                                //if(){
-                                    $("#paymentsInformation").html(paymentsTableTemplate({
-                                    payments: data })); 
+                                $("#paymentsInformation").html(paymentsTableTemplate({
+                                payments: data })); 
 
-                                    sessionStorage.setItem('idPayment', idPayment);   
-                                //}
+                                sessionStorage.setItem('idPayment', idPayment);   
+                    
                             }
                             
                         },
                         error: function(request, error) {
-                            alertDGC("Error Interno, favor intente más tarde");
+                            alertDGC("Error, favor intente más tarde");
                         },
                     });
                     this.fillPaymentInformation(sessionStorage.getItem('idPayment'));
@@ -54,48 +53,51 @@ define(['backbone', 'jquery', 'hbs!Templates/poolMember/poolMemberInfoActive', '
             },
 
             fillPaymentInformation: function(idPayment) {
-                var that = this;
-                var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/payment/" + idPayment;
-
-
-                $.ajax({
-                    async: false,
-                    url: url,
-                    type: "GET",
-                    success: function(data, status) {
-
-                        var payment = data;
-                        that.currentPaymentId = payment.id;
-                        var planId = payment.product.productPK.plan.id;
-
-                        $("#planDetailInformation").html('');
-                        $("#scheduleDetailInformation").html('');
-
-                        new planDetailInformationView({
-                            el: $("#planDetailInformation"),
-                            template: planDetailInformationTemplate,
-                            planId: planId
-                        });
-
-                        var typeOfPlan = payment.product.productPK.plan.typeOfPlan;
-
-                        if (typeOfPlan == "typeBlocksPerWeek") {
-
-                            var scheduleId = payment.product.productPK.schedule.id;
-
-                            new scheduleDetailInformationView({
-                                el: $("#scheduleDetailInformation"),
-                                template: scheduleDetailInformationTemplate,
-                                scheduleId: scheduleId
+                if(idPayment!=null){
+                    var that = this;
+                    var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/payment/" + idPayment;
+    
+    
+                    $.ajax({
+                        async: false,
+                        url: url,
+                        type: "GET",
+                        success: function(data, status) {
+    
+                            var payment = data;
+                            that.currentPaymentId = payment.id;
+                            var planId = payment.product.productPK.plan.id;
+    
+                            $("#planDetailInformation").html('');
+                            $("#scheduleDetailInformation").html('');
+    
+                            new planDetailInformationView({
+                                el: $("#planDetailInformation"),
+                                template: planDetailInformationTemplate,
+                                planId: planId
                             });
-                        }
-
-                    },
-                    error: function(request, error) {
-                        alertDGC("Error Interno, favor intente más tarde");
-                    },
-                });
-
+    
+                            var typeOfPlan = payment.product.productPK.plan.typeOfPlan;
+    
+                            if (typeOfPlan == "typeBlocksPerWeek") {
+    
+                                var scheduleId = payment.product.productPK.schedule.id;
+    
+                                new scheduleDetailInformationView({
+                                    el: $("#scheduleDetailInformation"),
+                                    template: scheduleDetailInformationTemplate,
+                                    scheduleId: scheduleId
+                                });
+                            }
+    
+                        },
+                        error: function(request, error) {
+                            alertDGC("Error, favor intente más tarde");
+                        },
+                    });
+                }
+                else
+                    alertDGC("No posee plan vigente");
 
 
             },
