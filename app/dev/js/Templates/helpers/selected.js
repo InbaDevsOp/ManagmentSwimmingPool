@@ -9,6 +9,5 @@ define('Templates/helpers/selected', ['handlebars'], function(Handlebars) {
 	}
 
 	Handlebars.registerHelper('selected', selected);
-	return selected;
 
 });

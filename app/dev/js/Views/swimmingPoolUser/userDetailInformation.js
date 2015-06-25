@@ -3,12 +3,14 @@ define(['backbone', 'jquery'], function(Backbone, $) {
     userDetailInformation = Backbone.View.extend({
 
         initialize: function(options) {
-            userJson = this.fillUserInformation(options.userId);
-            
-            if (userJson) {
-                $(this.el).html(options.template({
+            if (options.userId) {
+                userJson = this.fillUserInformation(options.userId);
+
+                if (userJson) {
+                    $(this.el).html(options.template({
                         user: userJson
-                }));
+                    }));
+                }
             }
         },
         fillUserInformation: function(userId) {

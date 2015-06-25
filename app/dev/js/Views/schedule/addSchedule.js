@@ -37,7 +37,8 @@ define(['backbone', 'jquery', 'hbs!Templates/schedule/addSchedule', 'Modules/log
                 }
             },
             findPlans: function() {
-                var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/plan/getAll";
+
+                var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/plan/findAllPlanByTypeOfPlan/typeBlocksPerWeek";
                 var dataJson;
                 $.ajax({
                     async: false,
@@ -65,8 +66,8 @@ define(['backbone', 'jquery', 'hbs!Templates/schedule/addSchedule', 'Modules/log
 
                 if (planJson) {
                     $("#planHoursRestrictionMessage").text("El plan " + planJson.name + " tiene restricciones horarias de " +
-                        planJson.hoursPerWeek + " horas a la semana.");
-                    $("#hoursCount").attr("value", planJson.hoursPerWeek);
+                        planJson.blocksPerWeek + " horas a la semana.");
+                    $("#hoursCount").attr("value", planJson.blocksPerWeek);
 
                 } else {    
                     $("#planHoursRestrictionMessage").text('');
@@ -78,8 +79,8 @@ define(['backbone', 'jquery', 'hbs!Templates/schedule/addSchedule', 'Modules/log
                 if (planJson) {
                     $("#plansScheduleCombo option[id=" + planJson.id + "]").attr("selected", "selected");
                     $("#planHoursRestrictionMessage").text("El plan " + planJson.name + " tiene restricciones horarias de " +
-                        planJson.hoursPerWeek + " horas a la semana.");
-                    $("#hoursCount").attr("value", planJson.hoursPerWeek);
+                        planJson.blocksPerWeek + " horas a la semana.");
+                    $("#hoursCount").attr("value", planJson.blocksPerWeek);
 
                 }
             },
@@ -114,7 +115,7 @@ define(['backbone', 'jquery', 'hbs!Templates/schedule/addSchedule', 'Modules/log
                             alertDGC("Horario guardado exitosamente");
                             that._cleanSchedule();
                             $("#planHoursRestrictionMessage").text('');
-                            $("#hoursCount").attr("value", planJson.hoursPerWeek);
+                            $("#hoursCount").attr("value", planJson.blocksPerWeek);
                         },
                         error: function(model, response) {
                             alertDGC("Error Interno, favor intente más tarde");

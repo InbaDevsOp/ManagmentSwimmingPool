@@ -1,49 +1,58 @@
-define(['backbone', 'jquery', 'Modules/login', 'Views/schedule/addSchedule', 'Modules/schedule/scheduleConfig',
-        'hbs!Templates/schedule/managmentSchedules', 'hbs!Templates/schedule/schedulesTable', 'Models/schedule'
+define(['backbone', 'jquery', 'Modules/login', 'Views/payment/addPayment',
+        'hbs!Templates/payment/managmentPayments', 'hbs!Templates/payment/paymentsTable', 'Models/payment',
+        'Views/swimmingPoolUser/usersInformation', 'hbs!Templates/swimmingPoolUser/usersCombo',
+        'Views/plan/planDetailInformation', 'hbs!Templates/plan/planDetailInformation',
+        'Views/schedule/scheduleDetailInformation', 'hbs!Templates/schedule/scheduleDetailInformation',
+        'hbs!Templates/payment/paymentDetailInformation'
     ],
-    function(Backbone, $, login, addScheduleView, scheduleConfig,
-        managmentSchedules, schedulesTable, schedule) {
+    function(Backbone, $, login, addpaymentView,
+        managmentPayments, paymentsTableTemplate, paymentModel,
+        usersInformationView, usersInformationTemplate,
+        planDetailInformationView, planDetailInformationTemplate,
+        scheduleDetailInformationView, scheduleDetailInformationTemplate,
+        paymentDetailInformationTemplate) {
 
-        managmentSchedules = Backbone.View.extend({
-            template: managmentSchedules,
+        managmentPayments = Backbone.View.extend({
+            template: managmentPayments,
 
-            schedules: {
-                count: 0,
-                group: 5,
-                array: []
-            },
-
-            childView: null,
+            currentPaymentId: null,
 
             el: $("#applicationContent"),
 
             events: {
-                "click #backwardGroupSchedule": "backwardGroupSchedule",
-                "click #forwardGroupSchedule": "forwardGroupSchedule",
-                "click #scheduleInformation #viewSchedule": "fillScheduleInformation",
-                "click #scheduleInformation #deleteSchedule": "eliminateSchedule"
+                "click #searchUsers": "searchUsers",
+                "click #viewPayment": "fillPaymentInformation",
+                "click #deletePayment": "eliminatePayment",
+                "change #usersInformation": "fillPaymentsTable",
             },
             initialize: function() {
 
                 if (login.verifyIsUserlogded()) {
                     $(this.el).html(this.template());
-                    this.searchSchedules();
                 }
             },
-            searchSchedules: function() {
-                var that = this;
-                var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/schedule/getAll";
+            searchUsers: function() {
+
+                new usersInformationView({
+                    el: $("#usersInformation"),
+                    template: usersInformationTemplate,
+                    searchUserPattern: $("#userId").val()
+                });
+
+            },
+            fillPaymentsTable: function(event) {
+                var userId = $(event.currentTarget).find("option:selected").attr("id");
+                var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/payment/swimmingPoolUser/" + userId;
+
 
                 $.ajax({
                     async: false,
                     url: url,
                     type: "GET",
                     success: function(data, status) {
-                        that.schedules.array = data;
 
-                        $("#scheduleInfo").html(schedulesTable({
-                            // schedules: that.schedules.array.slice(that.schedules.count, that.schedules.count += that.schedules.group)
-                            schedules: that.schedules.array
+                        $("#paymentsInformation").html(paymentsTableTemplate({
+                            payments: data
                         }));
                     },
                     error: function(request, error) {
@@ -52,46 +61,59 @@ define(['backbone', 'jquery', 'Modules/login', 'Views/schedule/addSchedule', 'Mo
                 });
 
             },
-            // backwardGroupSchedule: function() {
-            //     if (this.schedules.count > this.schedules.group) {
-            //         console.log("atras" + this.schedules.count);
-            //         $("#scheduleInfo").html(schedulesTable({
-            //             schedules: this.schedules.array.slice(this.schedules.count -= (this.schedules.group * 2), this.schedules.count += this.schedules.group)
-            //         }));
-            //     }
-            // },
-            // forwardGroupSchedule: function() {
-            //     if (this.schedules.count < this.schedules.array.length) {
-            //         console.log("adelante" + this.schedules.count);
-            //         $("#scheduleInfo").html(schedulesTable({
-            //             schedules: this.schedules.array.slice(this.schedules.count, this.schedules.count += this.schedules.group)
-            //         }));
-            //     }
-            // },
-            fillScheduleInformation: function(eventTd) {
+            fillPaymentInformation: function(eventTd) {
+                var that = this;
+                var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/payment/" + $(eventTd.currentTarget.closest("tr")).attr("id");
 
-                var id = $(eventTd.currentTarget.closest("tr")).index();
-                var scheduleJson = this.schedules.array[id];
 
-                var scheduleModel = new schedule({
-                    id: scheduleJson.id,
-                    name: scheduleJson.name,
-                    description: scheduleJson.description,
-                    daySection: scheduleJson.daySection
+                $.ajax({
+                    async: false,
+                    url: url,
+                    type: "GET",
+                    success: function(data, status) {
+
+                        var payment = data;
+                        that.currentPaymentId = payment.id;
+                        var planId = payment.product.productPK.plan.id;
+
+                        $("#planDetailInformation").html('');
+                        $("#scheduleDetailInformation").html('');
+                        $("#paymentDetailInformation").html('');
+                        $("#paymentDetailInformation").html(paymentDetailInformationTemplate({payment : payment}));
+
+
+                        new planDetailInformationView({
+                            el: $("#planDetailInformation"),
+                            template: planDetailInformationTemplate,
+                            planId: planId
+                        });
+
+                        var typeOfPlan = payment.product.productPK.plan.typeOfPlan;
+
+                        if (typeOfPlan == "typeBlocksPerWeek") {
+
+                            var scheduleId = payment.product.productPK.schedule.id;
+
+                            new scheduleDetailInformationView({
+                                el: $("#scheduleDetailInformation"),
+                                template: scheduleDetailInformationTemplate,
+                                scheduleId: scheduleId
+                            });
+                        }
+
+                    },
+                    error: function(request, error) {
+                        alertDGC("Error Interno, favor intente más tarde");
+                    },
                 });
 
-                this.childView = new addScheduleView({
-                    model: scheduleModel,
-                    el: $("#scheduleModify"),
-                });
 
-                this.childView.model.on('sync', this.initialize, this);
 
             },
-            eliminateSchedule: function(eventTd) {
+            eliminatePayment: function(eventTd) {
                 var that = this;
-                var schedule = eventTd.currentTarget.closest("tr");
-                var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/schedule/delete/" + schedule.id;
+                var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/payment/delete/" + $(eventTd.currentTarget.closest("tr")).attr("id");
+
 
                 $.ajax({
                     async: false,
@@ -99,15 +121,15 @@ define(['backbone', 'jquery', 'Modules/login', 'Views/schedule/addSchedule', 'Mo
                     type: "DELETE",
                     success: function(data, status) {
                         alertDGC("Horario Eliminado exitosamente");
+
+                        if ($(eventTd.currentTarget).closest("tr").attr("id") == that.currentPaymentId) {    
+                            $("#planDetailInformation").html('');
+                            $("#scheduleDetailInformation").html('');
+                        }
+
                         $(eventTd.currentTarget).closest("tr").html("");
 
-                        //TODO managment in a backbone Collection 
-                        if (!$.isEmptyObject(that.childView) && (that.childView.model.get("id") == schedule.id)) {
-                            that.childView.$el.html('')
-                            that.childView.undelegateEvents();
-                            that.childView.stopListening();
-                            that.childView = null;
-                        }
+
                     },
                     error: function(request, error) {
                         alertDGC("Error Interno, favor intente más tarde");
@@ -116,6 +138,6 @@ define(['backbone', 'jquery', 'Modules/login', 'Views/schedule/addSchedule', 'Mo
             }
         });
 
-        return managmentSchedules;
+        return managmentPayments;
 
     });

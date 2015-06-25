@@ -1,6 +1,6 @@
 define(['jquery', 'jquery.validate'], function($, jqueryValidate) {
 
-    addPaymentValidation = {
+    addProductValidation = {
 
         validateForm: function() {
 
@@ -15,40 +15,37 @@ define(['jquery', 'jquery.validate'], function($, jqueryValidate) {
             }, "Por Favor Ingrese un valor con el formato correcto.");
             $.validator.messages.required = "Campo requerido";
 
-
-            $("#addPaymentForm").validate({
+            $("#addProductForm").validate({
                 ignore: '',
                 rules: {
-                    numberOfTicket: {
-                        required: true,
-                        regexp: "^[0-9]+$"
-                    },
                     usersCombo:{
                         required: true
                     },
                     plansCombo:{
                         required: true
                     },
-                    formOfPayment: {
+                    startValidDate: {
                         required: true,
+                        regexp: "^(0[1-9]|[1-2][0-9]|3[0-1])/(0[1-9]|1[0-2])/[0-9]{4}$"
                     },
-                    chequeNumber:{
-                        regexp: "^[0-9]+$"
+                    endValidDate: {
+                        required: true,
+                        regexp: "^(0[1-9]|[1-2][0-9]|3[0-1])/(0[1-9]|1[0-2])/[0-9]{4}$"
                     }
                 },
                 messages: {
-                    numberOfTicket: {
-                        regexp: "Formato Incorrecto: Solo números"
-                    },
-                    chequeNumber: {
-                        regexp: "Formato Incorrecto: Solo números"
-                    },
                     plansCombo:{
                         required: "Seleccione alguna opción"
                     },
                     usersCombo:{
                         required: "Seleccione alguna opción"
-                    }
+                    },
+                    startValidDate: {
+                        regexp: "Formato Incorrecto: Ej: 31/12/1989"
+                    },
+                    endValidDate: {
+                        regexp: "Formato Incorrecto: Ej: 31/12/1989"
+                    },
                 },
                 errorPlacement: function(error, element) {
                     error.css({
@@ -61,11 +58,11 @@ define(['jquery', 'jquery.validate'], function($, jqueryValidate) {
         },
 
         isValidForm: function() {
-            return $("#addPaymentForm").valid();
+            return $("#addProductForm").valid();
         }
 
     }
 
-    return addPaymentValidation;
+    return addProductValidation;
 
 });

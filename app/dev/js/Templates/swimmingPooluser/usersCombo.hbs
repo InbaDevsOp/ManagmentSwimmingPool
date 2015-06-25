@@ -1,6 +1,6 @@
 <label for="inputKey" class="col-md-2 control-label">Usuarios</label>
 <div class="col-md-5">
-  <select id= "usersCombo" class="form-control">
+  <select id= "usersCombo" name="usersCombo" class="form-control">
     <option value=""></option>
     {{#users}}
     <option id="{{id}}}" value="{{rut}}">{{names}} {{firstLastName}}, {{rut}}</option>

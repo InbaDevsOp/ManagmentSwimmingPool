@@ -1,6 +1,6 @@
 define(['jquery', 'jquery.validate'], function($, jqueryValidate) {
 
-    addScheduleValidation = {
+    changePassValidation = {
 
         validateForm: function() {
 
@@ -9,42 +9,39 @@ define(['jquery', 'jquery.validate'], function($, jqueryValidate) {
                 return regexp.test(value);
             }, "Por Favor Ingrese un valor con el formato correcto.");
 
-            $.validator.addMethod("schedule", function() {
-                if ($("tr:has(td.selected)").length) {
+            $.validator.addMethod("iguales", function() {
+                if ($("#password").val() == $("#passNewConfrm").val()) {
                     return true;
                 }
                 return false;
-            }, "Error: Ingrese algún bloque al horario");
+            }, "Error: Contrase&ntildea no coincide (deben ser iguales)");
 
-            $.validator.addMethod("count", function() {
-                if ($("#hoursCount").attr("value")) {
-
-                    if ($("#schedule").find("td.selected").length == parseInt($("#hoursCount").attr("value"))) {
-                        return true;
-                    }
-                    return false;
-
+            $.validator.addMethod("passconfirm", function() {
+                if ($("#passOld").val() == sessionStorage.getItem('pass')) {
+                    return true;
                 }
-            }, "Error: Ingrese la cantidad de bloques con respecto a la restricción de horas del plan");
+                return false;
+            }, "Error: Contrase&ntildea no coincide");
+
 
             $.validator.messages.required = "Campo requerido";
 
-            $("#addScheduleForm").validate({
+            $("#changePassForm").validate({
                 ignore: [],
                 rules: {
-                    name: {
+                    passOld: {
                         required: true,
-                        regexp: "^[0-9A-Za-zñ ]+$"
+                        passconfirm:true,
+                        regexp: "^[0-9A-ZÑa-zñ ]+$"
                     },
-                    plansScheduleCombo: {
-                        required: true
+                    password: {
+                        required: true,
+                        regexp: "^[0-9A-ZÑa-zñ ]+$"
                     },
-                    description: {
-                        required: true
-                    },
-                    scheduleValidation: {
-                        schedule: true,
-                        count: true
+                    passNewConfrm: {
+                        required: true,
+                        iguales:true,
+                        regexp: "^[0-9A-ZÑa-zñ ]+$"
                     }
                 },
                 messages: {
@@ -53,6 +50,9 @@ define(['jquery', 'jquery.validate'], function($, jqueryValidate) {
                     },
                     plansScheduleCombo: {
                         required: "Por Favor seleccione algúna opción"
+                    },
+                    passNewConfrm: {
+                        
                     },
                 },
                 errorPlacement: function(error, element) {
@@ -66,12 +66,11 @@ define(['jquery', 'jquery.validate'], function($, jqueryValidate) {
         },
 
         isValidForm: function() {
-            return $("#addScheduleForm").valid();
+            return $("#changePassForm").valid();
         }
 
     }
 
-    return addScheduleValidation;
+    return changePassValidation;
 
 });
-

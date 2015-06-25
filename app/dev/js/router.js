@@ -1,12 +1,15 @@
 require(['backbone', 'marionette', 'jquery', 'Views/login', 
     'Views/swimmingPoolUser/addUser', 'Views/swimmingPoolUser/managmentUsers', 
     'Views/schedule/addSchedule', 'Views/schedule/managmentSchedules',
-    'Views/plan/addPlan', 'Views/plan/managmentPlans', 
-    'Views/payment/addPayment', 
-    'Models/plan', 'Models/schedule', 'Models/User', 'Models/payment'
+    'Views/plan/addPlan', 'Views/plan/managmentPlans', 'Views/payment/managmentPayments', 'Views/product/addProduct', 
+    'Views/poolMember/changePass','Views/poolMember/poolMemberInfoActive','Views/poolMember/payHistory',
+    'Models/plan', 'Models/schedule', 'Models/User', 'Models/poolMember',
     ],
     function(Backbone, Marionette, $, login, addUser, managmentUsers, addSchedule, managmentSchedules, addPlan, 
-        managmentPlans, addPayment, planModel, scheduleModel, userModel, paymentModel) {
+        managmentPlans, managmentPayments, addProduct,
+        changePass, poolMemberInfoActive, payHistory, 
+        planModel, scheduleModel, userModel, poolMemberModel) {
+
 
         var myRouter = Backbone.Router.extend({
 
@@ -18,8 +21,13 @@ require(['backbone', 'marionette', 'jquery', 'Views/login',
                 "managmentSchedules": "managmentSchedules",
                 "addPlan": "addPlan",
                 "managmentPlans": "managmentPlans",
-                "addPayment": "addPayment",
+                "addProduct": "addProduct",
+                "managmentPayments": "managmentPayments",
+                "changePass":"changePass",
+                "poolMemberInfoActive":"poolMemberInfoActive",
+                "payHistory":"payHistory",
                 "exitUser": "exitUser"
+
             },
 
             currentView: null,
@@ -51,14 +59,34 @@ require(['backbone', 'marionette', 'jquery', 'Views/login',
                     el: $("#applicationContent")
                 }));
             },
-            addPayment: function() {
-                this.switchView(new addPayment({
-                    model: new paymentModel({}),
+            addProduct: function() {
+                this.switchView(new addProduct({
+                    el: $("#applicationContent")
+                }));
+            },
+            changePass: function() {
+                this.switchView(this.changePass = new changePass({
+                    model: new poolMemberModel({}),
+                    el: $("#applicationContent")
+                }));
+            },
+            poolMemberInfoActive: function() {
+                this.switchView(this.poolMemberInfoActive = new poolMemberInfoActive({
+                    model: new poolMemberModel({}),
+                    el: $("#applicationContent")
+                }));
+            },
+            payHistory: function() {
+                this.switchView(this.payHistory = new payHistory({
+                    model: new poolMemberModel({}),
                     el: $("#applicationContent")
                 }));
             },
             managmentPlans: function() {
                 this.switchView(new managmentPlans());
+            },
+            managmentPayments: function() {
+                this.switchView(new managmentPayments());
             },
             exitUser: function() {
                 sessionStorage.clear();

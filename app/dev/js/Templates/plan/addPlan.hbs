@@ -10,23 +10,45 @@
                 <div class="col-md-12">
                     
                     <div class="form-group row">
-                        <label for="inputKey" class="col-md-3 control-label">Nombre del Plan</label>
-                        <div class="col-md-9">
+                        <label for="inputKey" class="col-md-2 control-label">Nombre del Plan</label>
+                        <div class="col-md-8">
                             <input type="text" class="form-control" name="name" value="{{plan.name}}" id="name" placeholder="Nombre del plan">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="inputKey" class="col-md-1 control-label">Precio</label>
-                        <div class="col-md-5">
-                            <input type="text" class="form-control" name="price" value="{{plan.price}}" id="price" placeholder="Precio Ej: 30000">
-                        </div>
-                
-                        <label for="inputKey" class="col-md-2 control-label">Horas a la Semana</label>
+                        <label for="inputKey" class="col-md-2 control-label">Precio</label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" name="hoursPerWeek" value="{{plan.hoursPerWeek}}" id="hoursPerWeek" placeholder="N horas por semana">
+                            <input type="text" class="form-control" name="price" value="{{plan.price}}" id="price" placeholder="Precio Ej: 30000">
                         </div>
                     </div>
                     
+                    <div class="form-group row">
+                        <label for="inputKey" class="col-md-2 control-label">Tipo Plan</label>
+                        <div class="col-md-8">
+                            <select name="typeOfPlan" class="form-control" id="typeOfPlan" {{disabledTypeOfPlan}}>
+                                <option  value=""></option>
+                                <option  {{selected plan.typeOfPlan "typeHoursPerWeek"}} value="typeHoursPerWeek">Nado Libre (Cantidad fija de horas a la semana)</option>
+                                <option  {{selected plan.typeOfPlan "typeBlocksPerWeek"}} value="typeBlocksPerWeek">Curso (Cantidad fija de bloques a la semana)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div hidden id="blocksPerWeekContainer">
+                            <label for="inputKey" class="col-md-2 control-label">Bloques (de 1 hora) a la semana</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" name="blocksPerWeek" id="blocksPerWeek" value="{{plan.blocksPerWeek}}" placeholder="N bloques por semana">
+                            </div>
+                        </div>
+                        <div hidden id="hoursPerWeekContainer">
+                            <label for="inputKey" class="col-md-2 control-label">Horas a la Semana</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" id="hoursPerWeek" name="hoursPerWeek" value="{{plan.hoursPerWeek}}"  placeholder="N horas por semana">
+                            </div>
+                        </div>
+                        <input type="hidden" class="form-control" name="addPlanValidation" id="addPlanValidation">
+                    </div>
+                    
+
                     <div class="form-group row">
                         <label for="inputValue" class="col-md-2 control-label">Descripción</label>
                         <div class="col-md-10">
