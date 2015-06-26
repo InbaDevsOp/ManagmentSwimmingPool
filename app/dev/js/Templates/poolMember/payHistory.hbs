@@ -5,9 +5,11 @@
       <th>Nombre Plan</th>
       <th>Nombre Horario</th>
       <th>Precio $</th>
-      <th>Num.Boleta</th>
-      <th>Vigencia</th>
       <th>Fecha de Pago</th>
+      <th>Num.Boleta</th>
+      <th>Fecha de Inicio</th>
+      <th>Fecha Final</th>
+      
     </tr>
   </thead>
   <tbody>
@@ -17,9 +19,10 @@
       <td>{{product.productPK.plan.name}}</td>
       <td>{{product.productPK.schedule.name}}</td>
       <td>{{product.productPK.plan.price}}</td>
-      <td>{{numberOfTicket}}</td>
       <td>{{datepay}}</td>
-      <td>{{#isProductActive product.startValidDate product.endValidDate}}ACTIVO{{/isProductActive}}</td>
+      <td>{{numberOfTicket}}</td>
+      <td>{{product.startValidDate}}</td>
+      <td>{{product.endValidDate}}</td>
     </tr>
     {{/payments}}
   </tbody>

@@ -34,25 +34,24 @@ define(['jquery', 'jquery.validate'], function($, jqueryValidate) {
                         passconfirm:true,
                         regexp: "^[0-9A-ZÑa-zñ ]+$"
                     },
+
                     password: {
                         required: true,
-                        regexp: "^[0-9A-ZÑa-zñ ]+$"
+                        regexp: "^.{6,15}$"
                     },
                     passNewConfrm: {
                         required: true,
                         iguales:true,
-                        regexp: "^[0-9A-ZÑa-zñ ]+$"
+                        regexp: "^.{6,15}$"
                     }
                 },
                 messages: {
-                    name: {
-                        regexp: "Formato Incorrecto: Solo números y letras"
-                    },
-                    plansScheduleCombo: {
-                        required: "Por Favor seleccione algúna opción"
+                    
+                    password: {
+                        regexp: "Formato Incorrecto: De 6 a 15 caracteres"
                     },
                     passNewConfrm: {
-                        
+                        regexp: "Formato Incorrecto: De 6 a 15 caracteres"
                     },
                 },
                 errorPlacement: function(error, element) {
