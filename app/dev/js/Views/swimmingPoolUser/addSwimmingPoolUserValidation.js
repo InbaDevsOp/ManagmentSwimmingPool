@@ -169,7 +169,11 @@ define(['jquery', 'jquery.validate'], function($, jqueryValidate) {
                     },
                     phone: {
                         required: true,
-                        regexp: "^\\+56(9|2)[0-9]{8}$"
+                        regexp: "[0-9]{8}$"
+                    },
+                    phone_mobile: {
+                        required: true,
+                        regexp: "[0-9]{8}$"
                     },
                     sickness: {},
                     comments: {}
@@ -203,7 +207,10 @@ define(['jquery', 'jquery.validate'], function($, jqueryValidate) {
                         regexp: "Formato Incorrecto: Ej: Nombre_Apellido@dominio.com"
                     },
                     phone: {
-                        regexp: "Formato Incorrecto: Ej: +56227765435, +56967823454"
+                        regexp: "Formato Incorrecto: Ej: 28175035"
+                    },
+                    phone_mobile: {
+                        regexp: "Formato Incorrecto: Ej: 84939155"
                     },
                 },
                 errorPlacement: function(error, element) {

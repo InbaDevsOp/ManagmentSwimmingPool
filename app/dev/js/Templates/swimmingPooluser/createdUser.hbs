@@ -64,44 +64,59 @@ orientation: "top auto"
           </div>
           <div class="form-group row">
             
-            <label for="inputKey" class="col-md-2 control-label">Correo Electrónico</label>
-            <div class="col-md-5">
+            <label for="inputKey" class="col-md-1 control-label">Correo</label>
+            <div class="col-md-3">
               <input type="text" class="form-control" value="{{user.email}}" name="email" id="email" placeholder="correo@correo.cl">
             </div>
-            <label for="inputValue" class="col-md-1 control-label">Telefono</label>
-            <div class="col-md-4">
-              <input type="text" class="form-control" value="{{user.phone}}" name="phone" id="phone" placeholder="+56981779012">
+            <label for="inputValue" class="col-md-1 control-label">Teléfono</label>
+            <div class="col-md-3">
+              <input type="text" class="form-control" value="{{user.phone}}" name="phone" id="phone" placeholder="28145047">
+            </div>
+
+            <label for="inputValue" class="col-md-1 control-label">Celular</label>
+            <div class="col-md-3">
+              <input type="text" class="form-control" value="{{user.phone_mobile}}" name="phone_mobile" id="phone_mobile" placeholder="81779012">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="inputValue" class="col-md-1 control-label">Region</label>
+            
+            <div class="col-md-5" id="divComboRegion" >
+            
             </div>
             
+
+            <label for="inputValue" class="col-md-1 control-label">Comuna</label>
+            <div class="col-md-5" id="divComboCommunes">
+              <select id= "commune" name="commune" value = "{{user.commune.name}}" class="form-control">
+                <option value="">{{user.commune.name}}</option>
+              </select>
+            </div>
+
           </div>
+
           <div class="form-group row">
-            
             <label for="inputKey" class="col-md-2 control-label">Dirección </label>
-            <div class="col-md-6">
+            <div class="col-md-10">
               <input type="text" class="form-control" value="{{user.address}}" name="address" id="address" placeholder="Dirección">
             </div>
-            <label for="inputValue" class="col-md-1 control-label">Comuna </label>
-            <div class="col-md-3">
-              <input type="text" class="form-control" value="{{user.state}}" name="state" id="state" placeholder="Comuna">
-            </div>
           </div>
+          
           <div class="form-group row">
-            
             <label for="inputValue" class="col-md-2 control-label">Observaciones</label>
             <div class="col-md-10">
               <textarea class="form-control" rows="3" maxlength="500" value="{{user.comments}}" name="comments" id="comments" placeholder="Observaciones">{{user.comments}}</textarea>
             </div>
-            
           </div>
+          
           <div class="form-group row">
-            
-            <label for="inputValue" class="col-md-1 control-label">Clave</label>
+            <label for="inputValue" class="col-md-3 control-label">Clave, generada automaticamente</label>
             <div class="col-md-5">
-              <input class="form-control" name="password" id="password" value="{{user.password}}" placeholder="Contraseña" type="password">
+              <input class="form-control" {{disabledPassUser}} name="password" id="password" value="{{user.password}}" placeholder="Contraseña(6 primeros digitos del rut)" type="password">
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3">
             </div>
-            
             <label id="save" class="col-md-3 control-label btn btn-primary">Guardar Usuario</label>
           </div>
         </div>
