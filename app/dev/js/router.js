@@ -2,11 +2,13 @@ require(['backbone', 'marionette', 'jquery', 'Views/login',
     'Views/swimmingPoolUser/addUser', 'Views/swimmingPoolUser/managmentUsers', 
     'Views/schedule/addSchedule', 'Views/schedule/managmentSchedules',
     'Views/plan/addPlan', 'Views/plan/managmentPlans', 'Views/payment/managmentPayments', 'Views/product/addProduct', 
+    'Views/controlAccess/controlAccess',
     'Views/poolMember/changePass','Views/poolMember/poolMemberInfoActive','Views/poolMember/payHistory',
     'Models/plan', 'Models/schedule', 'Models/User', 'Models/poolMember',
     ],
     function(Backbone, Marionette, $, login, addUser, managmentUsers, addSchedule, managmentSchedules, addPlan, 
         managmentPlans, managmentPayments, addProduct,
+        controlAccess,
         changePass, poolMemberInfoActive, payHistory, 
         planModel, scheduleModel, userModel, poolMemberModel) {
 
@@ -23,6 +25,7 @@ require(['backbone', 'marionette', 'jquery', 'Views/login',
                 "managmentPlans": "managmentPlans",
                 "addProduct": "addProduct",
                 "managmentPayments": "managmentPayments",
+                "controlAccess": "controlAccess",
                 "changePass":"changePass",
                 "poolMemberInfoActive":"poolMemberInfoActive",
                 "payHistory":"payHistory",
@@ -87,6 +90,9 @@ require(['backbone', 'marionette', 'jquery', 'Views/login',
             },
             managmentPayments: function() {
                 this.switchView(new managmentPayments());
+            },
+            controlAccess: function() {
+                this.switchView(new controlAccess());
             },
             exitUser: function() {
                 sessionStorage.clear();
