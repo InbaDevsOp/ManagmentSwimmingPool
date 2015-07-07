@@ -14,7 +14,7 @@ define(['backbone', 'jquery'], function(Backbone, $) {
             }
         },
         fillUserInformation: function(userId) {
-            var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/users/swimmingPool/" + userId;
+            var url = SwimmingPoolApplicationHost + "/SwimmingPool/rest/users/swimmingPool/" + userId;
             var userJson;
             $.ajax({
                 async: false,

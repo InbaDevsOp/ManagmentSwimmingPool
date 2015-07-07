@@ -15,7 +15,7 @@ define(['backbone', 'jquery'],
                 }
             },
             schedulesInformation: function(searchSchedulePattern) {
-                var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/schedule/searchScheduleRestriction/" + searchSchedulePattern;
+                var url = SwimmingPoolApplicationHost + "/SwimmingPool/rest/schedule/searchScheduleRestriction/" + searchSchedulePattern;
                 var schedulesJson;
 
                 $.ajax({

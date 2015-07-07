@@ -41,7 +41,7 @@ define(['backbone', 'jquery', 'hbs!Templates/headerApplication', 'hbs!Templates/
                     var password = $("#password").val();
                     
                     var getParamsService = rut + "/" + password;
-                    var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/users/login/" + getParamsService;
+                    var url = SwimmingPoolApplicationHost + "/SwimmingPool/rest/users/login/" + getParamsService;
 
                     $.ajax({
                         async: false,
@@ -51,10 +51,10 @@ define(['backbone', 'jquery', 'hbs!Templates/headerApplication', 'hbs!Templates/
                             if (data) {
                                 sessionStorage.info = data;
                                 var userName = data.names;
-                                var userNew = data.id_profile;
+                                var userNew = data.profile;
                                 var flag = data.id;
                                 var pass = data.password;
-                                switch (data.id_profile){
+                                switch (data.profile){
                                     case 2:
                                         $('#header').html(headerApplication({userName: userName}));
                                         $(that.el).html(initialApplicationPage());

@@ -2,7 +2,7 @@ define(['backbone', 'jquery'], function(Backbone, $) {
 
     
     PoolMember = Backbone.Model.extend({
-        url: SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/users/",
+        url: SwimmingPoolApplicationHost + "/SwimmingPool/rest/users/",
     	
     	getCustomUrl: function (method) {
         switch (method) {

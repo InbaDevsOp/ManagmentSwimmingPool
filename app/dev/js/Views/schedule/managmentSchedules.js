@@ -32,7 +32,7 @@ define(['backbone', 'jquery', 'Modules/login', 'Views/schedule/addSchedule', 'Mo
             },
             searchSchedules: function() {
                 var that = this;
-                var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/schedule/getAll";
+                var url = SwimmingPoolApplicationHost + "/SwimmingPool/rest/schedule/getAll";
 
                 $.ajax({
                     async: false,
@@ -99,7 +99,7 @@ define(['backbone', 'jquery', 'Modules/login', 'Views/schedule/addSchedule', 'Mo
             eliminateSchedule: function(eventTd) {
                 var that = this;
                 var schedule = eventTd.currentTarget.closest("tr");
-                var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/schedule/delete/" + schedule.id;
+                var url = SwimmingPoolApplicationHost + "/SwimmingPool/rest/schedule/delete/" + schedule.id;
 
                 $.ajax({
                     async: false,

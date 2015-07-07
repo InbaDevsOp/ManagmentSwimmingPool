@@ -14,7 +14,7 @@ define(['backbone', 'jquery', 'Modules/login', 'Modules/utilForm',
             },
             getCommunes: function(event){
                 var idRegion = $(event.currentTarget).find("option:selected").attr("id");
-                var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/address/commune/findAllCommuneByIdRegion/" + idRegion;
+                var url = SwimmingPoolApplicationHost + "/SwimmingPool/rest/address/commune/findAllCommuneByIdRegion/" + idRegion;
 
 
                 var communeCombo;
