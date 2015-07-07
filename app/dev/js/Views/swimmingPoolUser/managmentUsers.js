@@ -26,7 +26,7 @@ define(['backbone', 'jquery', 'Modules/login', 'hbs!Templates/swimmingPoolUser/m
             var that = this;
             this.searchUserPattern = this.searchUserPattern || $("#userId").val();
 
-            var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/users/swimmingPool/searchUsers/" + this.searchUserPattern;
+            var url = SwimmingPoolApplicationHost + "/SwimmingPool/rest/users/swimmingPool/searchUsers/" + this.searchUserPattern;
 
             $.ajax({
                 async: false,
@@ -51,7 +51,7 @@ define(['backbone', 'jquery', 'Modules/login', 'hbs!Templates/swimmingPoolUser/m
         fillUserInformation: function(eventTd) {
             var that = this;
             var user = eventTd.currentTarget.closest("tr");
-            var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/users/swimmingPool/" + user.id;
+            var url = SwimmingPoolApplicationHost + "/SwimmingPool/rest/users/swimmingPool/" + user.id;
 
             $.ajax({
                 async: false,
@@ -92,7 +92,7 @@ define(['backbone', 'jquery', 'Modules/login', 'hbs!Templates/swimmingPoolUser/m
         eliminateUser: function(eventTd) {
             var that = this;
             var user = eventTd.currentTarget.closest("tr");
-            var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/users/delete/" + user.id;
+            var url = SwimmingPoolApplicationHost + "/SwimmingPool/rest/users/delete/" + user.id;
 
             $.ajax({
                 async: false,

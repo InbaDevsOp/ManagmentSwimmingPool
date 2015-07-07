@@ -14,7 +14,7 @@ define(['backbone', 'jquery'],
                 }
             },
             usersInformation: function(searchUserPattern) {
-                var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/users/swimmingPool/searchUsers/" + searchUserPattern;
+                var url = SwimmingPoolApplicationHost + "/SwimmingPool/rest/users/swimmingPool/searchUsers/" + searchUserPattern;
                 var usersJson;
 
                 $.ajax({

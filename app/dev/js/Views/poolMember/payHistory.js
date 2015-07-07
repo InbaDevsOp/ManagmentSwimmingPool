@@ -16,7 +16,7 @@ define(['backbone', 'jquery', 'hbs!Templates/poolMember/payHistory', 'Modules/lo
                     }));
 
                 var userId = sessionStorage.getItem('flag');
-                var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/payment/swimmingPoolUser/" + userId;
+                var url = SwimmingPoolApplicationHost + "/SwimmingPool/rest/payment/swimmingPoolUser/" + userId;
 
 
                 $.ajax({

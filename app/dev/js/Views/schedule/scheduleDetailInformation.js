@@ -21,7 +21,7 @@ define(['backbone', 'jquery', 'hbs!Templates/schedule/scheduleDetailInformation'
 
             },
             fillScheduleInformation: function(scheduleId) {
-                var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/schedule/" + scheduleId;
+                var url = SwimmingPoolApplicationHost + "/SwimmingPool/rest/schedule/" + scheduleId;
                 var scheduleJson;
                 $.ajax({
                     async: false,

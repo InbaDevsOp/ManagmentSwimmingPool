@@ -38,7 +38,7 @@ define(['backbone', 'jquery', 'hbs!Templates/schedule/addSchedule', 'Modules/log
             },
             findPlans: function() {
 
-                var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/plan/findAllPlanByTypeOfPlan/typeBlocksPerWeek";
+                var url = SwimmingPoolApplicationHost + "/SwimmingPoolrest/plan/findAllPlanByTypeOfPlan/typeBlocksPerWeek";
                 var dataJson;
                 $.ajax({
                     async: false,

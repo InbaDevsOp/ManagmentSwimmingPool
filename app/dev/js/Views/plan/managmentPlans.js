@@ -23,7 +23,7 @@ define(['backbone', 'jquery', 'Modules/login', 'hbs!Templates/plan/managmentPlan
         },
         searchPlans: function() {
             var that = this;
-            var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/plan/getAll";
+            var url = SwimmingPoolApplicationHost + "/SwimmingPool/rest/plan/getAll";
 
             $.ajax({
                 async: false,
@@ -44,7 +44,7 @@ define(['backbone', 'jquery', 'Modules/login', 'hbs!Templates/plan/managmentPlan
         fillPlanInformation: function(eventTd) {
             var that = this;
             var plan = eventTd.currentTarget.closest("tr");
-            var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/plan/" + plan.id;
+            var url = SwimmingPoolApplicationHost + "/SwimmingPool/rest/plan/" + plan.id;
 
             $.ajax({
                 async: false,
@@ -84,7 +84,7 @@ define(['backbone', 'jquery', 'Modules/login', 'hbs!Templates/plan/managmentPlan
         eliminatePlan: function(eventTd) {
             var that = this;
             var plan = eventTd.currentTarget.closest("tr");
-            var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/plan/delete/" + plan.id;
+            var url = SwimmingPoolApplicationHost + "/SwimmingPool/rest/plan/delete/" + plan.id;
 
             $.ajax({
                 async: false,

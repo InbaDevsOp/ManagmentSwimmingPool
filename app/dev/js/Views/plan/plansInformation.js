@@ -14,7 +14,7 @@ define(['backbone', 'jquery'],
                 }
             },
             plansInformation: function() {
-                var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/plan/getAll";
+                var url = SwimmingPoolApplicationHost + "/SwimmingPool/rest/plan/getAll";
                 var plansJson;
 
                 $.ajax({

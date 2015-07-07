@@ -41,7 +41,7 @@ define(['backbone', 'jquery', 'hbs!Templates/headerApplication', 'hbs!Templates/
                     var password = $("#password").val();
                     
                     var getParamsService = rut + "/" + password;
-                    var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/users/login/" + getParamsService;
+                    var url = SwimmingPoolApplicationHost + "/SwimmingPool/rest/users/login/" + getParamsService;
 
                     $.ajax({
                         async: false,

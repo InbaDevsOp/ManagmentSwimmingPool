@@ -15,7 +15,7 @@ define(['backbone', 'jquery'],
                 }
             },
             regionsInformation: function(getAllRegions) {
-                var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/address/region/getAll";
+                var url = SwimmingPoolApplicationHost + "/SwimmingPool/rest/address/region/getAll";
                 var regionsJson;
 
                 $.ajax({

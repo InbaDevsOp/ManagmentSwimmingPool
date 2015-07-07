@@ -42,7 +42,7 @@ define(['backbone', 'jquery', 'Modules/login', 'Views/payment/addPayment',
             },
             fillPaymentsTable: function(event) {
                 var userId = $(event.currentTarget).find("option:selected").attr("id");
-                var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/payment/swimmingPoolUser/" + userId;
+                var url = SwimmingPoolApplicationHost + "/SwimmingPool/rest/payment/swimmingPoolUser/" + userId;
 
 
                 $.ajax({
@@ -63,7 +63,7 @@ define(['backbone', 'jquery', 'Modules/login', 'Views/payment/addPayment',
             },
             fillPaymentInformation: function(eventTd) {
                 var that = this;
-                var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/payment/" + $(eventTd.currentTarget.closest("tr")).attr("id");
+                var url = SwimmingPoolApplicationHost + "/SwimmingPool/rest/payment/" + $(eventTd.currentTarget.closest("tr")).attr("id");
 
 
                 $.ajax({
@@ -112,7 +112,7 @@ define(['backbone', 'jquery', 'Modules/login', 'Views/payment/addPayment',
             },
             eliminatePayment: function(eventTd) {
                 var that = this;
-                var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/payment/delete/" + $(eventTd.currentTarget.closest("tr")).attr("id");
+                var url = SwimmingPoolApplicationHost + "/SwimmingPool/rest/payment/delete/" + $(eventTd.currentTarget.closest("tr")).attr("id");
 
 
                 $.ajax({
