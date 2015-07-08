@@ -1,7 +1,7 @@
 define(['backbone', 'jquery'], function(Backbone, $) {
 
 	User = Backbone.Model.extend({
-		url: SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/users/swimmingPool/",
+		url: SwimmingPoolApplicationHost + "/SwimmingPool/rest/users/swimmingPool/",
 
 		getCustomUrl: function(method) {
 			switch (method) {
@@ -26,7 +26,7 @@ define(['backbone', 'jquery'], function(Backbone, $) {
 			return Backbone.sync.apply(this, arguments);
 		},
 		validate: function(attrs, options) {
-			var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/users/isUserExist/" + attrs.rut;
+			var url = SwimmingPoolApplicationHost + "/SwimmingPool/rest/users/isUserExist/" + attrs.rut;
 			var error;
 
 			if (this.isNew()) {

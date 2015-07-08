@@ -55,7 +55,7 @@ define(['backbone', 'jquery', 'hbs!Templates/poolMember/poolMemberInfoActive', '
             fillPaymentInformation: function(idPayment) {
                 if(idPayment!=null){
                     var that = this;
-                    var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/payment/" + idPayment;
+                    var url = SwimmingPoolApplicationHost + "/SwimmingPool/rest/payment/" + idPayment;
     
     
                     $.ajax({
@@ -103,7 +103,7 @@ define(['backbone', 'jquery', 'hbs!Templates/poolMember/poolMemberInfoActive', '
             },
             eliminatePayment: function(eventTd) {
                 var that = this;
-                var url = SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/payment/delete/" + $(eventTd.currentTarget.closest("tr")).attr("id");
+                var url = SwimmingPoolApplicationHost + "/SwimmingPool/rest/payment/delete/" + $(eventTd.currentTarget.closest("tr")).attr("id");
 
 
                 $.ajax({

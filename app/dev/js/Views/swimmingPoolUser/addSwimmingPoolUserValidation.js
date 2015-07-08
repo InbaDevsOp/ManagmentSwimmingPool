@@ -171,7 +171,7 @@ define(['jquery', 'jquery.validate'], function($, jqueryValidate) {
                         required: true,
                         regexp: "[0-9]{8}$"
                     },
-                    phone_mobile: {
+                    phoneMobile: {
                         required: true,
                         regexp: "[0-9]{8}$"
                     },
@@ -209,7 +209,7 @@ define(['jquery', 'jquery.validate'], function($, jqueryValidate) {
                     phone: {
                         regexp: "Formato Incorrecto: Ej: 28175035"
                     },
-                    phone_mobile: {
+                    phoneMobile: {
                         regexp: "Formato Incorrecto: Ej: 84939155"
                     },
                 },

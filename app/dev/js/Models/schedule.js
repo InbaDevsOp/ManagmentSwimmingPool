@@ -1,7 +1,7 @@
 define(['backbone', 'jquery'], function(Backbone, $) {
 
     Schedule = Backbone.Model.extend({
-        url: SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/schedule/",
+        url: SwimmingPoolApplicationHost + "/SwimmingPool/rest/schedule/",
     	
     	getCustomUrl: function (method) {
         switch (method) {

@@ -1,7 +1,7 @@
 define(['backbone', 'jquery'], function(Backbone, $) {
 
     Payment = Backbone.Model.extend({
-        url: SwimmingPoolApplicationHost + "/SwimmingPoolServiceExample/rest/payment/",
+        url: SwimmingPoolApplicationHost + "/SwimmingPool/rest/payment/",
     	
     	getCustomUrl: function (method) {
         switch (method) {
