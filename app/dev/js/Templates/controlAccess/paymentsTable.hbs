@@ -15,12 +15,12 @@
     <tr id="{{id}}" class="{{#isProductActive product.startValidDate product.endValidDate}}success{{/isProductActive}}" >
       <td></td>
       <td>{{product.productPK.plan.name}}</td>
-      <td>{{product.productPK.schedule.name}}</td>
+      <td scheduleId="{{product.productPK.schedule.id}}">{{product.productPK.schedule.name}}{{#if_not_null product.productPK.schedule.name }} &nbsp;&nbsp;&nbsp;&nbsp; <a><span id="viewSchedule" class="glyphicon glyphicon-zoom-in"></span></a> {{/if_not_null}}</td>
       <td>{{product.startValidDate}}</td>
       <td>{{product.endValidDate}}</td>
 
       <td productId="{{product.id}}" align="center"><a><span id="entrance" class="glyphicon glyphicon-log-in"></span></a></td>  
-      <td productId="{{product.id}}" align="center"><a><span id="exit" class="glyphicon glyphicon-log-out"></span></a></td>
+      <td productId="{{product.id}}" align="center"><a>{{#if_null product.productPK.schedule.name }} <span id="exit" class="glyphicon glyphicon-log-out"></span></a> {{/if_null}}</td>
    
     </tr>
     {{/payments}}
