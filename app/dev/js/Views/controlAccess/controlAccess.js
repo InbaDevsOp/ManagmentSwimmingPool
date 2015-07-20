@@ -1,10 +1,11 @@
 define(['backbone', 'jquery', 'Modules/login',
         'hbs!Templates/controlAccess/controlAccess', 'hbs!Templates/controlAccess/paymentsTable', 'Models/payment',
         'Views/swimmingPoolUser/usersInformation', 'hbs!Templates/swimmingPoolUser/usersCombo',  'hbs!Templates/controlAccess/productResume',
+        'Views/schedule/scheduleDetailInformation'
     ],
     function(Backbone, $, login,
         managmentPayments, paymentsTableTemplate, paymentModel,
-        usersInformationView, usersInformationTemplate, productResumeTemplate) {
+        usersInformationView, usersInformationTemplate, productResumeTemplate, scheduleDetailInformationView) {
 
         managmentPayments = Backbone.View.extend({
             template: managmentPayments,
@@ -15,6 +16,7 @@ define(['backbone', 'jquery', 'Modules/login',
                 "click #searchUsers": "searchUsers",
                 "change #usersInformation": "fillPaymentsTable",
                 "click #entrance": "entranceSwimmingPool",
+                "click #viewSchedule": "viewSchedule",
                 "click #exit": "exitSwimmingPool",
             },
             initialize: function() {
@@ -53,7 +55,18 @@ define(['backbone', 'jquery', 'Modules/login',
                 });
 
             },
+            viewSchedule: function(event) {
+                var scheduleId = $(event.currentTarget).closest("td").attr("scheduleId");
+                
+               $("#scheduleDetailInformation").html('');
+                new scheduleDetailInformationView({
+                    el: $("#scheduleDetailInformation"),
+                    scheduleId: scheduleId
+                });
+            },
+
             entranceSwimmingPool: function(event){
+                $("#scheduleDetailInformation").html('');
                 var productId = $(event.currentTarget).closest("td").attr("productId");
                 var userId = $("#usersInformation option:selected").attr("id");           
 
@@ -67,13 +80,20 @@ define(['backbone', 'jquery', 'Modules/login',
                     type: "GET",
                     success: function(data, status) {
 
-                        $("#productInformationData").html(productResumeTemplate({
-                            product: data
-                        }));
+                        if(data.schedule == false){
+
+                            $("#productInformationData").html(productResumeTemplate({
+                                product: data
+                            }));
+
+                        }
+                        else{
+                            alertDGC("Entrada Valida: Asistencia Marcada al curso");    
+                        }
                     },
                     error: function(request, error) {
                         if(error){
-                        alertDGC(error);
+                        alertDGC("Entrada Invalida: Revise su Plan/Horario");
                         }
                         else{
 
@@ -85,6 +105,7 @@ define(['backbone', 'jquery', 'Modules/login',
             },
 
             exitSwimmingPool: function(event){
+                $("#scheduleDetailInformation").html('');
                 var productId = $(event.currentTarget).closest("td").attr("productId");
                 var userId = $("#usersInformation option:selected").attr("id");           
 
@@ -104,7 +125,7 @@ define(['backbone', 'jquery', 'Modules/login',
                     },
                     error: function(request, error) {
                         if(error){
-                        alertDGC(error);
+                        alertDGC("Entrada Invalida: Revise su Plan/Horario");
                         }
                         else{
 
