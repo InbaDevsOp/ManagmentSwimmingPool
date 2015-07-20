@@ -7,7 +7,7 @@ define(['jquery'],
                     var jsonData = {};
                     var formData = $(formSelector).serializeArray();
                     $.each(formData, function() {
-                        if(this.name != "regionSelect")
+                        if(this.name != "region")
                         {
                             if (jsonData[this.name]) {
                                 if (!jsonData[this.name].push) {

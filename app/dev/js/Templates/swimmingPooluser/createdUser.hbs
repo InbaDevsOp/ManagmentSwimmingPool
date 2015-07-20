@@ -26,7 +26,7 @@ orientation: "top auto"
             
             <label for="inputKey" class="col-md-1 control-label">Rut</label>
             <div class="col-md-5">
-              <input type="text" class="form-control" value="{{user.rut}}" name="rut" id="rut" placeholder="Rut" {{disabledIdUser}}>
+              <input type="text" class="form-control textUpper" value="{{user.rut}}" name="rut" id="rut" placeholder="Rut" {{disabledIdUser}}>
             </div>
             <label for="inputValue" class="col-md-2 control-label">Fecha Nacimiento</label>
             <div class="col-md-4">
@@ -36,15 +36,15 @@ orientation: "top auto"
           <div class="form-group row">
             <label for="inputValue" class="col-md-1 control-label">Nombres</label>
             <div class="col-md-5">
-              <input type="text" class="form-control" value="{{user.names}}" name="names" id="names" placeholder="Nombres">
+              <input type="text" class="form-control textUpper" value="{{user.names}}" name="names" id="names" placeholder="Nombres">
             </div>
             <label for="inputValue" class="col-md-1 control-label">Apellido Paterno</label>
             <div class="col-md-2">
-              <input type="text" class="form-control" value="{{user.firstLastName}}" name="firstLastName" id="firstLastName" placeholder="Apellido Paterno">
+              <input type="text" class="form-control textUpper" value="{{user.firstLastName}}" name="firstLastName" id="firstLastName" placeholder="Apellido Paterno">
             </div>
             <label for="inputValue" class="col-md-1 control-label">Apellido Materno</label>
             <div class="col-md-2">
-              <input type="text" class="form-control" value="{{user.secondLastName}}" name="secondLastName" id="secondLastName" placeholder="Apellido Materno">
+              <input type="text" class="form-control textUpper" value="{{user.secondLastName}}" name="secondLastName" id="secondLastName" placeholder="Apellido Materno">
             </div>
           </div>
           <div class="form-group row">
@@ -52,13 +52,13 @@ orientation: "top auto"
             <label for="inputKey" class="col-md-2 control-label">Certificado Medico</label>
             <div class="col-md-2">
               <select name="medicalCertificate" class="form-control" value="{{user.medicalCertificate}}" id="medicalCertificate">
-                <option {{selected user.medicalCertificate "Si"}} value="Si">Sí</option>
-                <option {{selected user.medicalCertificate "No"}} value="No">No</option>
+                <option {{selected user.medicalCertificate "Si"}} value="Si">SI</option>
+                <option {{selected user.medicalCertificate "No"}} value="No">NO</option>
               </select>
             </div>
             <label for="inputValue" class="col-md-2 control-label">Enfermedades</label>
             <div class="col-md-6">
-              <input type="text" class="form-control" value="{{user.sickness}}" name="sickness" id="sickness" placeholder="Enfermedades">
+              <input type="text" class="form-control textUpper" value="{{user.sickness}}" name="sickness" id="sickness" placeholder="Enfermedades">
             </div>
             
           </div>
@@ -66,7 +66,7 @@ orientation: "top auto"
             
             <label for="inputKey" class="col-md-1 control-label">Correo</label>
             <div class="col-md-3">
-              <input type="text" class="form-control" value="{{user.email}}" name="email" id="email" placeholder="correo@correo.cl">
+              <input type="text" class="form-control textUpper" value="{{user.email}}" name="email" id="email" placeholder="correo@correo.cl">
             </div>
             <label for="inputValue" class="col-md-1 control-label">Teléfono</label>
             <div class="col-md-3">
@@ -99,14 +99,14 @@ orientation: "top auto"
           <div class="form-group row">
             <label for="inputKey" class="col-md-2 control-label">Dirección </label>
             <div class="col-md-10">
-              <input type="text" class="form-control" value="{{user.address}}" name="address" id="address" placeholder="Dirección">
+              <input type="text" class="form-control textUpper" value="{{user.address}}" name="address" id="address" placeholder="Dirección">
             </div>
           </div>
           
           <div class="form-group row">
             <label for="inputValue" class="col-md-2 control-label">Observaciones</label>
             <div class="col-md-10">
-              <textarea class="form-control" rows="3" maxlength="500" value="{{user.comments}}" name="comments" id="comments" placeholder="Observaciones">{{user.comments}}</textarea>
+              <textarea class="form-control textUpper" rows="3" maxlength="500" value="{{user.comments}}" name="comments" id="comments" placeholder="Observaciones">{{user.comments}}</textarea>
             </div>
           </div>
           
