@@ -1,13 +1,13 @@
 require(['backbone', 'marionette', 'jquery', 'Views/login', 
     'Views/swimmingPoolUser/addUser', 'Views/swimmingPoolUser/managmentUsers', 
     'Views/schedule/addSchedule', 'Views/schedule/managmentSchedules',
-    'Views/plan/addPlan', 'Views/plan/managmentPlans', 'Views/payment/managmentPayments', 'Views/product/addProduct', 
+    'Views/plan/addPlan', 'Views/plan/managmentPlans', 'Views/payment/managmentPayments','Views/payment/closeTurn', 'Views/product/addProduct', 
     'Views/controlAccess/controlAccess',
-    'Views/poolMember/changePass','Views/poolMember/poolMemberInfoActive','Views/poolMember/payHistory',
+    'Views/poolMember/changePass','Views/poolMember/poolMemberInfoActive','Views/poolMember/payHistory', 
     'Models/plan', 'Models/schedule', 'Models/User', 'Models/poolMember',
     ],
     function(Backbone, Marionette, $, login, addUser, managmentUsers, addSchedule, managmentSchedules, addPlan, 
-        managmentPlans, managmentPayments, addProduct,
+        managmentPlans, managmentPayments, closeTurn, addProduct,
         controlAccess,
         changePass, poolMemberInfoActive, payHistory, 
         planModel, scheduleModel, userModel, poolMemberModel) {
@@ -25,6 +25,7 @@ require(['backbone', 'marionette', 'jquery', 'Views/login',
                 "managmentPlans": "managmentPlans",
                 "addProduct": "addProduct",
                 "managmentPayments": "managmentPayments",
+                "closeTurn":"closeTurn",
                 "controlAccess": "controlAccess",
                 "changePass":"changePass",
                 "poolMemberInfoActive":"poolMemberInfoActive",
@@ -90,6 +91,11 @@ require(['backbone', 'marionette', 'jquery', 'Views/login',
             },
             managmentPayments: function() {
                 this.switchView(new managmentPayments());
+            },
+            closeTurn: function() {
+                this.switchView(new closeTurn({
+                    el: $("#applicationContent")
+                }));
             },
             controlAccess: function() {
                 this.switchView(new controlAccess());

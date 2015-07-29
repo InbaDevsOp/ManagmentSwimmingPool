@@ -27,6 +27,7 @@ define(['backbone', 'jquery', 'hbs!Templates/poolMember/payHistory', 'Modules/lo
                         if(data[0]!=null){
                             $("#paymentsInformation").html(payHistory({
                                 payments: data
+
                             }));
                         }
                         else

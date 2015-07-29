@@ -11,6 +11,7 @@ define(['backbone', 'jquery', 'Modules/login', 'Modules/utilForm',
             events: {
                 "click #save": "saveUser",
                 "change #region" : "getCommunes",
+                
             },
             getCommunes: function(event){
                 var idRegion = $(event.currentTarget).find("option:selected").attr("id");
@@ -76,7 +77,13 @@ define(['backbone', 'jquery', 'Modules/login', 'Modules/utilForm',
                 this.stopListening();
                 return this;
             },
+            getPass: function() {
+                var textRut = $("#rut").val();
+                $("#password").val(textRut.substr(0,6));
+                return this;
+            },
             saveUser: function() {
+
                 var textRut = $("#rut").val();
                 $("#password").val(textRut.substr(0,6));
 
