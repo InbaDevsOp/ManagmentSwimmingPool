@@ -7,7 +7,7 @@ define(['jquery', 'hbs!Templates/headerApplication', 'hbs!Templates/headerMember
                 var flagSession = sessionStorage.getItem('sessionActive');
                 var userName = sessionStorage.getItem('userName');
                 var userProfile = sessionStorage.getItem('userProfile');
-                var flag = sessionStorage.getItem('flag');
+                var adminUserIdentificator = sessionStorage.getItem('adminUserIdentificator');
                 var pass = sessionStorage.getItem('pass');
                 var info = sessionStorage.getItem('info');
                 if (flagSession == 1) {
