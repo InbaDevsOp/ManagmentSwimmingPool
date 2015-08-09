@@ -88,32 +88,45 @@ define(['backbone', 'jquery', 'Modules/login', 'hbs!Templates/swimmingPoolUser/m
                 },
             });
 
+            var userProfile = sessionStorage.getItem('userProfile');
+            if ( userProfile == "3"){
+                
+                $("#addUserform :input").prop('disabled',true);
+                $("#save").hide();
+            }
+
         },
         eliminateUser: function(eventTd) {
-            var that = this;
-            var user = eventTd.currentTarget.closest("tr");
-            var url = SwimmingPoolApplicationHost + "/SwimmingPool/rest/users/delete/" + user.id;
+            var userProfile = sessionStorage.getItem('userProfile');
+            if ( userProfile == "3" || userProfile == "5"){
+                alertDGC("No posee permisos para realizar esta tarea");
+            }
+            else{
+                var that = this;
+                var user = eventTd.currentTarget.closest("tr");
+                var url = SwimmingPoolApplicationHost + "/SwimmingPool/rest/users/delete/" + user.id;
 
-            $.ajax({
-                async: false,
-                url: url,
-                type: "DELETE",
-                success: function(data, status) {
-                    alertDGC("Usuario de la Piscina Eliminado exitosamente");
-                    $(eventTd.currentTarget.closest("tr")).html("");
+                $.ajax({
+                    async: false,
+                    url: url,
+                    type: "DELETE",
+                    success: function(data, status) {
+                        alertDGC("Usuario de la Piscina Eliminado exitosamente");
+                        $(eventTd.currentTarget.closest("tr")).html("");
 
-                    //TODO managment in a backbone Collection
-                    if (!$.isEmptyObject(that.childView) && (that.childView.model.get("id") == user.id)) {
-                        that.childView.$el.html('')
-                        that.childView.undelegateEvents();
-                        that.childView.stopListening();
-                        that.childView = null;
+                        //TODO managment in a backbone Collection
+                        if (!$.isEmptyObject(that.childView) && (that.childView.model.get("id") == user.id)) {
+                            that.childView.$el.html('')
+                            that.childView.undelegateEvents();
+                            that.childView.stopListening();
+                            that.childView = null;
+                        }
+                    },
+                    error: function(request, error) {
+                        alertDGC("Error Interno, favor intente más tarde");
                     }
-                },
-                error: function(request, error) {
-                    alertDGC("Error Interno, favor intente más tarde");
-                }
-            });
+                });
+            }   
         }
     });
     return managmentUsers;

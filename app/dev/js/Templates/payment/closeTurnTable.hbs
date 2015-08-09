@@ -3,6 +3,7 @@
   <thead>
     <tr>
       <th>#</th>
+      <th>Vendedor</th>
       <th>Nombres/Apellido</th>
       <th>Nombre Plan</th>
       <th>N Boleta</th>
@@ -14,6 +15,7 @@
     {{#closeTurnInfo}}
     <tr id="{{id}}" >
       <td></td>
+      <td>{{adminUser.names}} {{adminUser.firstLastName}} </td>
       <td>{{swimmingPoolUser.names}} {{swimmingPoolUser.firstLastName}} </td>
       <td>{{product.productPK.plan.name}}</td>
       <td>{{numberOfTicket}}</td>
@@ -22,6 +24,7 @@
     </tr>
     {{/closeTurnInfo}}
     <tr>
+      <th></th>
       <th></th>
       <th></th>
       <th></th>

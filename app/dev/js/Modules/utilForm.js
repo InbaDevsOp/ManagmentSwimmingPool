@@ -29,6 +29,7 @@ define(['jquery'],
                 for (var i in selector) {
                     object[selector[i].name] = selector[i].value;
                 }
+                
                 return object;
             },
 
