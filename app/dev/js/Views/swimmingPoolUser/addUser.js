@@ -45,6 +45,7 @@ define(['backbone', 'jquery', 'Modules/login', 'Modules/utilForm',
 
                         }));
                         var prueba1 = this.model.toJSON();
+                        var otro = prueba1.commune.region.name;
                         new viewRegionInformation({
                             el: $("#divComboRegion"),
                             template: templateComboRegion,
@@ -56,6 +57,8 @@ define(['backbone', 'jquery', 'Modules/login', 'Modules/utilForm',
                             user: this.model.toJSON(),
                         }));
                         var prueba1 = this.model.toJSON();
+                        var otro = prueba1.commune.region.name;
+                        
                         new viewRegionInformation({
                             el: $("#divComboRegion"),
                             template: templateComboRegion,

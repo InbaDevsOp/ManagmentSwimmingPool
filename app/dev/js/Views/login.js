@@ -1,7 +1,9 @@
 define(['backbone', 'jquery', 'hbs!Templates/headerApplication', 'hbs!Templates/initialApplicationPage',
-        'hbs!Templates/login','Views/loginValidation','hbs!Templates/headerMember'
+        'hbs!Templates/login','Views/loginValidation','hbs!Templates/headerMember',
+        'hbs!Templates/headerAdministrator','hbs!Templates/headerAdministrative','hbs!Templates/headerReceptionist', 'hbs!Templates/headerNursing'
     ],
-    function(Backbone, $, headerApplication, initialApplicationPage, loginTemplate, loginValidation, headerMember) {
+    function(Backbone, $, headerApplication, initialApplicationPage, loginTemplate, loginValidation, headerMember,
+        headerAdministrator, headerAdministrative, headerReceptionist, headerNursing) {
 
         LoginView = Backbone.View.extend({
             el: $("#applicationContent"),
@@ -19,12 +21,24 @@ define(['backbone', 'jquery', 'hbs!Templates/headerApplication', 'hbs!Templates/
                 var info = sessionStorage.getItem('info');
                 if (flagSession == 1) {
                     switch (userProfile){
-                        case "2":
-                            $('#header').html(headerApplication({userName: userName}));
-                            $(this.el).html(initialApplicationPage());
-                            break;
                         case "1":
                             $('#header').html(headerMember({userName: userName}));
+                            $(this.el).html(initialApplicationPage());
+                            break;
+                        case "2":
+                            $('#header').html(headerAdministrator({userName: userName}));
+                            $(this.el).html(initialApplicationPage());
+                            break;
+                        case "3":
+                            $('#header').html(headerAdministrative({userName: userName}));
+                            $(this.el).html(initialApplicationPage());
+                            break;
+                        case "4":
+                            $('#header').html(headerReceptionist({userName: userName}));
+                            $(this.el).html(initialApplicationPage());
+                            break;
+                        case "5":
+                            $('#header').html(headerNursing({userName: userName}));
                             $(this.el).html(initialApplicationPage());
                             break;
                     }
@@ -55,12 +69,24 @@ define(['backbone', 'jquery', 'hbs!Templates/headerApplication', 'hbs!Templates/
                                 var flag = data.id;
                                 var pass = data.password;
                                 switch (data.profile){
-                                    case 2:
-                                        $('#header').html(headerApplication({userName: userName}));
-                                        $(that.el).html(initialApplicationPage());
-                                        break;
                                     case 1:
                                         $('#header').html(headerMember({userName: userName}));
+                                        $(that.el).html(initialApplicationPage());
+                                        break;
+                                    case 2:
+                                        $('#header').html(headerAdministrator({userName: userName}));
+                                        $(that.el).html(initialApplicationPage());
+                                        break;
+                                    case 3:
+                                        $('#header').html(headerAdministrative({userName: userName}));
+                                        $(that.el).html(initialApplicationPage());
+                                        break;
+                                    case 4:
+                                        $('#header').html(headerReceptionist({userName: userName}));
+                                        $(that.el).html(initialApplicationPage());
+                                        break;
+                                    case 5:
+                                        $('#header').html(headerNursing({userName: userName}));
                                         $(that.el).html(initialApplicationPage());
                                         break;
                                 }

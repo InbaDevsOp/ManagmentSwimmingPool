@@ -7,6 +7,7 @@ require.config({
 
         jquery: '../../../bower_components/jquery/dist/jquery',
         "jquery.validate": '../../../bower_components/jquery-validation/dist/jquery.validate',
+        "jquery.table2excel": '../../../bower_components/jquery-table2excel/src/jquery.table2excel',
 
         backbone: '../../../bower_components/backbone/backbone',
         marionette: '../../../bower_components/backbone.marionette/lib/backbone.marionette',
@@ -25,7 +26,11 @@ require.config({
     shim: {
         'jquery.validate': {
             deps: ['jquery']
+        },
+        'jquery.table2excel': {
+            deps: ['jquery']
         }
+
     },
     hbs: {
         disableI18n: true,
