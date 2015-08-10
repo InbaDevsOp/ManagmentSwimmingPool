@@ -80,16 +80,12 @@ define(['backbone', 'jquery', 'Modules/login',
                     type: "GET",
                     success: function(data, status) {
 
-                        if(data.schedule == false){
+                        $("#productInformationData").html(productResumeTemplate({
+                            product: data
+                        }));
 
-                            $("#productInformationData").html(productResumeTemplate({
-                                product: data
-                            }));
+                        alertDGC("Entrada Valida: Asistencia Marcada");
 
-                        }
-                        else{
-                            alertDGC("Entrada Valida: Asistencia Marcada al curso");    
-                        }
                     },
                     error: function(request, error) {
                         if(error){
@@ -122,6 +118,7 @@ define(['backbone', 'jquery', 'Modules/login',
                         $("#productInformationData").html(productResumeTemplate({
                             product: data
                         }));
+
                     },
                     error: function(request, error) {
                         if(error){

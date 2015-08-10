@@ -20,7 +20,8 @@
       <td>{{product.endValidDate}}</td>
 
       <td productId="{{product.id}}" align="center"><a><span id="entrance" class="glyphicon glyphicon-log-in"></span></a></td>  
-      <td productId="{{product.id}}" align="center"><a>{{#if_null product.productPK.schedule.name }} <span id="exit" class="glyphicon glyphicon-log-out"></span></a> {{/if_null}}</td>
+      <td productId="{{product.id}}" align="center"><a><span id="exit" class="glyphicon glyphicon-log-out"></span></a>
+      </td>
    
     </tr>
     {{/payments}}
