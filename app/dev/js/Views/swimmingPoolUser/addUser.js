@@ -1,5 +1,5 @@
 define(['backbone', 'jquery', 'Modules/login', 'Modules/utilForm',
-        'hbs!Templates/swimmingPooluser/createdUser', 'Views/swimmingPoolUser/addSwimmingPoolUserValidation',
+        'hbs!Templates/swimmingPoolUser/createdUser', 'Views/swimmingPoolUser/addSwimmingPoolUserValidation',
         'hbs!Templates/comboRegion', 'Views/regionInformation','hbs!Templates/comboCommunes'
     ],
     function(Backbone, $, login, utilForm, createdUser, addSwimmingPoolUserValidation,templateComboRegion, viewRegionInformation,
