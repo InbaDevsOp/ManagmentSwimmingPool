@@ -16,7 +16,7 @@ define(['backbone', 'jquery', 'hbs!Templates/headerApplication', 'hbs!Templates/
                 var flagSession = sessionStorage.getItem('sessionActive');
                 var userName = sessionStorage.getItem('userName');
                 var userProfile = sessionStorage.getItem('userProfile');
-                var flag = sessionStorage.getItem('flag');
+                var adminUserIdentificator = sessionStorage.getItem('adminUserIdentificator');
                 var pass = sessionStorage.getItem('pass');
                 var info = sessionStorage.getItem('info');
                 if (flagSession == 1) {
@@ -66,7 +66,7 @@ define(['backbone', 'jquery', 'hbs!Templates/headerApplication', 'hbs!Templates/
                                 sessionStorage.info = data;
                                 var userName = data.names;
                                 var userNew = data.profile;
-                                var flag = data.id;
+                                var adminUserIdentificator = data.id;
                                 var pass = data.password;
                                 switch (data.profile){
                                     case 1:
@@ -93,7 +93,7 @@ define(['backbone', 'jquery', 'hbs!Templates/headerApplication', 'hbs!Templates/
                                 sessionStorage.setItem('sessionActive', 1);
                                 sessionStorage.setItem('userName', userName);
                                 sessionStorage.setItem('userProfile', userNew);
-                                sessionStorage.setItem('flag', flag);
+                                sessionStorage.setItem('adminUserIdentificator', adminUserIdentificator);
                                 sessionStorage.setItem('pass', pass);
                                 
                                 //sessionStorage.setItem('info', info);

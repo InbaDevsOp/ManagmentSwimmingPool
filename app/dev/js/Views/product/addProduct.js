@@ -170,6 +170,9 @@ define(['backbone', 'jquery', 'hbs!Templates/product/addProduct', 'Modules/login
                     swimmingPoolUser: {
                         id: $("#usersCombo").find("option:selected").attr("id")
                     },
+                    adminUser: {
+                        id: sessionStorage.getItem('adminUserIdentificator')
+                    },
                     product: {
                         productPK: {
                             plan: {

@@ -24,7 +24,7 @@ define(['backbone', 'jquery', 'hbs!Templates/poolMember/poolMemberInfoActive', '
                         infoActive: this.model.toJSON()
                     }));
 
-                    var userId = sessionStorage.getItem('flag');
+                    var userId = sessionStorage.getItem('adminUserIdentificator');
                     var url = SwimmingPoolApplicationHost + "/SwimmingPool/rest/payment/swimmingPoolUser/" + userId;
 
                     $.ajax({

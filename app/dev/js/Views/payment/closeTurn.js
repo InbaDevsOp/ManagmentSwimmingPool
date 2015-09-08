@@ -16,7 +16,7 @@ define(['backbone', 'jquery', 'jquery.table2excel', 'hbs!Templates/payment/close
                 }
             },
             CloseTurn: function(event) {
-                var userId = sessionStorage.getItem('flag');
+                var userId = sessionStorage.getItem('adminUserIdentificator');
                 var url = SwimmingPoolApplicationHost + "/SwimmingPool/rest/payment/closeTurn/" + userId;
 
 
