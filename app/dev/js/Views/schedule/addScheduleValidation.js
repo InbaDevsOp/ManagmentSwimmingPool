@@ -25,7 +25,7 @@ define(['jquery', 'jquery.validate'], function($, jqueryValidate) {
                     return false;
 
                 }
-            }, "Error: Ingrese la cantidad de bloques con respecto a la restricción de horas del plan");
+            }, "Error: Ingrese la cantidad de horas con respecto a la restricción de horas del plan");
 
             $.validator.messages.required = "Campo requerido";
 
