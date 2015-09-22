@@ -27,7 +27,7 @@ define(['jquery'],
                 var selector = $(formSelector).serializeArray();
                 var object = {};
                 for (var i in selector) {
-                    object[selector[i].name] = selector[i].value;
+                    object[selector[i].name] = selector[i].value.toUpperCase();
                 }
                 
                 return object;
