@@ -80,7 +80,6 @@ define(['backbone', 'jquery', 'Modules/login', 'Modules/utilForm',
             saveUser: function() {
 
                 var textRut = $("#rut").val();
-                
 
                 if (addSwimmingPoolUserValidation.isValidForm()) {
 
