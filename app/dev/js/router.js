@@ -1,22 +1,24 @@
 require(['backbone', 'marionette', 'jquery', 'Views/login', 
-    'Views/swimmingPoolUser/addUser', 'Views/swimmingPoolUser/managmentUsers', 
+    'Views/inventory/createItem','Views/inventory/createCategory', 'Views/swimmingPoolUser/addUser', 'Views/swimmingPoolUser/managmentUsers', 
     'Views/schedule/addSchedule', 'Views/schedule/managmentSchedules',
     'Views/plan/addPlan', 'Views/plan/managmentPlans', 'Views/payment/managmentPayments','Views/payment/closeTurn', 'Views/payment/reportSales',
     'Views/product/addProduct', 'Views/controlAccess/controlAccess',
     'Views/poolMember/changePass','Views/poolMember/poolMemberInfoActive','Views/poolMember/payHistory', 
-    'Models/plan', 'Models/schedule', 'Models/User', 'Models/poolMember',
+    'Models/plan', 'Models/schedule', 'Models/User', 'Models/poolMember', 'Models/item','Models/category',
     ],
-    function(Backbone, Marionette, $, login, addUser, managmentUsers, addSchedule, managmentSchedules, addPlan, 
+    function(Backbone, Marionette, $, login, createItem, createCategory, addUser, managmentUsers, addSchedule, managmentSchedules, addPlan, 
         managmentPlans, managmentPayments, closeTurn, reportSales, addProduct,
         controlAccess,
         changePass, poolMemberInfoActive, payHistory, 
-        planModel, scheduleModel, userModel, poolMemberModel) {
+        planModel, scheduleModel, userModel, poolMemberModel, itemModel, categoryModel) {
 
 
         var myRouter = Backbone.Router.extend({
 
             routes: {
                 "": "handleLogin",
+                "createItem":"createItem",
+                "createCategory":"createCategory",
                 "addUser": "addUser",
                 "managmentUsers": "managmentUsers",
                 "addSchedule": "addSchedule",
@@ -39,6 +41,18 @@ require(['backbone', 'marionette', 'jquery', 'Views/login',
 
             handleLogin: function() {
                 this.login = new login();
+            },
+            createItem: function() {
+                this.switchView(this.createItem = new createItem({
+                    model: new itemModel({}),
+                    el: $("#applicationContent")
+                }));
+            },
+            createCategory: function() {
+                this.switchView(this.createCategory = new createCategory({
+                    model: new categoryModel({}),
+                    el: $("#applicationContent")
+                }));
             },
             addUser: function() {
                 this.switchView(this.addUser = new addUser({
