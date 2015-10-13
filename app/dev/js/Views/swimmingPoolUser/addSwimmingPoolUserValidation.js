@@ -168,8 +168,7 @@ define(['jquery', 'jquery.validate'], function($, jqueryValidate) {
                         regexp: "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+[.][a-zA-Z0-9-.]+$"
                     },
                     phone: {
-                        required: true,
-                        regexp: "[0-9]{8}$"
+                        regexp: "(^$)|[0-9]{8}$"
                     },
                     phoneMobile: {
                         required: true,
