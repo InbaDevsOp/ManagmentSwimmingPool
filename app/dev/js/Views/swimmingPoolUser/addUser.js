@@ -85,7 +85,6 @@ define(['backbone', 'jquery', 'Modules/login', 'Modules/utilForm',
             saveUser: function() {
 
                 var textRut = $("#rut").val();
-                $("#password").val(textRut.substr(0,6));
 
                 if (addSwimmingPoolUserValidation.isValidForm()) {
 
@@ -93,6 +92,7 @@ define(['backbone', 'jquery', 'Modules/login', 'Modules/utilForm',
                     modelJson.commune = {
                         id: $("#commune option:selected").attr('id')
                     };
+		    modelJson.password = textRut.substr(0,6);
                     this.model.set(modelJson);
 
                     this.model.save({}, {
