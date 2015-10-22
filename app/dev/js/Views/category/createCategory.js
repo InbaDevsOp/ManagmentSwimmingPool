@@ -1,4 +1,4 @@
-define(['backbone', 'jquery', 'hbs!Templates/inventory/createCategory', 'Modules/login', 'Modules/utilForm',
+define(['backbone', 'jquery', 'hbs!Templates/category/createCategory', 'Modules/login', 'Modules/utilForm',
         'Models/category'
     ],
     function(Backbone, $, createCategoryTemplate, login, utilForm,

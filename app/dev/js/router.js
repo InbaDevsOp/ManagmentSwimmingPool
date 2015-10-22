@@ -1,12 +1,12 @@
 require(['backbone', 'marionette', 'jquery', 'Views/login', 
-    'Views/inventory/createItem','Views/inventory/createCategory', 'Views/swimmingPoolUser/addUser', 'Views/swimmingPoolUser/managmentUsers', 
+    'Views/item/createItem', 'Views/item/managmentItem', 'Views/category/createCategory', 'Views/category/managmentCategory', 'Views/swimmingPoolUser/addUser', 'Views/swimmingPoolUser/managmentUsers', 
     'Views/schedule/addSchedule', 'Views/schedule/managmentSchedules',
     'Views/plan/addPlan', 'Views/plan/managmentPlans', 'Views/payment/managmentPayments','Views/payment/closeTurn', 'Views/payment/reportSales',
     'Views/product/addProduct', 'Views/controlAccess/controlAccess',
     'Views/poolMember/changePass','Views/poolMember/poolMemberInfoActive','Views/poolMember/payHistory', 
     'Models/plan', 'Models/schedule', 'Models/User', 'Models/poolMember', 'Models/item','Models/category',
     ],
-    function(Backbone, Marionette, $, login, createItem, createCategory, addUser, managmentUsers, addSchedule, managmentSchedules, addPlan, 
+    function(Backbone, Marionette, $, login, createItem, managmentItem, createCategory, managmentCategory, addUser, managmentUsers, addSchedule, managmentSchedules, addPlan, 
         managmentPlans, managmentPayments, closeTurn, reportSales, addProduct,
         controlAccess,
         changePass, poolMemberInfoActive, payHistory, 
@@ -18,7 +18,9 @@ require(['backbone', 'marionette', 'jquery', 'Views/login',
             routes: {
                 "": "handleLogin",
                 "createItem":"createItem",
+                "managmentItem": "managmentItem",
                 "createCategory":"createCategory",
+                "managmentCategory": "managmentCategory",
                 "addUser": "addUser",
                 "managmentUsers": "managmentUsers",
                 "addSchedule": "addSchedule",
@@ -48,11 +50,17 @@ require(['backbone', 'marionette', 'jquery', 'Views/login',
                     el: $("#applicationContent")
                 }));
             },
+            managmentItem: function() {
+                this.switchView(new managmentItem());
+            },
             createCategory: function() {
                 this.switchView(this.createCategory = new createCategory({
                     model: new categoryModel({}),
                     el: $("#applicationContent")
                 }));
+            },
+            managmentCategory: function() {
+                this.switchView(new managmentCategory());
             },
             addUser: function() {
                 this.switchView(this.addUser = new addUser({

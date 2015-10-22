@@ -1,4 +1,4 @@
-define(['backbone', 'jquery', 'hbs!Templates/inventory/createItem', 'Modules/login', 'Modules/utilForm',
+define(['backbone', 'jquery', 'hbs!Templates/item/createItem', 'Modules/login', 'Modules/utilForm',
         'Models/item'
     ],
     function(Backbone, $, createItemTemplate, login, utilForm,
@@ -36,6 +36,7 @@ define(['backbone', 'jquery', 'hbs!Templates/inventory/createItem', 'Modules/log
 
                 itemJson.name = itemDataJson.name;
                 itemJson.quantity = itemDataJson.quantity;
+                itemJson.minQuantity = itemDataJson.minQuantity;
                 itemJson.unitMeasure = itemDataJson.unitMeasure;
                 itemJson.description = itemDataJson.description;
 
