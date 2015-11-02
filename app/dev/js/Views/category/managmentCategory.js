@@ -73,7 +73,6 @@ define(['backbone', 'jquery', 'Modules/login', 'hbs!Templates/category/managment
                             that.$el.html('');
                             that.initialize();
                             that.render();
-                            //that.searchCategory(that.categoryId);
                             return that;
                         }, that);
                     }
@@ -97,41 +96,44 @@ define(['backbone', 'jquery', 'Modules/login', 'hbs!Templates/category/managment
                 alertDGC("No posee permisos para realizar esta tarea");
             }
             else{
-                var that = this;
-                var plan = eventTd.currentTarget.closest("tr");
-                var url = SwimmingPoolApplicationHost + "/SwimmingPool/rest/category/delete/" + plan.id;
+                if (confirm("Esta seguro que desea ELIMINAR esta Categoria?") == true) {
+                    
+                    var that = this;
+                    var plan = eventTd.currentTarget.closest("tr");
+                    var url = SwimmingPoolApplicationHost + "/SwimmingPool/rest/category/delete/" + plan.id;
 
-                $.ajax({
-                    async: false,
-                    url: url,
-                    type: "DELETE",
-                    success: function(data, status) {
-                        if (data == false) {
-                            // var scheduleMessage = "\n";
-                            // for (var count in data) {
-                            //     var schedule = data[count];
-                            //     scheduleMessage += "Nombre Horario:" + schedule.name + "\n";
-                            // }
-                            // alertDGC("Error: Hay Horarios que dependen del plan, \n" + scheduleMessage);
-                            alertDGC("Error: No se peude eliminar mientras esta categoria tenga Items");
+                    $.ajax({
+                        async: false,
+                        url: url,
+                        type: "DELETE",
+                        success: function(data, status) {
+                            if (data == false) {
+                                // var scheduleMessage = "\n";
+                                // for (var count in data) {
+                                //     var schedule = data[count];
+                                //     scheduleMessage += "Nombre Horario:" + schedule.name + "\n";
+                                // }
+                                // alertDGC("Error: Hay Horarios que dependen del plan, \n" + scheduleMessage);
+                                alertDGC("Error: No se peude eliminar mientras esta categoria tenga Items");
 
-                        } else {
-                            alertDGC("Categoria Eliminada exitosamente");
-                            $(eventTd.currentTarget.closest("tr")).html("");
+                            } else {
+                                alertDGC("Categoria Eliminada exitosamente");
+                                $(eventTd.currentTarget.closest("tr")).html("");
 
-                            //TODO managment in a backbone Collection
-                            if (!$.isEmptyObject(that.childView) && (that.childView.model.get("id") == plan.id)) {
-                                that.childView.$el.html('')
-                                that.childView.undelegateEvents();
-                                that.childView.stopListening();
-                                that.childView = null;
+                                //TODO managment in a backbone Collection
+                                if (!$.isEmptyObject(that.childView) && (that.childView.model.get("id") == plan.id)) {
+                                    that.childView.$el.html('')
+                                    that.childView.undelegateEvents();
+                                    that.childView.stopListening();
+                                    that.childView = null;
+                                }
                             }
+                        },
+                        error: function(request, error) {
+                            alertDGC("Error Interno, favor intente más tarde");
                         }
-                    },
-                    error: function(request, error) {
-                        alertDGC("Error Interno, favor intente más tarde");
-                    }
-                });
+                    });
+                }
             }
         }
     });

@@ -116,31 +116,33 @@ define(['backbone', 'jquery', 'Modules/login', 'Views/payment/addPayment',
                     alertDGC("No posee permisos para realizar esta tarea");
                 }
                 else{
+                    if (confirm("Esta seguro que desea ELIMINAR este Pago?") == true) {
+                    
+                        var that = this;
+                        var url = SwimmingPoolApplicationHost + "/SwimmingPool/rest/payment/delete/" + $(eventTd.currentTarget.closest("tr")).attr("id");
 
-                    var that = this;
-                    var url = SwimmingPoolApplicationHost + "/SwimmingPool/rest/payment/delete/" + $(eventTd.currentTarget.closest("tr")).attr("id");
+
+                        $.ajax({
+                            async: false,
+                            url: url,
+                            type: "DELETE",
+                            success: function(data, status) {
+                                alertDGC("Pago Eliminado exitosamente");
+
+                                if ($(eventTd.currentTarget).closest("tr").attr("id") == that.currentPaymentId) {    
+                                    $("#planDetailInformation").html('');
+                                    $("#scheduleDetailInformation").html('');
+                                }
+
+                                $(eventTd.currentTarget).closest("tr").html("");
 
 
-                    $.ajax({
-                        async: false,
-                        url: url,
-                        type: "DELETE",
-                        success: function(data, status) {
-                            alertDGC("Horario Eliminado exitosamente");
-
-                            if ($(eventTd.currentTarget).closest("tr").attr("id") == that.currentPaymentId) {    
-                                $("#planDetailInformation").html('');
-                                $("#scheduleDetailInformation").html('');
+                            },
+                            error: function(request, error) {
+                                alertDGC("Error Interno, favor intente más tarde");
                             }
-
-                            $(eventTd.currentTarget).closest("tr").html("");
-
-
-                        },
-                        error: function(request, error) {
-                            alertDGC("Error Interno, favor intente más tarde");
-                        }
-                    });
+                        });
+                    }
                 }
             }
         });

@@ -29,7 +29,10 @@ define(['backbone', 'jquery', 'jquery.table2excel', 'hbs!Templates/payment/close
                         var sum=0;
                         for (var i = 0; i < dataTotal.length; i++) {
                             sum=dataTotal[i].product.productPK.plan.price+sum;
-                        };
+                            precio = dataTotal[i].product.productPK.plan.price;
+                            precio = (precio.toLocaleString()).replace(",",".");
+                            dataTotal[i].product.productPK.plan.price = precio;
+                        }sum=(sum.toLocaleString()).replace(",",".");                        
                         $("#closeTurnInformation").html(closeTurnTable({
                             closeTurnInfo: data,
                             addTotal:sum

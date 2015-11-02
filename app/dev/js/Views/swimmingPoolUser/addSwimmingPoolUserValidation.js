@@ -137,15 +137,15 @@ define(['jquery', 'jquery.validate'], function($, jqueryValidate) {
                     },
                     names: {
                         required: true,
-                        regexp: "^[A-Za-zñ ]+$"
+                        regexp: "^[A-ZÑa-zñ áéíóúÁÉÍÓÚ]+$"
                     },
                     firstLastName: {
                         required: true,
-                        regexp: "^[A-Za-zñ ]+$"
+                        regexp: "^[A-ZÑa-zñ áéíóúÁÉÍÓÚ]+$"
                     },
                     secondLastName: {
                         required: true,
-                        regexp: "^[A-Za-zñ ]+$"
+                        regexp: "^[A-ZÑa-zñ áéíóúÁÉÍÓÚ]+$"
                     },
                     birthDate: {
                         required: true,

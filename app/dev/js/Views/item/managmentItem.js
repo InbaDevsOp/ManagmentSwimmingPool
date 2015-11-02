@@ -96,41 +96,44 @@ define(['backbone', 'jquery', 'Modules/login', 'hbs!Templates/item/managmentItem
                 alertDGC("No posee permisos para realizar esta tarea");
             }
             else{
-                var that = this;
-                var item = eventTd.currentTarget.closest("tr");
-                var url = SwimmingPoolApplicationHost + "/SwimmingPool/rest/item/delete/" + item.id;
+                if (confirm("Esta seguro que desea ELIMINAR este Item?") == true) {
+                    
+                    var that = this;
+                    var item = eventTd.currentTarget.closest("tr");
+                    var url = SwimmingPoolApplicationHost + "/SwimmingPool/rest/item/delete/" + item.id;
 
-                $.ajax({
-                    async: false,
-                    url: url,
-                    type: "DELETE",
-                    success: function(data, status) {
-                        if (data == false) {
-                            // var scheduleMessage = "\n";
-                            // for (var count in data) {
-                            //     var schedule = data[count];
-                            //     scheduleMessage += "Nombre Horario:" + schedule.name + "\n";
-                            // }
-                            // alertDGC("Error: Hay Horarios que dependen del plan, \n" + scheduleMessage);
-                            alertDGC("Error: No puede ser borrado este Item");
+                    $.ajax({
+                        async: false,
+                        url: url,
+                        type: "DELETE",
+                        success: function(data, status) {
+                            if (data == false) {
+                                // var scheduleMessage = "\n";
+                                // for (var count in data) {
+                                //     var schedule = data[count];
+                                //     scheduleMessage += "Nombre Horario:" + schedule.name + "\n";
+                                // }
+                                // alertDGC("Error: Hay Horarios que dependen del plan, \n" + scheduleMessage);
+                                alertDGC("Error: No puede ser borrado este Item");
 
-                        } else {
-                            alertDGC("Item Eliminado exitosamente");
-                            $(eventTd.currentTarget.closest("tr")).html("");
+                            } else {
+                                alertDGC("Item Eliminado exitosamente");
+                                $(eventTd.currentTarget.closest("tr")).html("");
 
-                            //TODO managment in a backbone Collection
-                            if (!$.isEmptyObject(that.childView) && (that.childView.model.get("id") == item.id)) {
-                                that.childView.$el.html('')
-                                that.childView.undelegateEvents();
-                                that.childView.stopListening();
-                                that.childView = null;
+                                //TODO managment in a backbone Collection
+                                if (!$.isEmptyObject(that.childView) && (that.childView.model.get("id") == item.id)) {
+                                    that.childView.$el.html('')
+                                    that.childView.undelegateEvents();
+                                    that.childView.stopListening();
+                                    that.childView = null;
+                                }
                             }
+                        },
+                        error: function(request, error) {
+                            alertDGC("Error Interno, favor intente más tarde");
                         }
-                    },
-                    error: function(request, error) {
-                        alertDGC("Error Interno, favor intente más tarde");
-                    }
-                });
+                    });
+                }
             }
         }
     });

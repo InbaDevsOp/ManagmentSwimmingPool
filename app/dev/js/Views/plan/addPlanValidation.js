@@ -35,7 +35,7 @@ define(['jquery', 'jquery.validate'], function($, jqueryValidate) {
                 rules: {
                     name: {
                         required: true,
-                        regexp: "^[0-9A-Za-zñ ]+$"
+                        regexp: "^[0-9A-ZÑa-zñ áéíóúÁÉÍÓÚ]+$"
                     },
                     description: {
                         required: true

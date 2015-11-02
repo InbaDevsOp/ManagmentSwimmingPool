@@ -23,7 +23,7 @@ define(['backbone', 'jquery', 'Modules/login', 'hbs!Templates/plan/managmentPlan
         },
         searchPlans: function() {
             var that = this;
-            var url = SwimmingPoolApplicationHost + "/SwimmingPool/rest/plan/getAll";
+            var url = SwimmingPoolApplicationHost + "/SwimmingPool/rest/plan/getAllForName";
 
             $.ajax({
                 async: false,
@@ -93,41 +93,44 @@ define(['backbone', 'jquery', 'Modules/login', 'hbs!Templates/plan/managmentPlan
                 alertDGC("No posee permisos para realizar esta tarea");
             }
             else{
-                var that = this;
-                var plan = eventTd.currentTarget.closest("tr");
-                var url = SwimmingPoolApplicationHost + "/SwimmingPool/rest/plan/delete/" + plan.id;
+                if (confirm("Esta seguro que desea ELIMINAR este Plan?") == true) {
+                    
+                    var that = this;
+                    var plan = eventTd.currentTarget.closest("tr");
+                    var url = SwimmingPoolApplicationHost + "/SwimmingPool/rest/plan/delete/" + plan.id;
 
-                $.ajax({
-                    async: false,
-                    url: url,
-                    type: "DELETE",
-                    success: function(data, status) {
-                        if (data == false) {
-                            // var scheduleMessage = "\n";
-                            // for (var count in data) {
-                            //     var schedule = data[count];
-                            //     scheduleMessage += "Nombre Horario:" + schedule.name + "\n";
-                            // }
-                            // alertDGC("Error: Hay Horarios que dependen del plan, \n" + scheduleMessage);
-                            alertDGC("Error: Hay Horarios o Pagos que dependen del Plan");
+                    $.ajax({
+                        async: false,
+                        url: url,
+                        type: "DELETE",
+                        success: function(data, status) {
+                            if (data == false) {
+                                // var scheduleMessage = "\n";
+                                // for (var count in data) {
+                                //     var schedule = data[count];
+                                //     scheduleMessage += "Nombre Horario:" + schedule.name + "\n";
+                                // }
+                                // alertDGC("Error: Hay Horarios que dependen del plan, \n" + scheduleMessage);
+                                alertDGC("Error: Hay Horarios o Pagos que dependen del Plan");
 
-                        } else {
-                            alertDGC("Plan Eliminado exitosamente");
-                            $(eventTd.currentTarget.closest("tr")).html("");
+                            } else {
+                                alertDGC("Plan Eliminado exitosamente");
+                                $(eventTd.currentTarget.closest("tr")).html("");
 
-                            //TODO managment in a backbone Collection
-                            if (!$.isEmptyObject(that.childView) && (that.childView.model.get("id") == plan.id)) {
-                                that.childView.$el.html('')
-                                that.childView.undelegateEvents();
-                                that.childView.stopListening();
-                                that.childView = null;
+                                //TODO managment in a backbone Collection
+                                if (!$.isEmptyObject(that.childView) && (that.childView.model.get("id") == plan.id)) {
+                                    that.childView.$el.html('')
+                                    that.childView.undelegateEvents();
+                                    that.childView.stopListening();
+                                    that.childView = null;
+                                }
                             }
+                        },
+                        error: function(request, error) {
+                            alertDGC("Error Interno, favor intente más tarde");
                         }
-                    },
-                    error: function(request, error) {
-                        alertDGC("Error Interno, favor intente más tarde");
-                    }
-                });
+                    });
+                }
             }
         }
     });

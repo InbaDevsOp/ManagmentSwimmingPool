@@ -32,7 +32,7 @@ define(['backbone', 'jquery', 'Modules/login', 'Views/schedule/addSchedule', 'Mo
             },
             searchSchedules: function() {
                 var that = this;
-                var url = SwimmingPoolApplicationHost + "/SwimmingPool/rest/schedule/getAll";
+                var url = SwimmingPoolApplicationHost + "/SwimmingPool/rest/schedule/getAllForName";
 
                 $.ajax({
                     async: false,
@@ -104,46 +104,51 @@ define(['backbone', 'jquery', 'Modules/login', 'Views/schedule/addSchedule', 'Mo
 
             },
             eliminateSchedule: function(eventTd) {
+                
+                
                 var userProfile = sessionStorage.getItem('userProfile');
                 if ( userProfile == "3" || userProfile == "4"){
                     alertDGC("No posee permisos para realizar esta tarea");
                 }
+
                 else{
-                    var that = this;
-                    var schedule = eventTd.currentTarget.closest("tr");
-                    var url = SwimmingPoolApplicationHost + "/SwimmingPool/rest/schedule/delete/" + schedule.id;
+                    if (confirm("Esta seguro que desea ELIMINAR este Horario?") == true) {
+                        var that = this;
+                        var schedule = eventTd.currentTarget.closest("tr");
+                        var url = SwimmingPoolApplicationHost + "/SwimmingPool/rest/schedule/delete/" + schedule.id;
 
-                    $.ajax({
-                        async: false,
-                        url: url,
-                        type: "DELETE",
-                        success: function(data, status) {
-                            if (data == false) {
-                                // var scheduleMessage = "\n";
-                                // for (var count in data) {
-                                //     var schedule = data[count];
-                                //     scheduleMessage += "Nombre Horario:" + schedule.name + "\n";
-                                // }
-                                // alertDGC("Error: Hay Horarios que dependen del plan, \n" + scheduleMessage);
-                                alertDGC("Error: Hay Pagos que dependen del Horario");
+                        $.ajax({
+                            async: false,
+                            url: url,
+                            type: "DELETE",
+                            success: function(data, status) {
+                                if (data == false) {
+                                    // var scheduleMessage = "\n";
+                                    // for (var count in data) {
+                                    //     var schedule = data[count];
+                                    //     scheduleMessage += "Nombre Horario:" + schedule.name + "\n";
+                                    // }
+                                    // alertDGC("Error: Hay Horarios que dependen del plan, \n" + scheduleMessage);
+                                    alertDGC("Error: Hay Pagos que dependen del Horario");
 
-                            } else {
-                                alertDGC("Horario Eliminado exitosamente");
-                                $(eventTd.currentTarget).closest("tr").html("");
+                                } else {
+                                    alertDGC("Horario Eliminado exitosamente");
+                                    $(eventTd.currentTarget).closest("tr").html("");
 
-                                //TODO managment in a backbone Collection
-                                if (!$.isEmptyObject(that.childView) && (that.childView.model.get("id") == schedule.id)) {
-                                    that.childView.$el.html('')
-                                    that.childView.undelegateEvents();
-                                    that.childView.stopListening();
-                                    that.childView = null;
+                                    //TODO managment in a backbone Collection
+                                    if (!$.isEmptyObject(that.childView) && (that.childView.model.get("id") == schedule.id)) {
+                                        that.childView.$el.html('')
+                                        that.childView.undelegateEvents();
+                                        that.childView.stopListening();
+                                        that.childView = null;
+                                    }
                                 }
+                            },
+                            error: function(request, error) {
+                                alertDGC("Error Interno, favor intente más tarde");
                             }
-                        },
-                        error: function(request, error) {
-                            alertDGC("Error Interno, favor intente más tarde");
-                        }
-                    });
+                        });
+                    }
                 }
             }
         });
