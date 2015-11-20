@@ -153,7 +153,7 @@ define(['jquery', 'jquery.validate'], function($, jqueryValidate) {
                     },
                     address: {
                         required: true,
-                        regexp: "^[0-9a-zA-zñ ]+$"
+                        regexp: "^[0-9a-zA-ZñÑ áéíóúÁÉÍÓÚ]+$"
                     },
                     state: {
                         required: true,
