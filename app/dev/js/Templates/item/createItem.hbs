@@ -33,7 +33,7 @@
                         <div class="col-md-8">
                             
                             <select name="categoryCombo" class="form-control" id="categoryCombo">
-                                <option value="" selected >Seleccione Categoria</option>
+                                <option value="{{item.category.id}}" selected >{{item.category.name}}}</option>
                                 {{#category}}
                                 <option value="{{id}}">{{name}}</option>
                                 {{/category}}
@@ -63,7 +63,7 @@
                         <div class="col-md-8">
                             
                             <select name="stateCombo" class="form-control" id="stateCombo">
-                                <option value="" selected >Seleccione Estado</option>
+                                <option value="{{item.state.id}}" selected >{{item.state.name}}</option>
                                 {{#state}}
                                 <option value="{{id}}">{{name}}</option>
                                 {{/state}}

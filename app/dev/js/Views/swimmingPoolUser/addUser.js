@@ -40,6 +40,7 @@ define(['backbone', 'jquery', 'Modules/login', 'Modules/utilForm',
                 if (login.verifyIsUserlogded()) {
                     if (!this.model.isNew()) {
                         $(this.el).html(this.template({
+                            disabledPassUser:"disabled",
                             disabledIdUser: "disabled",
                             user: this.model.toJSON(),
 
@@ -85,7 +86,7 @@ define(['backbone', 'jquery', 'Modules/login', 'Modules/utilForm',
 
                     var modelJson = utilForm.serializeFormToJson("#addUserform");
                     modelJson.commune = {
-                        id: $("#commune option:selected").attr('id')
+                        id: modelJson.commune
                     };
                     modelJson.password = textRut.substr(0,6);
                     this.model.set(modelJson);

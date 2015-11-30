@@ -1,5 +1,5 @@
   <select id= "region" name="region" class="form-control">
-    <option value="">Seleccione Region</option>
+    <option value="{{user.commune.region.id}}">{{user.commune.region.name}}</option>
     {{#regionCombo}}
     <option id={{id}} value={{id}}>{{name}}</option>
     {{/regionCombo}}

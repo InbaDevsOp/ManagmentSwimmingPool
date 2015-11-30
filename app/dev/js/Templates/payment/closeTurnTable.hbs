@@ -6,6 +6,7 @@
       <th>Recepción</th>
       <th>Cliente</th>
       <th>Nombre Plan</th>
+      <th>Fecha de Pago</th>
       <th>N Boleta</th>
       <th>Medio de Pago</th>
       <th>Monto($)</th>
@@ -18,12 +19,14 @@
       <td>{{adminUser.names}} {{adminUser.firstLastName}} </td>
       <td>{{swimmingPoolUser.names}} {{swimmingPoolUser.firstLastName}} </td>
       <td>{{product.productPK.plan.name}}</td>
+      <td>{{datepay}}</td>
       <td>{{numberOfTicket}}</td>
       <td>{{formOfPayment}}</td>
       <td>{{product.productPK.plan.price}}</td>
     </tr>
     {{/closeTurnInfo}}
     <tr>
+      <th></th>
       <th></th>
       <th></th>
       <th></th>

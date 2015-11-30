@@ -18,7 +18,7 @@
                         <div id="unitMeasure">
                             <label for="inputKey" class="col-md-2 control-label">Descripción</label>
                             <div class="col-md-8">
-                                <textarea class="form-control textUpper" rows="6" maxlength="500" value="{{category.description}}" name="description" id="despcription" placeholder="Descripción">{{category.description}}</textarea>
+                                <textarea class="form-control textUpper" rows="6" maxlength="500" value="{{category.description}}" name="description" id="description" placeholder="Descripción">{{category.description}}</textarea>
                             </div>
                         </div>
                     </div>
@@ -29,7 +29,7 @@
                         <div class="col-md-8">
                             
                             <select name="stateCombo" class="form-control" id="stateCombo">
-                                <option value="" selected >Seleccione Estado</option>
+                                <option value="{{category.state.id}}" selected >{{category.state.name}}</option>
                                 {{#state}}
                                 <option value="{{id}}">{{name}}</option>
                                 {{/state}}

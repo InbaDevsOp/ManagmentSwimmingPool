@@ -15,6 +15,7 @@ define(['backbone', 'jquery', 'hbs!Templates/item/createItem', 'Modules/login', 
                     var categoryData = this.getCategory();
                     if (login.verifyIsUserlogded()) {
                         $(this.el).html(createItemTemplate({
+                            item: this.model.toJSON(),
                             state:stateData,
                             category : categoryData
                         }));
