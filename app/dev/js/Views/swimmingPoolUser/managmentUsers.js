@@ -24,7 +24,7 @@ define(['backbone', 'jquery', 'Modules/login', 'hbs!Templates/swimmingPoolUser/m
         },
         searchUsers: function() {
             var that = this;
-            this.searchUserPattern = this.searchUserPattern || $("#userId").val();
+            this.searchUserPattern = $("#userId").val();
 
             var url = SwimmingPoolApplicationHost + "/SwimmingPool/rest/users/swimmingPool/searchUsers/" + this.searchUserPattern;
 
