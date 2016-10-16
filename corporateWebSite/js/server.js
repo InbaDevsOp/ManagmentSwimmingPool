@@ -22,7 +22,7 @@ app.get('/',function(req,res){
 
 app.get('/send',function(req,res){
 	var mailOptions={
-		to : "recepcionpot@cordesan.cl",
+		to : "gabo1276@hotmail.com",
 		subject : req.query.subject,
 		text : req.query.text
 	}
