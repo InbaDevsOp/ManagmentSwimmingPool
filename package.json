@@ -4,7 +4,7 @@
   "dependencies": {
     "chromedriver": "~2.10.0-1",
     "selenium-webdriver": "^2.41.0",
-    "nodemailer":"~0.7.1",
+    "nodemailer":"0.7.1",
     "express": "~4.5.1"
   },
   "devDependencies": {
